@@ -46,8 +46,8 @@ def get_historical_data(path=PLATFORMS_PATH, url=PLATFORM_URL):
 		df['depth_ft'] = df['depth_ft'].str.strip(' ft').astype(int)
 		df = df[['date_time', 'platform_id', 'measurement_id', 'depth_ft', 'value']]
 		dfs.append(df)
-		
-	all_measures = pd.concat(dfs)
+
+	all_measures = pd.concat(dfs, ignore_index=True)
 	return all_measures
 
 if __name__ == "__main__":

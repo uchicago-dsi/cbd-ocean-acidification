@@ -1,0 +1,27 @@
+measurement_id,units,measurement_name
+A1_AirTemp,°F,Air Temp.
+A1_BarPress,inHg,Baro. Pressure
+A1_CO2Air,ppm,CO2 Air
+A1_WindDir,deg (from),Wind Direction
+A1_WindGust,knots,Wind Gust
+A1_WindSpeed,knots,Wind Speed
+H1_AlkalinityTot,µmol/kg,Alkalinity
+H1_AvgWavePrd,sec,Avg Wave Period.
+H1_CO2,ppm,CO2 Water
+H1_Chlorophyll,µg/L,Chlorophyll
+H1_Conductiv,mS/cm,Conductivity
+H1_DomWavePrd,sec,Dom. Wave Period
+H1_Oxygen,mg/L,Oxygen Conc.
+H1_OxygenSat,%,Oxygen Pct. Sat.
+H1_Pressure,dbar,Pressure
+H1_Salinity,PSU,Salinity
+H1_TCO2,µmol/kg,TCO2
+H1_Turbidity,NTU,Turbidity
+H1_WaterDens,kg/m³,Water Density
+H1_WaterDepth,ft,Water Depth
+H1_WaterLevel,ft,Water Level
+H1_WaterTemp,°F,Water Temp.
+H1_WaveHght,ft,Wave Height
+H1_WaveMeanDir,deg (from),Wave Mean Dir.
+H2_CO2,µatm,CO2 Water
+H4_Oxygen,µmol/kg,Oxygen Conc.
