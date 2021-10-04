@@ -44,7 +44,7 @@ def scrape_ipacoa():
     for sid in tqdm(station_ids):
         station_df = get_station_data(sid)
         dfs.append(station_df)
-    df_all = pd.concat(dfs)
+    df_all = pd.concat(dfs, ignore_index=True)
     return df_all
 
 if __name__ == "__main__":
