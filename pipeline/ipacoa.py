@@ -5,51 +5,55 @@ from tqdm import tqdm
 import time
 import os
 
-ASSET_LIST_URL = 'http://www.ipacoa.org/services/download_asset_list.php'
-IPACOA_URL = 'http://www.ipacoa.org/ssa/get_recent_measurements.php'
+PLATFORM_URL = 'http://www.ipacoa.org/ssa/get_platform_data.php'
+PLATFORMS_PATH = os.path.join('..', 'data', 'ipacoa', 'lookups', 'platform_measurements.csv')
 
-class NoDataError(Exception):
-    pass
+def get_historical_data(path=PLATFORMS_PATH, url=PLATFORM_URL):
+	'''
+	Queries IPACOA to get information on various environmental measurements. 
 
-def get_asset_list(url=ASSET_LIST_URL):
-    response = requests.get(url)
-    
-    # Raise error if request is not successful
-    response.raise_for_status()
-    
-    asset_list = pd.read_csv(StringIO(response.text))
-    return asset_list
+	Inputs:
+		path (str): Relative path directing to the location of a table containing
+			all platform-measurement combinations to query. 
+		url (str): IPACOA URL for requesting historical data from platforms. 
+	Output:
+		Pandas DataFrame: Contains information on all platforms listed in the input csv.
+	'''
 
-def get_station_data(station_id, url=IPACOA_URL):
-    params = (('platform_label', station_id),)
-    response = requests.get(url, params)
+	platform_measurement = pd.read_csv(PLATFORMS_PATH)
+	dfs = []
+	for i, (platform, measurement) in tqdm(platform_measurement.iterrows(), 
+										   total=platform_measurement.shape[0]):
+		params = (
+			('platform_id', platform),
+			('var_id', measurement),
+			('data_type', 'csv'),
+		)
+		response = requests.get(PLATFORM_URL, params=params)
+		
+		# Raise error if request is not successful
+		response.raise_for_status()
 
-    # Raise error if request is not successful
-    response.raise_for_status()
-    
-    raw_data = response.json()
-    
-    # Check whether any data 
-    if not raw_data['success']:
-        raise NoDataError('There was no data returned by IPACOA, '
-        	'make sure parameters are valid.')
-    
-    df = pd.DataFrame(raw_data['result'])
-    return df
-
-def scrape_ipacoa():
-    asset_list = get_asset_list()
-    station_ids = asset_list['ID']
-    dfs = []
-    for sid in tqdm(station_ids):
-        station_df = get_station_data(sid)
-        dfs.append(station_df)
-    df_all = pd.concat(dfs, ignore_index=True)
-    return df_all
+		if response.text == '': 
+			continue
+		df = pd.read_csv(StringIO(response.text))
+		df['platform_id'] = platform
+		df['value'] = df.pop(df.columns[2])
+		df['measurement_id'] = measurement
+		df.rename(columns={' Depth (Ft)': 'depth_ft',
+						  'Date and Time': 'date_time'},
+				 inplace=True)
+		df['depth_ft'] = df['depth_ft'].str.strip(' ft').astype(int)
+		df = df[['date_time', 'platform_id', 'measurement_id', 'depth_ft', 'value']]
+		dfs.append(df)
+		
+	all_measures = pd.concat(dfs)
+	return all_measures
 
 if __name__ == "__main__":
-	df_all = scrape_ipacoa()
-	path = os.path.join('..', 'data', 'ipacoa_data_' + str(int(time.time())) + '.csv')
+	df_all = get_historical_data()
+	path = os.path.join('..', 'data', 'ipacoa',
+		'ipacoa_data_{}.csv'.format(str(int(time.time()))))
 	df_all.to_csv(path, index=False)
 
 
