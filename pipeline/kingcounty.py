@@ -9,6 +9,19 @@ import time
 
 
 def get_all_data(start_date):
+    '''
+    Queries King County to get environmental measurements from Dockton, Point Williams, 
+    Seattle Aquarium, and Quartermaster Yacht Club through a POST request. 
+
+    Input:
+        start_date (str): The start date for data in 'MM/DD/YYYY' format. 
+    Output:
+        Pandas DataFrame: Contains information on all platforms listed in the input csv.
+    '''
+    if not re.match(r'\d{2}/\d{2}/\d{4}', start_date):
+        raise TypeError('Wrong format for start date, format must be MM/DD/YYYY.')
+
+
     url = 'https://green2.kingcounty.gov/marine-buoy/Data.aspx'
     
     # Setting up the parameters for POST request
