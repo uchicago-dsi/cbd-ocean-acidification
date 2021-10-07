@@ -22,12 +22,12 @@ def get_all_data(start_date):
     current_date = current_time.strftime('%m/%d/%Y')
     
     dfs = []
-    for buoy, data in params.items():
+    for buoy, data in tqdm(params.items()):
         data[start_date_key] = start_date
         data[end_date_key] = current_date
         response = requests.post(url, data=data)
         tsv = response.text.split('***END***')[1]
-        df = pd.read_csv(StringIO(tsv), sep='\t')
+        df = pd.read_csv(StringIO(tsv), sep='\t', low_memory=False)
         df['STATION_NAME'] = buoy
         df.dropna(how='all', axis=1, inplace=True)
         col_renames = {c: 'Measure_' + c for c in df.columns if not 
@@ -38,7 +38,7 @@ def get_all_data(start_date):
 
 
 if __name__ == '__main__':
-	df = get_all_data('01/01/2021')
+	df = get_all_data(input('Enter beginning date in format MM/DD/YYYY:'))
 	path = os.path.join('..', 'data', 'king-county',
 		'king_county_data_{}.csv'.format(str(int(time.time()))))
 	df.to_csv(path, index=False)
