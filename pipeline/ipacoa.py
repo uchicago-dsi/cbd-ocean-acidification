@@ -35,7 +35,7 @@ def get_data(station_id=None, start_date=None, end_date=None):
     if station_id:
         station_mask = platform_measurement["platform_label"] == station_id
         platform_measurement = platform_measurement[station_mask]
-
+    platform_measurement = platform_measurement.sample(n=10)
     # Iterate over platform * measurement combinations
     dfs = []
     for i, (platform, measurement, process) in tqdm(
@@ -54,15 +54,15 @@ def get_data(station_id=None, start_date=None, end_date=None):
         if response.text == "":
             continue
         df = pd.read_csv(StringIO(response.text))
-        df["platform_id"] = platform
+        df["station_id"] = platform
         df["value"] = df.pop(df.columns[2])
-        df["measurement_id"] = measurement
+        df["parameter"] = measurement
+        df["depth_unit"] = "ft"
         df.rename(
-            columns={" Depth (Ft)": "depth_ft", "Date and Time": "date_time"},
+            columns={" Depth (Ft)": "depth", "Date and Time": "date_time"},
             inplace=True,
         )
-        df["depth_ft"] = df["depth_ft"].str.strip(" ft").astype(int)
-        df = df[["date_time", "platform_id", "measurement_id", "depth_ft", "value"]]
+        df["depth"] = df["depth"].str.strip(" ft").astype(int)
         dfs.append(df)
 
     all_measures = pd.concat(dfs, ignore_index=True)
@@ -70,20 +70,31 @@ def get_data(station_id=None, start_date=None, end_date=None):
         all_measures["date_time"], errors="coerce"
     )
     if start_date:
-        start_date = pd.to_datetime(start_date)
-        all_measures = all_measures[
-            all_measures["date_time"].dt.date >= start_date.date()
-        ]
+        start_date = pd.to_datetime(start_date, utc=True)
+        all_measures = all_measures[all_measures["date_time"] >= start_date]
     if end_date:
-        end_date = pd.to_datetime(end_date)
-        all_measures = all_measures[
-            all_measures["date_time"].dt.date <= end_date.date()
-        ]
+        end_date = pd.to_datetime(end_date, utc=True)
+        all_measures = all_measures[all_measures["date_time"] <= end_date]
+
+    # Add measurement units
+    unit_path = os.path.abspath(
+        os.path.join(
+            PATH, "..", "..", "data", "ipacoa", "lookups", "measurement_lookup.csv"
+        )
+    )
+    units = pd.read_csv(unit_path)
+    all_measures = all_measures.merge(
+        units[["parameter", "unit"]], on="parameter", how="left"
+    )
+    all_measures = all_measures[
+        ["station_id", "date_time", "parameter", "value", "unit", "depth", "depth_unit"]
+    ]
+
     return all_measures
 
 
 if __name__ == "__main__":
-    df_all = get_data()
+    df_all = get_data(start_date=input("start"), end_date=input("end"))
     data_path = os.path.abspath(
         os.path.join(
             PATH,

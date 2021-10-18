@@ -1,4 +1,4 @@
-measurement_id,units,measurement_name
+parameter,unit,parameter_name
 A1_AirTemp,°F,Air Temp.
 A1_BarPress,inHg,Baro. Pressure
 A1_CO2Air,ppm,CO2 Air
@@ -25,3 +25,4 @@ H1_WaveHght,ft,Wave Height
 H1_WaveMeanDir,deg (from),Wave Mean Dir.
 H2_CO2,µatm,CO2 Water
 H4_Oxygen,µmol/kg,Oxygen Conc.
+H1_pH,,pH
