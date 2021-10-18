@@ -35,7 +35,6 @@ def get_data(station_id=None, start_date=None, end_date=None):
     if station_id:
         station_mask = platform_measurement["platform_label"] == station_id
         platform_measurement = platform_measurement[station_mask]
-    platform_measurement = platform_measurement.sample(n=10)
     # Iterate over platform * measurement combinations
     dfs = []
     for i, (platform, measurement, process) in tqdm(
@@ -94,7 +93,7 @@ def get_data(station_id=None, start_date=None, end_date=None):
 
 
 if __name__ == "__main__":
-    df_all = get_data(start_date=input("start"), end_date=input("end"))
+    df_all = get_data()
     data_path = os.path.abspath(
         os.path.join(
             PATH,
