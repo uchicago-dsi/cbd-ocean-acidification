@@ -22,10 +22,9 @@ def get_data(station_id=None, start_date=None, end_date=None):
     Returns:
         pd.DataFrame: Contains information on all platforms listed in the input json.
     """
-
     url = 'https://green2.kingcounty.gov/marine-buoy/Data.aspx'
-    param_path = os.path.join(PATH, '..', '..', 'data', 'king-county', 'keys', 
-        'king-county-keys.json')
+    param_path = os.path.abspath(os.path.join(PATH, '..', '..', 'data', 'king-county', 'keys', 
+        'king-county-keys.json'))
 
     if not end_date:
         current_time = datetime.now()
@@ -34,7 +33,7 @@ def get_data(station_id=None, start_date=None, end_date=None):
         start_date = '01/01/1900'
 
     # Setting up the parameters for POST request
-    with open(pram_path) as f:
+    with open(param_path) as f:
         params = json.load(f)
     
     start_date_key = 'ctl00$kcMasterPagePlaceHolder$startDate'
@@ -60,7 +59,7 @@ def get_data(station_id=None, start_date=None, end_date=None):
 
 
 if __name__ == '__main__':
-    df = get_data()
-    data_path = os.path.join(PATH, '..', '..', 'data', 'king-county',
-        'king_county_data_{}.csv'.format(str(int(time.time()))))
-    df.to_csv(path, index=False)
+    df = get_data(start_date="03/23/2021", end_date="03/27/2021")
+    data_path = os.path.abspath(os.path.join(PATH, '..', '..', 'data', 'king-county',
+        'king_county_data_{}.csv'.format(str(int(time.time())))))
+    df.to_csv(data_path, index=False)

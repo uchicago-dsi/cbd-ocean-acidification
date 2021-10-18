@@ -19,13 +19,12 @@ def get_data(station_id=None, start_date=None, end_date=None):
     Returns:
         pd.DataFrame: Contains information on all platforms listed in the input csv.
     """
-
     url = 'http://www.ipacoa.org/ssa/get_platform_data.php'
-    measurements_path = os.path.join(PATH, '..', '..', 'data', 'ipacoa', 'lookups', 
-        'platform_measurements.csv')
+    measurements_path = os.path.abspath(os.path.join(PATH, '..', '..', 'data', 'ipacoa', 'lookups', 
+        'platform_measurements.csv'))
 
     # Setting up parameters for GET request
-    platform_measurement = pd.read_csv(path)
+    platform_measurement = pd.read_csv(measurements_path)
     if station_id:
         mask = platform_measurement['platform_label'] == station_id
         platform_measurement = platform_measurement[mask]
@@ -58,16 +57,17 @@ def get_data(station_id=None, start_date=None, end_date=None):
         dfs.append(df)
 
     all_measures = pd.concat(dfs, ignore_index=True)
+    all_measures['date_time'] = pd.to_datetime(all_measures['date_time'], errors='coerce')
     if start_date:
         start_date = pd.to_datetime(start_date)
-        all_measures = all_measures[all_measures['date_time'] >= start_date]
+        all_measures = all_measures[all_measures['date_time'].dt.date >= start_date.date()]
     if end_date:
         end_date = pd.to_datetime(end_date)
-        all_measures = all_measures[all_measures['date_time'] <= end_date]
+        all_measures = all_measures[all_measures['date_time'].dt.date <= end_date.date()]
     return all_measures
 
 if __name__ == "__main__":
     df_all = get_data()
-    data_path = os.path.join(PATH, '..', '..', 'data', 'ipacoa',
-        'ipacoa_data_{}.csv'.format(str(int(time.time()))))
-    df_all.to_csv(path, index=False)
+    data_path = os.path.abspath(os.path.join(PATH, '..', '..', 'data', 'ipacoa',
+        'ipacoa_data_{}.csv'.format(str(int(time.time())))))
+    df_all.to_csv(data_path, index=False)
