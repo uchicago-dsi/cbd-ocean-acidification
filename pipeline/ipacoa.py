@@ -7,6 +7,7 @@ import os
 
 PATH = os.path.abspath(__file__)
 
+
 def get_data(station_id=None, start_date=None, end_date=None):
     """ Retrieves data for input station(s) and time range as DataFrame.
 
@@ -19,55 +20,78 @@ def get_data(station_id=None, start_date=None, end_date=None):
     Returns:
         pd.DataFrame: Contains information on all platforms listed in the input csv.
     """
-    url = 'http://www.ipacoa.org/ssa/get_platform_data.php'
-    measurements_path = os.path.abspath(os.path.join(PATH, '..', '..', 'data', 'ipacoa', 'lookups', 
-        'platform_measurements.csv'))
+    url = "http://www.ipacoa.org/ssa/get_platform_data.php"
+    measurements_path = os.path.abspath(
+        os.path.join(
+            PATH, "..", "..", "data", "ipacoa", "lookups", "platform_measurements.csv"
+        )
+    )
 
     # Setting up parameters for GET request
     platform_measurement = pd.read_csv(measurements_path)
+
+    # Filtering for measurements of interest
+    platform_measurement = platform_measurement[platform_measurement["process"]]
     if station_id:
-        mask = platform_measurement['platform_label'] == station_id
-        platform_measurement = platform_measurement[mask]
-    
+        station_mask = platform_measurement["platform_label"] == station_id
+        platform_measurement = platform_measurement[station_mask]
+
     # Iterate over platform * measurement combinations
     dfs = []
-    for i, (platform, measurement) in tqdm(platform_measurement.iterrows(), 
-                                           total=platform_measurement.shape[0]):
+    for i, (platform, measurement, process) in tqdm(
+        platform_measurement.iterrows(), total=platform_measurement.shape[0]
+    ):
         params = (
-            ('platform_id', platform),
-            ('var_id', measurement),
-            ('data_type', 'csv'),
+            ("platform_id", platform),
+            ("var_id", measurement),
+            ("data_type", "csv"),
         )
         response = requests.get(url, params=params)
-        
+
         # Raise error if request is not successful
         response.raise_for_status()
 
-        if response.text == '': 
+        if response.text == "":
             continue
         df = pd.read_csv(StringIO(response.text))
-        df['platform_id'] = platform
-        df['value'] = df.pop(df.columns[2])
-        df['measurement_id'] = measurement
-        df.rename(columns={' Depth (Ft)': 'depth_ft',
-                          'Date and Time': 'date_time'},
-                 inplace=True)
-        df['depth_ft'] = df['depth_ft'].str.strip(' ft').astype(int)
-        df = df[['date_time', 'platform_id', 'measurement_id', 'depth_ft', 'value']]
+        df["platform_id"] = platform
+        df["value"] = df.pop(df.columns[2])
+        df["measurement_id"] = measurement
+        df.rename(
+            columns={" Depth (Ft)": "depth_ft", "Date and Time": "date_time"},
+            inplace=True,
+        )
+        df["depth_ft"] = df["depth_ft"].str.strip(" ft").astype(int)
+        df = df[["date_time", "platform_id", "measurement_id", "depth_ft", "value"]]
         dfs.append(df)
 
     all_measures = pd.concat(dfs, ignore_index=True)
-    all_measures['date_time'] = pd.to_datetime(all_measures['date_time'], errors='coerce')
+    all_measures["date_time"] = pd.to_datetime(
+        all_measures["date_time"], errors="coerce"
+    )
     if start_date:
         start_date = pd.to_datetime(start_date)
-        all_measures = all_measures[all_measures['date_time'].dt.date >= start_date.date()]
+        all_measures = all_measures[
+            all_measures["date_time"].dt.date >= start_date.date()
+        ]
     if end_date:
         end_date = pd.to_datetime(end_date)
-        all_measures = all_measures[all_measures['date_time'].dt.date <= end_date.date()]
+        all_measures = all_measures[
+            all_measures["date_time"].dt.date <= end_date.date()
+        ]
     return all_measures
+
 
 if __name__ == "__main__":
     df_all = get_data()
-    data_path = os.path.abspath(os.path.join(PATH, '..', '..', 'data', 'ipacoa',
-        'ipacoa_data_{}.csv'.format(str(int(time.time())))))
+    data_path = os.path.abspath(
+        os.path.join(
+            PATH,
+            "..",
+            "..",
+            "data",
+            "ipacoa",
+            "ipacoa_data_{}.csv".format(str(int(time.time()))),
+        )
+    )
     df_all.to_csv(data_path, index=False)
