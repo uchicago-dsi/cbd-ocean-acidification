@@ -21,4 +21,10 @@ def erdapp_auto_retrival(y1, y2, dataset_id):
     }
     
     return e.to_pandas()
+#will edit df directly once finalized, just editing copy for now for testing purposes
+
+def format_df(df):
+    df_copy = df.copy()
+    df_copy.melt(id_vars= ["time (UTC)", "latitude (degrees_north)",
+"longitude (degrees_east)", "z (m)"])
 
