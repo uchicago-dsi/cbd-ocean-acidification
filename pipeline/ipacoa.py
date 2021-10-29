@@ -4,6 +4,7 @@ from io import StringIO
 from tqdm import tqdm
 import time
 import os
+import utils
 
 PATH = os.path.abspath(__file__)
 
@@ -88,6 +89,9 @@ def get_data(station_id=None, start_date=None, end_date=None):
     all_measures = all_measures[
         ["station_id", "date_time", "parameter", "value", "unit", "depth", "depth_unit"]
     ]
+
+    # map parameter names to normalized names
+    all_measures["parameter"] = all_measures["parameter"].map(utils.parameter_dict)
 
     return all_measures
 

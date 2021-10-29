@@ -7,6 +7,7 @@ import json
 from datetime import datetime
 import time
 import re
+import utils
 
 PATH = os.path.abspath(__file__)
 
@@ -26,14 +27,8 @@ COLS = [
     "SeaFET_Temperature_degC",
     "Qual_Sonde_pH",
     "Sonde_pH",
-    "Qual_SeaFET_Internal_pH_raw",
-    "SeaFET_Internal_pH_raw",
     "Qual_SeaFET_External_pH_recalc_w_salinity",
     "SeaFET_External_pH_recalc_w_salinity",
-    "Qual_SeaFET_External_pH_final_recalc",
-    "SEAFET_EXT_PH_V",
-    "Qual_SeaFET_Internal_pH_recalculated",
-    "SEAFET_INT_PH_V",
     "Qual_Salinity",
     "Salinity_PSU",
     "Depth_m",
@@ -48,10 +43,7 @@ COL_RENAMES = {
     "Water_Temperature_degC": "Measure_Water_Temperature",
     "SeaFET_Temperature_degC": "Measure_SeaFET_Temperature",
     "Sonde_pH": "Measure_Sonde_pH",
-    "SeaFET_Internal_pH_raw": "Measure_SeaFET_Internal_pH_raw",
     "SeaFET_External_pH_recalc_w_salinity": "Measure_SeaFET_External_pH_recalc_w_salinity",
-    "SEAFET_EXT_PH_V": "Measure_SeaFET_External_pH_final_recalc",
-    "SEAFET_INT_PH_V": "Measure_SeaFET_Internal_pH_recalculated",
     "Salinity_PSU": "Measure_Salinity",
     "Depth_m": "depth",
 }
@@ -119,25 +111,34 @@ def get_data(station_id=None, start_date=None, end_date=None):
     all_measures["Qual_Dissolved_Oxygen_Sat"] = all_measures["Qual_DO"]
     all_measures["Qual_Dissolved_Oxygen"] = all_measures.pop("Qual_DO")
     all_measures.rename(columns=COL_RENAMES, inplace=True)
+    all_measures.reset_index(inplace=True)
+    all_measures["id"] = all_measures.index
     all_measures = pd.wide_to_long(
         all_measures,
         stubnames=["Measure", "Qual"],
-        i=["date_time", "station_id", "depth"],
+        i=["id", "date_time", "station_id", "depth"],
         j="parameter",
         suffix=r"\w+",
         sep="_",
     ).reset_index()
+    all_measures.drop(["id", "index"], axis=1, inplace=True)
     all_measures.dropna(subset=["Measure"], inplace=True)
     all_measures.rename(
         columns={"Qual": "quality_flag", "Measure": "value"}, inplace=True
     )
     all_measures["depth_unit"] = "m"
     all_measures["date_time"] = pd.to_datetime(all_measures.date_time)
+
+    # map parameter names to device names, normalized names, and units
+    all_measures["device_name"] = all_measures["parameter"].map(utils.kc_devices)
+    all_measures["parameter"] = all_measures["parameter"].map(utils.parameter_dict)
+    all_measures["unit"] = all_measures["parameter"].map(utils.kc_units)
+
     return all_measures
 
 
 if __name__ == "__main__":
-    df = get_data(start_date="03/23/2021", end_date="9/27/2021")
+    df = get_data(start_date="10/26/2019")
     data_path = os.path.abspath(
         os.path.join(
             PATH,
