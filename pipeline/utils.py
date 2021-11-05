@@ -44,4 +44,52 @@ kc_devices = {
     "SeaFET_Temperature": "Satlantic SeaFET Sensor",
 }
 
-template_dict = {}
+ceden_params = {
+    "salinity": "Salinity",
+    "total_alkalinity": "Alkalinity as CaCO3",
+    "water_temperature": "Temperature",
+    "oxygen_concentration": "Oxygen, Dissolved",
+    "oxygen_saturation": "Oxygen, Saturation",
+    "co2": "Carbon dioxide, free",
+    "water_pressure": "Pressure",
+}
+
+ceden_stations = {
+    "HIOC_Hogisland1": "201ST1775",
+    "NERRS_elkapwq": "",
+    "NERRS_elksmwq": "306-ELKHO-33",
+    "NERRS_elkvmwq": "306ELKNVM",
+    "NERRS_sfbccwq": "CHINA CAMP",
+    "NERRS_sfbfmwq": "",
+    "NERRS_sfbgcwq": "LLFS17_17",
+    "NERRS_sfbsmwq": "",
+    "NERRS_tjroswq": "",
+    "PMELCO2_cce1": "",
+    "PMELCO2_cce2": "",
+    "CARLSBD_Aquafarm1": "",
+    "cencoos_Carquinez": "",
+    "cencoos_Humboldt": "",
+    "cencoos_Tiburon": "",
+    "cencoos_Trinidad": "",
+}
+
+ceden_station_misc = {
+    "EventCode": "WQ",  # for for Water Quality
+    "ProjectCode": "",
+    "ProtocolCode": "Not Recorded",
+    "AgencyCode": "Not Recorded",
+    "SampleComments": "",
+    "LocationCode": "Not Recorded",
+    "GeometryShape": "Point",
+    "CoordinateNumber": "1",
+    "Datum": "NR",
+    "CoordinateSource": "NR",
+    "Elevation": "",
+    "UnitElevation": "",
+    "StationDetailVerBy": "",
+    "StationDetailVerDate": "",
+    "StationDetailComments": "",
+}
+
+ceden_field_misc = {}
+
