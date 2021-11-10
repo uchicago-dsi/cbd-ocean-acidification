@@ -1,30 +1,27 @@
+# -*- coding: utf-8 -*-
+
 import utils
 import pandas as pd
 from xlrd import open_workbook
 from xlutils.copy import copy
 import os
+import numpy as np
+from pytemp import pytemp  # for temperature unit conversion
+import time
+
+pd.options.mode.chained_assignment = None  # default='warn'
 
 
-def populate_locations(stations, measurements, locations):
+def populate_locations(df, locations):
 
     # Preprocess the dataframe to match CEDEN format
-    cali_stations = stations.query('state == "California"')
-    cali_stations = merge(measurements, on="station_id", how="inner")
-    cali_stations["date"] = pd.to_datetime(
-        cali_stations.date_time, utc=True
-    ).dt.strftime("%d/%b/%Y")
-    cali_stations = cali_stations[
-        ["station_id", "latitude", "longitude", "date"]
-    ].drop_duplicates()
-    cali_stations["StationCode"] = cali_stations.pop("station_id").map(
-        utils.ceden_stations
-    )
-    cali_stations = cali_stations.query("StationCode != ''")
+    df = df[["station_id", "latitude", "longitude", "date"]].drop_duplicates()
+    df["StationCode"] = df.pop("station_id").map(utils.ceden_stations)
 
     for k, v in utils.ceden_station_misc.items():
-        cali_stations[k] = v
+        df.loc[:, k] = v
 
-    cali_stations = cali_stations[
+    df = df[
         [
             "StationCode",
             "date",
@@ -49,32 +46,108 @@ def populate_locations(stations, measurements, locations):
     ]
 
     # Write dataframe content to the 'Locations' sheet of CEDEN template
-    iter_stations = cali_stations.reset_index(drop=True).iterrows()
-    for i, cols in iter_rows:
+    iter_stations = df.reset_index(drop=True).iterrows()
+    for i, cols in iter_stations:
         for j, value in enumerate(cols):
             locations.write(i + 1, j, value)
 
 
-def populate_field_results(stations, measurements, field_results):
-    pass
+def populate_field_results(df, field_results):
+    df["time"] = pd.to_datetime(df.date_time, utc=True).dt.strftime("%H:%M")
+    df["Replicate"] = df.groupby(["station_id", "date"]).cumcount() + 1
+
+    df["station_id"] = df["station_id"].map(utils.ceden_stations)
+
+    molg = df.loc[df.unit == "µmol/kg", "value"] * 1000
+    df.loc[df.unit == "µmol/kg", "value"] = molg
+
+    deg_c = df.loc[df.unit == "°F", "value"].apply(lambda x: pytemp(x, "f", "c"))
+    df.loc[df.unit == "°F", "value"] = deg_c
+
+    mmhg = df.loc[df.unit == "inHg", "value"] / 0.0393701
+    df.loc[df.unit == "inHg", "value"] = mmhg
+
+    for k, v in utils.ceden_field_misc.items():
+        df.loc[:, k] = v
+
+    df["MatrixName"] = df["parameter"].map(utils.ceden_matrix_dict)
+    df["unit"] = df["unit"].map(utils.ceden_unit_dict)
+    df["parameter"] = df["parameter"].map(utils.ceden_param_dict)
+    df.sort_values(["station_id", "parameter", "date_time"])
+    df = df[
+        [
+            "station_id",
+            "date",
+            "ProjectCode",
+            "EventCode",
+            "ProtocolCode",
+            "AgencyCode",
+            "SampleComments",
+            "LocationCode",
+            "GeometryShape",
+            "time",
+            "CollectionMethodCode",
+            "Replicate",
+            "CollectionDeviceName",
+            "depth",
+            "depth_unit",
+            "PositionWaterColumn",
+            "FieldCollectionComments",
+            "MatrixName",
+            "MethodName",
+            "parameter",
+            "FractionName",
+            "unit",
+            "FieldReplicate",
+            "value",
+            "ResQualCode",
+            "QACode",
+            "ComplianceCode",
+            "BatchVerificationCode",
+            "CalibrationDate",
+            "FieldResultComments",
+        ]
+    ]
+    iter_measurements = df.reset_index(drop=True).iterrows()
+    for i, cols in iter_measurements:
+        for j, value in enumerate(cols):
+            field_results.write(i + 1, j, value)
 
 
-def populate_template(measurements_path, stations_path, template_path):
+def populate_template(measurements_path, stations_path, template_path, submittal_path):
     measurements = pd.read_csv(measurements_path, parse_dates=["date_time"])
     stations = pd.read_csv(stations_path)
-    rb = open_workbook(template_path, formatting_info=True)
-    wb = copy(rb)
-    locations = wb.get_sheet(1)
-    field_results = wb.get_sheet(2)
 
-    populate_locations(stations, measurements, locations)
-    populate_field_results(stations, measurements, field_results)
+    cali_stations = stations.query('state == "California"')
+    cali_stations = cali_stations.merge(measurements, on="station_id", how="inner")
+    cali_stations.sort_values(["station_id", "parameter", "date_time"], inplace=True)
+    cali_stations["date"] = pd.to_datetime(
+        cali_stations.date_time, utc=True
+    ).dt.strftime("%d/%b/%Y")
 
-    wb.save("template_stations.xls")
+    # .xls does not allow more than 63356 rows
+    max_rows = 65535
+    split_n = cali_stations.shape[0] // max_rows + 1
+    dfs = np.array_split(cali_stations, split_n)
+
+    for df in dfs:
+        rb = open_workbook(template_path, formatting_info=True)
+        wb = copy(rb)
+        locations = wb.get_sheet(1)
+        field_results = wb.get_sheet(2)
+
+        populate_locations(df, locations)
+        populate_field_results(df, field_results)
+
+        file_name = "ceden_{}.xls".format(str(int(time.time())))
+        file_path = os.path.join(submittal_path, file_name)
+
+        wb.save(file_path)
 
 
 if __name__ == "__main__":
     PATH = os.path.abspath(__file__)
+
     measurements_path = os.path.abspath(
         os.path.join(PATH, "..", "..", "data", "ipacoa", "ipacoa_sample.csv")
     )
@@ -84,6 +157,9 @@ if __name__ == "__main__":
     template_path = os.path.abspath(
         os.path.join(PATH, "..", "..", "templates", "ceden_field_template.xls")
     )
+    submittal_path = os.path.abspath(
+        os.path.join(PATH, "..", "..", "data", "submittal")
+    )
 
-    populate_template(measurements_path, stations_path, template_path)
+    populate_template(measurements_path, stations_path, template_path, submittal_path)
 

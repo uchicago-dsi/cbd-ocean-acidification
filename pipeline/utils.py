@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+import numpy as np
+
 parameter_dict = {
     "A1_AirTemp": "air_temperature",
     "A1_BarPress": "air_pressure",
@@ -44,16 +48,6 @@ kc_devices = {
     "SeaFET_Temperature": "Satlantic SeaFET Sensor",
 }
 
-ceden_params = {
-    "salinity": "Salinity",
-    "total_alkalinity": "Alkalinity as CaCO3",
-    "water_temperature": "Temperature",
-    "oxygen_concentration": "Oxygen, Dissolved",
-    "oxygen_saturation": "Oxygen, Saturation",
-    "co2": "Carbon dioxide, free",
-    "water_pressure": "Pressure",
-}
-
 ceden_stations = {
     "HIOC_Hogisland1": "201ST1775",
     "NERRS_elkapwq": "",
@@ -91,5 +85,66 @@ ceden_station_misc = {
     "StationDetailComments": "",
 }
 
-ceden_field_misc = {}
+ceden_field_misc = {
+    "ProjectCode": "",  # update with project code
+    "EventCode": "WQ",
+    "ProtocolCode": "Not Recorded",
+    "AgencyCode": "Not Recorded",
+    "SampleComments": "",
+    "LocationCode": "Not Recorded",
+    "GeometryShape": "Point",
+    "CollectionMethodCode": "Water_Grab",
+    "CollectionDeviceName": "Not Recorded",
+    "PositionWaterColumn": "Not Applicable",
+    "FieldCollectionComments": "",
+    "MethodName": "FieldMeasure",
+    "FractionName": "Not Recorded",
+    "FieldReplicate": "1",
+    "ResQualCode": "=",
+    "QACode": "None",
+    "ComplianceCode": "NR",
+    "BatchVerificationCode": "NR",
+    "CalibrationDate": "01/Jan/1950",
+    "FieldResultComments": "",
+}
 
+ceden_matrix_dict = {
+    "total_alkalinity": "samplewater",
+    "pH": "samplewater",
+    "salinity": "samplewater",
+    "water_temperature": "samplewater",
+    "oxygen_concentration": "samplewater",
+    "oxygen_saturation": "samplewater",
+    "co2": "samplewater",
+    "water_pressure": "samplewater",
+    "air_temperature": "air",
+    "air_pressure": "air",
+    "tco2": "samplewater",
+}
+
+ceden_param_dict = {
+    "salinity": "Salinity",
+    "total_alkalinity": "Alkalinity as CaCO3",
+    "water_temperature": "Temperature",
+    "oxygen_concentration": "Oxygen, Dissolved",
+    "oxygen_saturation": "Oxygen, Saturation",
+    "co2": "Carbon dioxide, free",
+    "water_pressure": "Pressure",
+    "air_pressure": "Barometric Pressure",
+    "air_temperature": "Temperature",  # looks like same as water
+    "tco2": "Carbon dioxide, free",
+    "pH": "pH",
+}
+
+ceden_unit_dict = {
+    "µmol/kg": "umol/g",  # multiply with 1000
+    "PSU": "psu",
+    "°F": "Deg C",  # convert to celsius
+    "mg/L": "mg/L",
+    "%": "%",
+    "ppm": "per mil",
+    "inHg": "mmHG",  # divide by 0.0393701, need to validate
+    "µatm": "per mil",  # not sure, need to validate
+    "dbar": "dbar",
+    np.NaN: "none",
+}
