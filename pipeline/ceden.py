@@ -13,6 +13,19 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 
 def populate_locations(df, locations):
+    """ Processes California data to match CEDEN template restrictions.
+        Writes data to the template's 'Locations' sheet. Changes the existing
+        sheet and does not return anything. 
+
+    Args:
+        df (DataFrame): Contains the merged columns of 'measurements' 
+            and 'stations' tables for California stations. 
+        locations (xlwt.Worksheet): Excel Worksheet object for the 'Locations' 
+            sheet of the template. 
+        
+    Returns:
+        None
+    """
 
     # Preprocess the dataframe to match CEDEN format
     df = df[["station_id", "latitude", "longitude", "date"]].drop_duplicates()
@@ -53,6 +66,20 @@ def populate_locations(df, locations):
 
 
 def populate_field_results(df, field_results):
+    """ Processes California data to match CEDEN template restrictions.
+        Writes data to the template's 'Field Results' sheet. Changes the existing
+        sheet and does not return anything. 
+
+    Args:
+        df (DataFrame): Contains the merged columns of 'measurements' 
+            and 'stations' tables for California stations. 
+        field_results (xlwt.Worksheet): Excel Worksheet object for the 'Field results' 
+            sheet of the template. 
+        
+    Returns:
+        None
+    """
+
     df["time"] = pd.to_datetime(df.date_time, utc=True).dt.strftime("%H:%M")
     df["Replicate"] = df.groupby(["station_id", "date"]).cumcount() + 1
 
@@ -115,6 +142,20 @@ def populate_field_results(df, field_results):
 
 
 def populate_template(measurements_path, stations_path, template_path, submittal_path):
+    """ Wrapper function to populate CEDEN template. Reads 'measurements' and 'stations' 
+        tables as well as the empty CEDEN template and passes them as parameters to the
+        populate_locations() and populate_field_results() functions.
+
+    Args:
+        measurements_path (str): Path to the measurements .csv file. 
+        stations_path (str): Path to the stations .csv file. 
+        template_path (str): Path to the empty CEDEN template (.xls).
+        submittal_path (str): Path to the folder where the populated template is going to
+            be saved.  
+        
+    Returns:
+        None. Saves the populated template to the provided template_path.
+    """
     measurements = pd.read_csv(measurements_path, parse_dates=["date_time"])
     stations = pd.read_csv(stations_path)
 
