@@ -98,7 +98,7 @@ ceden_field_misc = {
     "PositionWaterColumn": "Not Applicable",
     "FieldCollectionComments": "",
     "MethodName": "FieldMeasure",
-    "FractionName": "Not Recorded",
+    "FractionName": "None",
     "FieldReplicate": "1",
     "ResQualCode": "=",
     "QACode": "None",
@@ -142,7 +142,7 @@ ceden_unit_dict = {
     "°F": "Deg C",  # convert to celsius
     "mg/L": "mg/L",
     "%": "%",
-    "ppm": "per mil",
+    "ppm": "mg/L",
     "inHg": "mmHG",  # divide by 0.0393701, need to validate
     "µatm": "per mil",  # not sure, need to validate
     "dbar": "dbar",
