@@ -50,21 +50,21 @@ kc_devices = {
 
 ceden_stations = {
     "HIOC_Hogisland1": "201ST1775",
-    "NERRS_elkapwq": "",
+    "NERRS_elkapwq": "NERRS_elkapwq",
     "NERRS_elksmwq": "306-ELKHO-33",
     "NERRS_elkvmwq": "306ELKNVM",
     "NERRS_sfbccwq": "CHINA CAMP",
-    "NERRS_sfbfmwq": "",
+    "NERRS_sfbfmwq": "NERRS_sfbfmwq",
     "NERRS_sfbgcwq": "LLFS17_17",
-    "NERRS_sfbsmwq": "",
-    "NERRS_tjroswq": "",
-    "PMELCO2_cce1": "",
-    "PMELCO2_cce2": "",
-    "CARLSBD_Aquafarm1": "",
-    "cencoos_Carquinez": "",
-    "cencoos_Humboldt": "",
-    "cencoos_Tiburon": "",
-    "cencoos_Trinidad": "",
+    "NERRS_sfbsmwq": "NERRS_sfbsmwq",
+    "NERRS_tjroswq": "NERRS_tjroswq",
+    "PMELCO2_cce1": "PMELCO2_cce1",
+    "PMELCO2_cce2": "PMELCO2_cce2",
+    "CARLSBD_Aquafarm1": "CARLSBD_Aquafarm1",
+    "cencoos_Carquinez": "cencoos_Carquinez",
+    "cencoos_Humboldt": "cencoos_Humboldt",
+    "cencoos_Tiburon": "cencoos_Tiburon",
+    "cencoos_Trinidad": "cencoos_Trinidad",
 }
 
 ceden_station_misc = {
@@ -98,7 +98,7 @@ ceden_field_misc = {
     "PositionWaterColumn": "Not Applicable",
     "FieldCollectionComments": "",
     "MethodName": "FieldMeasure",
-    "FractionName": "None",
+    "FractionName": "Not Recorded",
     "FieldReplicate": "1",
     "ResQualCode": "=",
     "QACode": "None",
@@ -143,8 +143,10 @@ ceden_unit_dict = {
     "mg/L": "mg/L",
     "%": "%",
     "ppm": "mg/L",
-    "inHg": "mmHG",  # divide by 0.0393701, need to validate
-    "µatm": "per mil",  # not sure, need to validate
+    # "inHg": "mmHG",  # divide by 0.0393701, need to validate
+    "inHg": "inHg",
+    # "µatm": "per mil",  # not sure, need to validate
+    "µatm": "uatm",
     "dbar": "dbar",
     np.NaN: "none",
 }
