@@ -28,8 +28,11 @@ def populate_locations(df, locations):
     """
 
     # Preprocess the dataframe to match CEDEN format
-    df = df[["station_id", "latitude", "longitude", "date"]].drop_duplicates()
+    df = df[
+        ["station_id", "latitude", "longitude", "date", "provider"]
+    ].drop_duplicates()
     df["StationCode"] = df.pop("station_id").map(utils.ceden_stations)
+    df["Datum"] = df["provider"].map(utils.ceden_datum_dict)
 
     for k, v in utils.ceden_station_misc.items():
         df.loc[:, k] = v

@@ -69,14 +69,13 @@ ceden_stations = {
 
 ceden_station_misc = {
     "EventCode": "WQ",  # for for Water Quality
-    "ProjectCode": "",
+    "ProjectCode": "CBD-MONITORING-ACID",
     "ProtocolCode": "Not Recorded",
-    "AgencyCode": "Not Recorded",
+    "AgencyCode": "CBD",
     "SampleComments": "",
     "LocationCode": "Not Recorded",
     "GeometryShape": "Point",
     "CoordinateNumber": "1",
-    "Datum": "NR",
     "CoordinateSource": "NR",
     "Elevation": "",
     "UnitElevation": "",
@@ -86,10 +85,10 @@ ceden_station_misc = {
 }
 
 ceden_field_misc = {
-    "ProjectCode": "",  # update with project code
+    "ProjectCode": "CBD-MONITORING-ACID",
     "EventCode": "WQ",
     "ProtocolCode": "Not Recorded",
-    "AgencyCode": "Not Recorded",
+    "AgencyCode": "CBD",
     "SampleComments": "",
     "LocationCode": "Not Recorded",
     "GeometryShape": "Point",
@@ -149,4 +148,14 @@ ceden_unit_dict = {
     "µatm": "uatm",
     "dbar": "dbar",
     np.NaN: "none",
+}
+
+ceden_datum_dict = {
+    "Hog Island Oysters": "NR",
+    "NERRS ELK": "NAVD88",
+    "NERRS SFB": "NAVD88",
+    "NERRS TJR": "NAVD88",
+    "PMEL-CO2": "NR",
+    "Carlsbad Aquafarm": "NR",
+    "CeNCOOS": "NR",
 }
