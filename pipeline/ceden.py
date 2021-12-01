@@ -193,7 +193,7 @@ if __name__ == "__main__":
     PATH = os.path.abspath(__file__)
 
     measurements_path = os.path.abspath(
-        os.path.join(PATH, "..", "..", "data", "ipacoa", "ipacoa_sample.csv")
+        os.path.join(PATH, "..", "..", "data", "measurements.csv")
     )
     stations_path = os.path.abspath(
         os.path.join(PATH, "..", "..", "data", "stations.csv")
@@ -206,4 +206,3 @@ if __name__ == "__main__":
     )
 
     populate_template(measurements_path, stations_path, template_path, submittal_path)
-

@@ -6,3 +6,6 @@ RUN pip install --upgrade pip
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY . .
+COPY ./shell.sh /
+RUN chmod +x /shell.sh
+CMD [ "/shell.sh" ]
