@@ -29,8 +29,14 @@ If you want to run the scripts locally in a Python installed environment, then r
    ```sh
     docker run --name cbd cbd
    ```
-4. You can access the output files using the CLI through Docker Desktop.
+4. You can now access the output files using the CLI through Docker Desktop.
    <br><br>
+
+5. Can stop and remove via
+   ```sh
+   docker stop cbd
+   docker rm cbd
+   ```
 
 ### Or locally
 
