@@ -3,6 +3,7 @@ import requests
 from io import StringIO
 from tqdm import tqdm
 import time
+from datetime import date
 import os
 import utils
 
@@ -97,15 +98,9 @@ def get_data(station_id=None, start_date=None, end_date=None):
 
 
 if __name__ == "__main__":
+    today = date.today().strftime("%Y-%m-%d")
     df_all = get_data()
     data_path = os.path.abspath(
-        os.path.join(
-            PATH,
-            "..",
-            "..",
-            "data",
-            "ipacoa",
-            "ipacoa_data_{}.csv".format(str(int(time.time()))),
-        )
+        os.path.join(PATH, "..", "..", "data", "ipacoa", "ipacoa-{}.csv".format(today),)
     )
     df_all.to_csv(data_path, index=False)

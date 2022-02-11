@@ -4,7 +4,7 @@ from io import StringIO
 from tqdm import tqdm
 import os
 import json
-from datetime import datetime
+from datetime import datetime, date
 import time
 import re
 import utils
@@ -138,15 +138,11 @@ def get_data(station_id=None, start_date=None, end_date=None):
 
 
 if __name__ == "__main__":
+    today = date.today().strftime("%Y-%m-%d")
     df = get_data(start_date="10/26/2019")
     data_path = os.path.abspath(
         os.path.join(
-            PATH,
-            "..",
-            "..",
-            "data",
-            "king-county",
-            "king_county_data_{}.csv".format(str(int(time.time()))),
+            PATH, "..", "..", "data", "king-county", "kingcounty-{}.csv".format(today),
         )
     )
     df.to_csv(data_path, index=False)

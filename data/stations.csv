@@ -1,72 +1,72 @@
-station_id,name,latitude,longitude,state,source
-APSH_Seward1,AOOS Burkolator at Alutiiq Pride Shellfish Hatchery,60.0992,-149.4428,Alaska,IPACOA
-OCAL_Ketchikan1,AOOS Burkolator at OceansAlaska Ketchikan Shellfish Hatchery,55.315,-131.5954,Alaska,IPACOA
-APL_Chaba,Ćháʔba· UW/NANOOS Moored Buoy near La Push,47.9627,-124.958,Washington,IPACOA
-HIOC_Hogisland1,CeNCOOS Burkolator at Hog Island Oyster Farm,38.162,-122.8939,California,IPACOA
-FBO_Fannybay1,"Fanny Bay Oysters, Baynes Sound",49.4716,-124.7927,British Columbia,IPACOA
-HAKAI_KCBuoy,"Seaology CO2 Buoy in Kwakshua Channel, BC",51.6501,-127.9664,British Columbia,IPACOA
-HAKAI_Quadra1,Quadra Island Field Station at Hyacinthe Bay,50.116,-125.222,British Columbia,IPACOA
-OSU_NOAA_OI,NCDC Optimum Interpolation SST,46.1,-129.5,"Washington, Oregon, California, British Columbia",IPACOA
-NDBC_46041,NDBC 46041 - Cape Elizabeth - 45NM NW of Aberdeen,47.353,-124.731,Washington,IPACOA
-NERRS_elkapwq,"Azevedo Pond (elkapwq), Elkhorn Slough Reserve",36.8457,-121.7538,California,IPACOA
-NERRS_elksmwq,"South Marsh (elksmwq), Elkhorn Slough Reserve",36.8179,-121.7394,California,IPACOA
-NERRS_elkvmwq,"Vierra Mouth (elkvmwq), Elkhorn Slough Reserve",36.8111,-121.7792,California,IPACOA
-NERRS_job09wq,"Station 9 (job09wq), Jobos Bay Reserve",17.9437,-66.2385,Puerto Rico,IPACOA
-NERRS_job20wq,"Station 20 (job20wq), Jobos Bay Reserve",17.9303,-66.2115,Puerto Rico,IPACOA
-NERRS_kachdwq,"Homer Dolphin Deep (kachdwq), Kachemak Bay Reserve",59.602,-151.4088,Alaska,IPACOA
-NERRS_kacsdwq,"Seldovia Deep (kacsdwq), Kachemak Bay Reserve",59.441,-151.721,Alaska,IPACOA
-NERRS_pdbbpwq,"Ploeg Channel (pdbbpwq), Padilla Bay Reserve",48.5563,-122.5309,Washington,IPACOA
-NERRS_pdbbywq,"Bayview Channel (pdbbywq), Padilla Bay Reserve",48.4961,-122.5021,Washington,IPACOA
-NERRS_sfbccwq,"China Camp (sfbccwq), San Francisco Bay Reserve",38.0012,-122.4604,California,IPACOA
-NERRS_sfbfmwq,"First Mallard (sfbfmwq), San Francisco Bay Reserve",38.1949,-122.0328,California,IPACOA
-NERRS_sfbgcwq,"Gallinas Creek (sfbgcwq), San Francisco Bay Reserve",38.0159,-122.5085,California,IPACOA
-NERRS_sfbsmwq,"Second Mallard (sfbsmwq), San Francisco Bay Reserve",38.1841,-122.0136,California,IPACOA
-NERRS_soschwq,"Charleston Bridge (soschwq), South Slough Reserve",43.3377,-124.3205,Oregon,IPACOA
-NERRS_sosvawq,"Valino Island (sosvawq), South Slough Reserve",43.3172,-124.3216,Oregon,IPACOA
-NERRS_soswiwq,"Winchester Arm (soswiwq), South Slough Reserve",43.2824,-124.3203,Oregon,IPACOA
-NERRS_tjroswq,"Oneonta Slough (tjroswq), Tijuana River Reserve",32.5683,-117.1313,California,IPACOA
-ORCA_Dabobbay,Profiling Buoy at Dabob Bay - Hood Canal,47.8034,-122.8029,Washington,IPACOA
-ORCA_Twanoh,Profiling Buoy at Twanoh - Hood Canal,47.375,-123.0083,Washington,IPACOA
-OSU_CB06,"CB-06, 6NM W of Coos Bay",43.295,-124.5367,Oregon,IPACOA
-OSU_NH10,"NH-10 Buoy, Newport",44.645,-124.2985,Oregon,IPACOA
-PMELCO2_coastalla,Coastal Louisiana (LA) Buoy,28.9,-90.5,Louisiana,IPACOA
-PMELCO2_155w0,"TAO 0, 155W",0.0,-155.0,STATE,IPACOA
-PMELCO2_165e0,"TAO 0, 165E",0.0,165.0,STATE,IPACOA
-PMELCO2_165e8s,"TAO 8S, 165E",-8.0,165.0,STATE,IPACOA
-PMELCO2_170w,"TAO 0, 170W ",0.0,-170.0,STATE,IPACOA
-PMELCO2_HogReef,Hog Reef,32.46,-64.83,STATE,IPACOA
-PMELCO2_alawai,Ala Wai HiOOS Mooring,21.28,-157.85,Hawaii,IPACOA
-PMELCO2_cce1,California Current Ecosystem 1 Mooring,33.48,-122.53,California,IPACOA
-PMELCO2_cce2,California Current Ecosystem 2 Mooring,34.324,-120.814,California,IPACOA
-PMELCO2_cheeca,Cheeca Rocks Ocean Acidification Mooring,24.9,-80.62,STATE,IPACOA
-PMELCO2_chuukk1,Chuuk K1 Lagoon Mooring,7.42,151.82,STATE,IPACOA
-PMELCO2_coastalms,Coastal Mississippi at Station CenGOOS-01 ,30.0,-88.6,STATE,IPACOA
-PMELCO2_crescent,Crescent Reef,32.4,-64.79,STATE,IPACOA
-PMELCO2_crimp,Coral Reef Instrumented Monitoring Platform 2,21.46,-157.8,Hawaii,IPACOA
-PMELCO2_firstlanding,CBIBS OA Buoy at First Landing,37.0,-76.1,Maryland,IPACOA
-PMELCO2_gakoa,Gulf of Alaska OA Mooring,59.85,-149.5,Alaska,IPACOA
-PMELCO2_kaneohe,Kaneohe Offshore HiOOS Observatory,21.48,-157.78,Hawaii,IPACOA
-PMELCO2_kilonalu,Kilo Nalu Offshore HiOOS Observatory,21.29,-157.87,Hawaii,IPACOA
-PMELCO2_kodiak,"Kodiak, Gulf of Alaska OA Mooring",57.7,-152.31,Alaska,IPACOA
-PMELCO2_laparguera,La Parguera Coral Reef OA Mooring,17.95,-67.05,Puerto Rico,IPACOA
-PMELCO2_m2,SE Bering Sea M2 OA Mooring,56.51,-164.04,Alaska,IPACOA
-PMELCO2_ndbcga,NDBC Mooring 41008 at Grays Reef National Marine Sanctuary,31.4,-80.87,STATE,IPACOA
-PMELCO2_nh,Gulf of Maine Mooring,43.02,-70.54,New Hampshire,IPACOA
-PMELCO2_papa,Ocean Station Papa ,50.13,-144.84,STATE,IPACOA
-PMELCO2_seak,"Port Conclusion, Gulf of Alaska OA Mooring",56.0,-134.0,Alaska,IPACOA
-PMELCO2_whots,WHOI Hawaii Ocean Time-series Station Mooring,22.67,-157.98,Hawaii,IPACOA
-PSI_Baycenter,"PCSGA - Bay Center Port mooring, Willapa Bay",46.629,-123.9516,Washington,IPACOA
-PCS_Penncove1,"Penn Cove Shellfish, Coupeville - Whidbey Island",48.2191,-122.7048,Washington,IPACOA
-CARLSBD_Aquafarm1,Agua Hedionda Lagoon - Carlsbad Aquafarm,33.1407,-117.3389,California,IPACOA
-KC_SEAQYSI,Seattle Aquarium Mooring - Elliott Bay,47.608,-122.3438,Washington,IPACOA
-STA_Sitka1,Sitka Tribe of Alaska Burke-o-Lator site - Sitka,57.0526,-135.3456,Alaska,IPACOA
-TAF_Dabobbay,"PCSGA - Taylor Shellfish Hatchery intakes, Dabob Bay",47.8199,-122.8215,Washington,IPACOA
-WCSH_Whiskey1,"PCSGA - Whiskey Creek Shellfish Hatchery, Netarts Bay",45.4214,-123.9362,Oregon,IPACOA
-cencoos_Carquinez,Carquinez,38.0657,-122.2302,California,IPACOA
-cencoos_Humboldt,Humboldt,40.7775,-124.1965,California,IPACOA
-cencoos_Tiburon,Tiburon,37.8915,-122.4467,California,IPACOA
-cencoos_Trinidad,Trinidad,41.055,-124.147,California,IPACOA
-DOCKTON,Dockton Park,47.37611,-122.45722,Washington,King County
-POINT_WILLIAMS,Point Williams,47.53716,-122.40612,Washington,King County
-QUARTER_MASTER_YC,Quarter Master Yacht Club,47.39394,-122.4635,Washington,King County
-SEATTLE_AQUARIUM,Seattle Aquarium Mooring - Elliott Bay,47.60786,-122.3436,Washington,King County
+,station_id,name,latitude,longitude,state,source,provider
+0,APSH_Seward1,AOOS Burkolator at Alutiiq Pride Shellfish Hatchery,60.0992,-149.4428,Alaska,IPACOA,Alutiiq Pride Shellfish
+1,OCAL_Ketchikan1,AOOS Burkolator at OceansAlaska Ketchikan Shellfish Hatchery,55.315,-131.5954,Alaska,IPACOA,OceansAlaska
+2,APL_Chaba,Ćháʔba· UW/NANOOS Moored Buoy near La Push,47.9627,-124.958,Washington,IPACOA,APL-UW
+3,HIOC_Hogisland1,CeNCOOS Burkolator at Hog Island Oyster Farm,38.162,-122.8939,California,IPACOA,Hog Island Oysters
+4,FBO_Fannybay1,"Fanny Bay Oysters, Baynes Sound",49.4716,-124.7927,British Columbia,IPACOA,FannyBayOysters
+5,HAKAI_KCBuoy,"Seaology CO2 Buoy in Kwakshua Channel, BC",51.6501,-127.9664,British Columbia,IPACOA,Hakai Institute
+6,HAKAI_Quadra1,Quadra Island Field Station at Hyacinthe Bay,50.116,-125.222,British Columbia,IPACOA,Hakai Institute
+7,OSU_NOAA_OI,NCDC Optimum Interpolation SST,46.1,-129.5,"Washington, Oregon, California, British Columbia",IPACOA,NOAA-NCDC
+8,NDBC_46041,NDBC 46041 - Cape Elizabeth - 45NM NW of Aberdeen,47.353,-124.731,Washington,IPACOA,NDBC
+9,NERRS_elkapwq,"Azevedo Pond (elkapwq), Elkhorn Slough Reserve",36.8457,-121.7538,California,IPACOA,NERRS ELK
+10,NERRS_elksmwq,"South Marsh (elksmwq), Elkhorn Slough Reserve",36.8179,-121.7394,California,IPACOA,NERRS ELK
+11,NERRS_elkvmwq,"Vierra Mouth (elkvmwq), Elkhorn Slough Reserve",36.8111,-121.7792,California,IPACOA,NERRS ELK
+12,NERRS_job09wq,"Station 9 (job09wq), Jobos Bay Reserve",17.9437,-66.2385,Puerto Rico,IPACOA,NERRS JOB
+13,NERRS_job20wq,"Station 20 (job20wq), Jobos Bay Reserve",17.9303,-66.2115,Puerto Rico,IPACOA,NERRS JOB
+14,NERRS_kachdwq,"Homer Dolphin Deep (kachdwq), Kachemak Bay Reserve",59.602,-151.4088,Alaska,IPACOA,NERRS KAC
+15,NERRS_kacsdwq,"Seldovia Deep (kacsdwq), Kachemak Bay Reserve",59.441,-151.721,Alaska,IPACOA,NERRS KAC
+16,NERRS_pdbbpwq,"Ploeg Channel (pdbbpwq), Padilla Bay Reserve",48.5563,-122.5309,Washington,IPACOA,NERRS PDB
+17,NERRS_pdbbywq,"Bayview Channel (pdbbywq), Padilla Bay Reserve",48.4961,-122.5021,Washington,IPACOA,NERRS PDB
+18,NERRS_sfbccwq,"China Camp (sfbccwq), San Francisco Bay Reserve",38.0012,-122.4604,California,IPACOA,NERRS SFB
+19,NERRS_sfbfmwq,"First Mallard (sfbfmwq), San Francisco Bay Reserve",38.1949,-122.0328,California,IPACOA,NERRS SFB
+20,NERRS_sfbgcwq,"Gallinas Creek (sfbgcwq), San Francisco Bay Reserve",38.0159,-122.5085,California,IPACOA,NERRS SFB
+21,NERRS_sfbsmwq,"Second Mallard (sfbsmwq), San Francisco Bay Reserve",38.1841,-122.0136,California,IPACOA,NERRS SFB
+22,NERRS_soschwq,"Charleston Bridge (soschwq), South Slough Reserve",43.3377,-124.3205,Oregon,IPACOA,NERRS SOS
+23,NERRS_sosvawq,"Valino Island (sosvawq), South Slough Reserve",43.3172,-124.3216,Oregon,IPACOA,NERRS SOS
+24,NERRS_soswiwq,"Winchester Arm (soswiwq), South Slough Reserve",43.2824,-124.3203,Oregon,IPACOA,NERRS SOS
+25,NERRS_tjroswq,"Oneonta Slough (tjroswq), Tijuana River Reserve",32.5683,-117.1313,California,IPACOA,NERRS TJR
+26,ORCA_Dabobbay,Profiling Buoy at Dabob Bay - Hood Canal,47.8034,-122.8029,Washington,IPACOA,ORCA-UW
+27,ORCA_Twanoh,Profiling Buoy at Twanoh - Hood Canal,47.375,-123.0083,Washington,IPACOA,ORCA-UW
+28,OSU_CB06,"CB-06, 6NM W of Coos Bay",43.295,-124.5367,Oregon,IPACOA,OSU
+29,OSU_NH10,"NH-10 Buoy, Newport",44.645,-124.2985,Oregon,IPACOA,OSU
+30,PMELCO2_coastalla,Coastal Louisiana (LA) Buoy,28.9,-90.5,Louisiana,IPACOA,PMEL-CO2
+31,PMELCO2_155w0,"TAO 0, 155W",0.0,-155.0,STATE,IPACOA,PMEL-CO2
+32,PMELCO2_165e0,"TAO 0, 165E",0.0,165.0,STATE,IPACOA,PMEL-CO2
+33,PMELCO2_165e8s,"TAO 8S, 165E",-8.0,165.0,STATE,IPACOA,PMEL-CO2
+34,PMELCO2_170w,"TAO 0, 170W ",0.0,-170.0,STATE,IPACOA,PMEL-CO2
+35,PMELCO2_HogReef,Hog Reef,32.46,-64.83,STATE,IPACOA,PMEL-CO2
+36,PMELCO2_alawai,Ala Wai HiOOS Mooring,21.28,-157.85,Hawaii,IPACOA,PMEL-CO2
+37,PMELCO2_cce1,California Current Ecosystem 1 Mooring,33.48,-122.53,California,IPACOA,PMEL-CO2
+38,PMELCO2_cce2,California Current Ecosystem 2 Mooring,34.324,-120.814,California,IPACOA,PMEL-CO2
+39,PMELCO2_cheeca,Cheeca Rocks Ocean Acidification Mooring,24.9,-80.62,STATE,IPACOA,PMEL-CO2
+40,PMELCO2_chuukk1,Chuuk K1 Lagoon Mooring,7.42,151.82,STATE,IPACOA,PMEL-CO2
+41,PMELCO2_coastalms,Coastal Mississippi at Station CenGOOS-01 ,30.0,-88.6,STATE,IPACOA,PMEL-CO2
+42,PMELCO2_crescent,Crescent Reef,32.4,-64.79,STATE,IPACOA,PMEL-CO2
+43,PMELCO2_crimp,Coral Reef Instrumented Monitoring Platform 2,21.46,-157.8,Hawaii,IPACOA,PMEL-CO2
+44,PMELCO2_firstlanding,CBIBS OA Buoy at First Landing,37.0,-76.1,Maryland,IPACOA,PMEL-CO2
+45,PMELCO2_gakoa,Gulf of Alaska OA Mooring,59.85,-149.5,Alaska,IPACOA,PMEL-CO2
+46,PMELCO2_kaneohe,Kaneohe Offshore HiOOS Observatory,21.48,-157.78,Hawaii,IPACOA,PMEL-CO2
+47,PMELCO2_kilonalu,Kilo Nalu Offshore HiOOS Observatory,21.29,-157.87,Hawaii,IPACOA,PMEL-CO2
+48,PMELCO2_kodiak,"Kodiak, Gulf of Alaska OA Mooring",57.7,-152.31,Alaska,IPACOA,PMEL-CO2
+49,PMELCO2_laparguera,La Parguera Coral Reef OA Mooring,17.95,-67.05,Puerto Rico,IPACOA,PMEL-CO2
+50,PMELCO2_m2,SE Bering Sea M2 OA Mooring,56.51,-164.04,Alaska,IPACOA,PMEL-CO2
+51,PMELCO2_ndbcga,NDBC Mooring 41008 at Grays Reef National Marine Sanctuary,31.4,-80.87,STATE,IPACOA,PMEL-CO2
+52,PMELCO2_nh,Gulf of Maine Mooring,43.02,-70.54,New Hampshire,IPACOA,PMEL-CO2
+53,PMELCO2_papa,Ocean Station Papa ,50.13,-144.84,STATE,IPACOA,PMEL-CO2
+54,PMELCO2_seak,"Port Conclusion, Gulf of Alaska OA Mooring",56.0,-134.0,Alaska,IPACOA,PMEL-CO2
+55,PMELCO2_whots,WHOI Hawaii Ocean Time-series Station Mooring,22.67,-157.98,Hawaii,IPACOA,PMEL-CO2
+56,PSI_Baycenter,"PCSGA - Bay Center Port mooring, Willapa Bay",46.629,-123.9516,Washington,IPACOA,PSI
+57,PCS_Penncove1,"Penn Cove Shellfish, Coupeville - Whidbey Island",48.2191,-122.7048,Washington,IPACOA,PennCoveShellfish
+58,CARLSBD_Aquafarm1,Agua Hedionda Lagoon - Carlsbad Aquafarm,33.1407,-117.3389,California,IPACOA,Carlsbad Aquafarm
+59,KC_SEAQYSI,Seattle Aquarium Mooring - Elliott Bay,47.608,-122.3438,Washington,IPACOA,King County
+60,STA_Sitka1,Sitka Tribe of Alaska Burke-o-Lator site - Sitka,57.0526,-135.3456,Alaska,IPACOA,STA
+61,TAF_Dabobbay,"PCSGA - Taylor Shellfish Hatchery intakes, Dabob Bay",47.8199,-122.8215,Washington,IPACOA,TaylorShellfish
+62,WCSH_Whiskey1,"PCSGA - Whiskey Creek Shellfish Hatchery, Netarts Bay",45.4214,-123.9362,Oregon,IPACOA,WhiskeyCrShelfish
+63,cencoos_Carquinez,Carquinez,38.0657,-122.2302,California,IPACOA,CeNCOOS
+64,cencoos_Humboldt,Humboldt,40.7775,-124.1965,California,IPACOA,CeNCOOS
+65,cencoos_Tiburon,Tiburon,37.8915,-122.4467,California,IPACOA,CeNCOOS
+66,cencoos_Trinidad,Trinidad,41.055,-124.147,California,IPACOA,CeNCOOS
+67,DOCKTON,Dockton Park,47.37611,-122.45722,Washington,King County,King County
+68,POINT_WILLIAMS,Point Williams,47.53716,-122.40612,Washington,King County,King County
+69,QUARTER_MASTER_YC,Quarter Master Yacht Club,47.39394,-122.4635,Washington,King County,King County
+70,SEATTLE_AQUARIUM,Seattle Aquarium Mooring - Elliott Bay,47.60786,-122.3436,Washington,King County,King County
