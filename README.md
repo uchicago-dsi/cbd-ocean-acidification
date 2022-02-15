@@ -63,17 +63,13 @@ If you want to run the scripts locally in a Python installed environment, then r
 - `getdata.py`: Python script to call functions within `kingcounty.py` and `ipacoa.py` and store the concatenated results at `data/measurements.csv`. Change `months=6` to desired value at line 10 to get older/newer data.
 - `utils.py`: Contains relevant dictionaries used to normalize column and value names across different sources, as well as to comply with CEDEN template guidelines.
 
-### data/
+### pipeline/metadata
 
-- `ipacoa/lookups/asset_list.csv`: Contains information on all stations and buoys accessible through IPACOA.
-- `ipacoa/lookups/measurement_lookup.csv`: Lookup table that shows IDs, names, and measurement units for all measurements provided by stations listed in the asset list.
-- `ipacoa/lookups/platform_measurements.csv`: Contains all combinations of stations and measurements accessible through IPACOA. The `process` column indicates whether that information is going to be downloaded by the scraper `ipacoa.py`. If you want to add additional stations or measurements, you should update `process` column of the relevant row to be `True`. Otherwise that information will not be included in the dataset. Currently only ocean acidification related measurements of West Coast stations are set to have `process=True`.
-- `ipacoa/ipacoa_sample.csv`: Sample output of `ipacoa.py`.
+- `ipacoa_measurement_lookup.csv`: Lookup table that shows IDs, names, and measurement units for all measurements provided by stations listed in the asset list.
+- `ipacoa_platform_measurements.csv`: Contains all combinations of stations and measurements accessible through IPACOA. The `process` column indicates whether that information is going to be downloaded by the scraper `ipacoa.py`. If you want to add additional stations or measurements, you should update `process` column of the relevant row to be `True`. Otherwise that information will not be included in the dataset. Currently only ocean acidification related measurements of West Coast stations are set to have `process=True`.
   <br><br>
-- `king-county/keys/king-county-keys.json`: Contains necessary keys to make a `GET` request to King County's API. Used by the `kingcounty.py` script.
-- `king-county/lookups/measurement_lookup.csv`: Contains information on measurements, units, and devices used in the stations listed by King County data portal.
-  <br><br>
-- `submittal/`: Directory in which filled-in CEDEN templates are exported.
+- `king-county-keys.json`: Contains necessary keys to make a `GET` request to King County's API. Used by the `kingcounty.py` script.
+- `kingcounty_measurement_lookup.csv`: Contains information on measurements, units, and devices used in the stations listed by King County data portal.
   <br><br>
 - `stations.csv`: Table containing information on all stations that can be accessed through both IPACOA and King County data sources.
 

@@ -4,7 +4,7 @@ from io import StringIO
 from tqdm import tqdm
 from pathlib import Path
 import json
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import time
 import re
 import utils
@@ -50,25 +50,19 @@ COL_RENAMES = {
 }
 
 class KingCounty():
+    time_format = "%m/%d/%Y"
 
-    def get_data(self, station_id=None, start_date=None, end_date=None):
+    def get_data(self, station_id, start_date, end_date):
         """ Retrieves data for input station(s) and time range as DataFrame.
 
         Args:
-            station_id (str): Default None. If none supplied, retrieves data
-                for all station_ids
-            start_date (MM/DD/YYYY): Default None. If none supplied, 
-                starts with earliest available
-            end_date(MM/DD/YYYY): Default None. If none, uses current date.
+            station_id (str): id for station of interest
+            start_date (datetime): earliest time from which to collect data
+            end_date(datetime): latest time from which to collect data
         Returns:
             pd.DataFrame: Contains information on all platforms listed in the input json.
         """
         url = "https://green2.kingcounty.gov/marine-buoy/Data.aspx"
-        if not end_date:
-            current_time = datetime.now()
-            end_date = current_time.strftime("%m/%d/%Y")
-        if not start_date:
-            start_date = "01/01/1900"
 
         # Setting up the parameters for POST request
         with open(KEYS) as f:
@@ -77,65 +71,60 @@ class KingCounty():
         start_date_key = "ctl00$kcMasterPagePlaceHolder$startDate"
         end_date_key = "ctl00$kcMasterPagePlaceHolder$endDate"
 
-        # Iterate over station parameters
-        cols = set()
-        dfs = []
-        for buoy, data in tqdm(params.items()):
-            data[start_date_key] = start_date
-            data[end_date_key] = end_date
-            response = requests.post(url, data=data)
-            tsv = response.text.split("***END***")[1]
-            df = pd.read_csv(StringIO(tsv), sep="\t", low_memory=False)
-            df["station_id"] = buoy
-            df.dropna(how="all", axis=1, inplace=True)
+        data = params[station_id]
+        data[start_date_key] = start_date.strftime(self.time_format)
+        data[end_date_key] = end_date.strftime(self.time_format)
+        response = requests.post(url, data=data)
+        tsv = response.text.split("***END***")[1]
+        station_data = pd.read_csv(StringIO(tsv), sep="\t", low_memory=False)
+        station_data["station_id"] = station_id
+        station_data.dropna(how="all", axis=1, inplace=True)
 
-            # Seattle Aquarium gets two measurements at different depths for each
-            # parameter, and these are shown on the same row with different column names.
-            if buoy == "SEATTLE_AQUARIUM":
-                pd.options.mode.chained_assignment = None
-                sa_1 = df.filter(regex="1_|Date|station_id")
-                sa_2 = df.filter(regex="2_|Date|station_id")
-                sa_rename_1 = {i: i.replace("1_", "") for i in sa_1.columns}
-                sa_rename_2 = {i: i.replace("2_", "") for i in sa_2.columns}
-                sa_1.rename(columns=sa_rename_1, inplace=True)
-                sa_2.rename(columns=sa_rename_2, inplace=True)
-                df = pd.concat([sa_1, sa_2], ignore_index=True)
+        # Seattle Aquarium gets two measurements at different depths for each
+        # parameter, and these are shown on the same row with different column names.
+        if station_id == "SEATTLE_AQUARIUM":
+            pd.options.mode.chained_assignment = None
+            sa_1 = station_data.filter(regex="1_|Date|station_id")
+            sa_2 = station_data.filter(regex="2_|Date|station_id")
+            sa_rename_1 = {i: i.replace("1_", "") for i in sa_1.columns}
+            sa_rename_2 = {i: i.replace("2_", "") for i in sa_2.columns}
+            sa_1.rename(columns=sa_rename_1, inplace=True)
+            sa_2.rename(columns=sa_rename_2, inplace=True)
+            station_data = pd.concat([sa_1, sa_2], ignore_index=True)
 
-            dfs.append(df)
-        all_measures = pd.concat(dfs)
-        all_measures = all_measures.filter(items=COLS)
-        all_measures["Qual_Dissolved_Oxygen_Sat"] = all_measures["Qual_DO"]
-        all_measures["Qual_Dissolved_Oxygen"] = all_measures.pop("Qual_DO")
-        all_measures.rename(columns=COL_RENAMES, inplace=True)
-        all_measures.reset_index(inplace=True)
-        all_measures["id"] = all_measures.index
-        all_measures = pd.wide_to_long(
-            all_measures,
+        station_data = station_data.filter(items=COLS)
+        station_data["Qual_Dissolved_Oxygen_Sat"] = station_data["Qual_DO"]
+        station_data["Qual_Dissolved_Oxygen"] = station_data.pop("Qual_DO")
+        station_data.rename(columns=COL_RENAMES, inplace=True)
+        station_data.reset_index(inplace=True)
+        station_data["id"] = station_data.index
+        station_data = pd.wide_to_long(
+            station_data,
             stubnames=["Measure", "Qual"],
             i=["id", "date_time", "station_id", "depth"],
             j="parameter",
             suffix=r"\w+",
             sep="_",
         ).reset_index()
-        all_measures.drop(["id", "index"], axis=1, inplace=True)
-        all_measures.dropna(subset=["Measure"], inplace=True)
-        all_measures.rename(
+        station_data.drop(["id", "index"], axis=1, inplace=True)
+        station_data.dropna(subset=["Measure"], inplace=True)
+        station_data.rename(
             columns={"Qual": "quality_flag", "Measure": "value"}, inplace=True
         )
-        all_measures["depth_unit"] = "m"
-        all_measures["date_time"] = pd.to_datetime(all_measures.date_time)
+        station_data["depth_unit"] = "m"
+        station_data["date_time"] = pd.to_datetime(station_data.date_time)
 
         # map parameter names to device names, normalized names, and units
-        all_measures["device_name"] = all_measures["parameter"].map(utils.kc_devices)
-        all_measures["parameter"] = all_measures["parameter"].map(utils.parameter_dict)
-        all_measures["unit"] = all_measures["parameter"].map(utils.kc_units)
+        station_data["device_name"] = station_data["parameter"].map(utils.kc_devices)
+        station_data["parameter"] = station_data["parameter"].map(utils.parameter_dict)
+        station_data["unit"] = station_data["parameter"].map(utils.kc_units)
 
-        return all_measures
+        return station_data
 
 
 if __name__ == "__main__":
     today = date.today().strftime("%Y-%m-%d")
     collector = KingCounty()
-    df = collector.get_data(start_date="10/26/2019")
-    data_path = HERE.parent / 'data'
+    df = collector.get_data("POINT_WILLIAMS", datetime.now() - timedelta(30), datetime.now())
+    data_path = HERE.parent / 'data' / 'kingtest.csv'
     df.to_csv(data_path, index=False)
