@@ -4,23 +4,37 @@ import pandas as pd
 import numpy as np
 import erddapy
 import requests
+from pathlib import Path
 
 COL_RENAMES = {
-    'time (UTC)': 'datetime',
-    'latitude (degrees_north)': 'latitude',
-    'longitude (degrees_east)': 'longitude',
     'sea_water_practical_salinity': 'salinity',
-    'station': 'staion_id',
     'sea_water_ph_reported_on_total_scale': 'pH',
+    'sea_water_ph_reported_on_total_scale_salinity_corrected': 'pH_salinity',
+    'sea_water_ph_reported_on_total_scale_internal': 'pH_internal',
+    'sea_water_ph_reported_on_total_scale_external': 'pH_external',
     'sea_water_temperature' : 'water_temperature',
+    'sea_water_pressure': 'water_pressure',
     'mass_concentration_of_oxygen_in_sea_water' : 'oxygen_concentration',
     'fractional_saturation_of_oxygen_in_sea_water' : 'oxygen_saturation',
     'sea_water_electrical_conductivity' : 'conductivity',
     'total_dissolved_solids' : 'total_dissolved_solids',
     'sea_water_turbidity' : 'turbidity',
     'total_alkalinity_ta' : 'total_alkalinity',
-    'z (m)': 'z'
+    'omega_aragonite': 'omega_aragonite'
 }
+
+positional_column_mapping = {
+    'time (UTC)': 'datetime',
+    'latitude (degrees_north)': 'latitude',
+    'longitude (degrees_east)': 'longitude',
+    'station': 'staion_id',
+    'z (m)': 'depth'
+}
+
+index_columns = ["datetime", "latitude", "longitude", "station_id", "depth"]
+
+HERE = Path(__file__).resolve().parent
+station_parameter_metadata = HERE / 'metadata' / 'station_parameter_metadata.csv'
 
 class ERDDAP():
 
@@ -104,27 +118,33 @@ class ERDDAP():
         }
         dataset_df = erddap_builder.to_pandas()
         dataset_df['station_id'] = dataset_id
-        long_df = self.format_df(dataset_df)
+        long_df = self.standardize_data(dataset_df)
         return long_df
 
-    def format_df(self, df):
-        df = df.set_index(['time (UTC)', 'latitude (degrees_north)', 'longitude (degrees_east)', 'z (m)', 'station_id'])
-        df = df.drop(
-            ['Unnamed: 0', 'Unnamed: 0.1', 'mass_concentration_of_oxygen_in_sea_water (mL.L-1)', 'mass_concentration_of_oxygen_in_sea_water (micromol.L-1)'],
-            axis='columns',
-            errors='ignore'
+    def standardize_data(self, dataset: pd.DataFrame):
+        """ Reformat data to match a single standard format """
+        # use station_id column used to retrieve data
+        dataset.drop(columns=["station"], inplace=True)
+        dataset.rename(columns=positional_column_mapping, inplace=True, errors='ignore')
+        # measurements updated with qc tests, keep most up to date
+        dataset.drop_duplicates(subset=index_columns, keep="last", inplace=True)
+        # rearrange stubs to prefix parameter names to fit wide_to_long
+        # erddap cols are var_name_qc_agg, var_name_qc_tests, var_name (unit)
+        dataset.columns = dataset.columns.str.replace("(.*) \(.*\)", "value_\\1")
+        dataset.columns = dataset.columns.str.replace("(.*)_qc(.*)", "qc\\2_\\1")
+        long_df = pd.wide_to_long(
+            dataset,
+            stubnames=["value", "qc_agg", "qc_tests"],
+            i=index_columns, 
+            j="parameter",
+            sep="_",
+            suffix=r"\w+"
         )
-        df.columns = df.columns.str.split(' ', 1).str[0]
-        df.columns = df.columns.str.split('_qc_', 1, expand=True)
-        df.rename(columns=COL_RENAMES, inplace=True, errors='ignore')
-        df = pd.melt(df, ignore_index=False, var_name=['parameter', 'meta'])
-        df = df.reset_index().rename(columns=COL_RENAMES, errors='ignore')
-        df = df.drop_duplicates()
-        df = df.pivot(
-            index=['datetime', 'latitude', 'longitude', 'z', 'station_id', 'parameter'],
-            columns=['meta'],
-            values=['value']
-        )
-        df.columns = ["value", "qc_agg", "qc_tests"]
-        df = df.dropna(subset=['value'])
-        return df
+        long_df.drop(columns="qc_tests", inplace=True)
+        long_df.dropna(subset=['value'], inplace=True)
+        long_df.rename(columns={"qc_agg": "quality"}, inplace=True)
+        long_df.reset_index(inplace=True)
+        parameter_metadata = pd.read_csv(station_parameter_metadata, index_col=["station_id", "parameter"])
+        long_df = long_df.join(parameter_metadata, on=["station_id", "parameter"], how='left')
+        long_df['parameter'] = long_df["parameter"].map(COL_RENAMES)
+        return long_df

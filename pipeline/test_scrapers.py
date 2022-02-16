@@ -36,6 +36,12 @@ class TestDataCollection():
     def run_collector_tests(self, collector, station_id, start, end):
         """ Runs get_data tests and asserts properly formed table """
         data = collector.get_data(station_id, start, end)
+        expected_columns = {
+            "datetime", "latitude", "longitude", "depth", "station_id",
+            "parameter", "value", "quality", "unit", "instrument"
+        }
+        ## depth unit and reference point?
+        assert set(data.columns) == expected_columns
 
         
 
