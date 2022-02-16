@@ -5,7 +5,7 @@ from tqdm import tqdm
 import time
 from datetime import date
 from pathlib import Path
-import utils
+from . import utils
 
 HERE = Path(__file__).resolve().parent
 measurements_path = HERE / 'metadata' / 'ipacoa_platform_measurements.csv'
@@ -87,10 +87,3 @@ class IPACOA():
         all_measures["parameter"] = all_measures["parameter"].map(utils.parameter_dict)
 
         return all_measures
-
-
-if __name__ == "__main__":
-    today = date.today().strftime("%Y-%m-%d")
-    df_all = get_data()
-    data_path = HERE / 'ipacoa.csv'
-    df_all.to_csv(data_path, index=False)

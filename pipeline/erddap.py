@@ -128,10 +128,3 @@ class ERDDAP():
         df.columns = ["value", "qc_agg", "qc_tests"]
         df = df.dropna(subset=['value'])
         return df
-
-
-if __name__ == "__main__":
-    servers = ["https://erddap.dataexplorer.oceanobservatories.org/erddap/", "https://erddap.cencoos.org/erddap/"]
-    ooi = ERDDAP(servers[0])
-    cencoos = ERDDAP(servers[1])
-    df = ooi.get_data()

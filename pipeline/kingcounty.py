@@ -7,8 +7,7 @@ import json
 from datetime import datetime, date, timedelta
 import time
 import re
-import utils
-
+from . import utils
 HERE = Path(__file__).resolve().parent
 KEYS = HERE / "metadata" / 'king-county-keys.json'
 
@@ -120,11 +119,3 @@ class KingCounty():
         station_data["unit"] = station_data["parameter"].map(utils.kc_units)
 
         return station_data
-
-
-if __name__ == "__main__":
-    today = date.today().strftime("%Y-%m-%d")
-    collector = KingCounty()
-    df = collector.get_data("POINT_WILLIAMS", datetime.now() - timedelta(30), datetime.now())
-    data_path = HERE.parent / 'data' / 'kingtest.csv'
-    df.to_csv(data_path, index=False)
