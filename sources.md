@@ -26,6 +26,8 @@ Contacted with no response.
 ### Moss Landing Marine Laboratory
 Contacted with no response.
 
+Depth: 16.6m (54.4ft) below MLLW 
+
 ### Romberg Tiburon Center, San Francisco State University
 
 Depth: Distance the sensors are below the water's surface. The sensors are in a fixed position attached to a pier, so depth also measures tidal range. (units = meters or feet)
