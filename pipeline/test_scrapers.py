@@ -28,7 +28,7 @@ class TestDataCollection():
         self.run_collector_tests(collector, station_id, self.month_prior, self.now)
     
     def test_kingcounty_default(self):
-        station_id = "POINT_WILLIAMS"
+        station_id = "SEATTLE_AQUARIUM"
         collector = KingCounty()
         self.run_collector_tests(collector, station_id, self.month_prior, self.now)
 
@@ -37,7 +37,7 @@ class TestDataCollection():
         """ Runs get_data tests and asserts properly formed table """
         data = collector.get_data(station_id, start, end)
         expected_columns = {
-            "datetime", "latitude", "longitude", "depth", "station_id",
+            "datetime", "latitude", "longitude", "depth", "depth_unit", "station_id",
             "parameter", "value", "quality", "unit", "instrument"
         }
         ## depth unit and reference point?

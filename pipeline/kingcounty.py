@@ -8,8 +8,12 @@ from datetime import datetime, date, timedelta
 import time
 import re
 from . import utils
+
+
 HERE = Path(__file__).resolve().parent
 KEYS = HERE / "metadata" / 'king-county-keys.json'
+station_parameter_metadata = HERE / 'metadata' / 'station_parameter_metadata.csv'
+stations = HERE / "metadata" / "stations.csv"
 
 COLS = [
     "station_id",
@@ -33,20 +37,6 @@ COLS = [
     "Salinity_PSU",
     "Depth_m",
 ]
-
-COL_RENAMES = {
-    "Date": "date_time",
-    "Air_Pressure_inHg": "Measure_Air_Pressure",
-    "Air_Temperature_F": "Measure_Air_Temperature",
-    "Dissolved_Oxygen_%Sat": "Measure_Dissolved_Oxygen_Sat",
-    "Dissolved_Oxygen_mg/L": "Measure_Dissolved_Oxygen",
-    "Water_Temperature_degC": "Measure_Water_Temperature",
-    "SeaFET_Temperature_degC": "Measure_SeaFET_Temperature",
-    "Sonde_pH": "Measure_Sonde_pH",
-    "SeaFET_External_pH_recalc_w_salinity": "Measure_SeaFET_External_pH_recalc_w_salinity",
-    "Salinity_PSU": "Measure_Salinity",
-    "Depth_m": "depth",
-}
 
 class KingCounty():
     time_format = "%m/%d/%Y"
@@ -90,32 +80,41 @@ class KingCounty():
             sa_1.rename(columns=sa_rename_1, inplace=True)
             sa_2.rename(columns=sa_rename_2, inplace=True)
             station_data = pd.concat([sa_1, sa_2], ignore_index=True)
+        long_df = self.standardize_data(station_data)
+        return long_df
 
-        station_data = station_data.filter(items=COLS)
-        station_data["Qual_Dissolved_Oxygen_Sat"] = station_data["Qual_DO"]
-        station_data["Qual_Dissolved_Oxygen"] = station_data.pop("Qual_DO")
-        station_data.rename(columns=COL_RENAMES, inplace=True)
-        station_data.reset_index(inplace=True)
-        station_data["id"] = station_data.index
-        station_data = pd.wide_to_long(
-            station_data,
-            stubnames=["Measure", "Qual"],
-            i=["id", "date_time", "station_id", "depth"],
+    def standardize_data(self, dataset: pd.DataFrame):
+        """ Reformat data to match a single standard format """
+        dataset = dataset.filter(items=COLS)
+        # Dissolved Oxygen measures share on qc column 'DO'
+        dataset["Qual_Dissolved_Oxygen_Sat"] = dataset["Qual_DO"]
+        dataset["Qual_Dissolved_Oxygen"] = dataset.pop("Qual_DO")
+        # restructure columns for wide_to_long
+        dataset.rename(columns=utils.positional_column_mapping, inplace=True)
+        # kingcounty cols are Var_Name_Unit, Qual_Var_Name
+        dataset.rename(columns={'Dissolved_Oxygen_%Sat': 'Dissolved_Oxygen_Sat_%'}, inplace=True)
+        dataset.columns = dataset.columns.str.replace("(^(?!Qual).*)_pH", "\\1_pH_1")
+        dataset.columns = dataset.columns.str.replace("(^(?!Qual|[a-z]).*)_(.*)", "value_\\1")
+        dataset.columns = dataset.columns.str.replace("Qual_(.*)", "quality_\\1")
+        dataset.reset_index(inplace=True)
+        long_df = pd.wide_to_long(
+            dataset,
+            stubnames=["value", "quality"],
+            i=["datetime", "station_id", "depth"],
             j="parameter",
             suffix=r"\w+",
             sep="_",
         ).reset_index()
-        station_data.drop(["id", "index"], axis=1, inplace=True)
-        station_data.dropna(subset=["Measure"], inplace=True)
-        station_data.rename(
-            columns={"Qual": "quality_flag", "Measure": "value"}, inplace=True
-        )
-        station_data["depth_unit"] = "m"
-        station_data["date_time"] = pd.to_datetime(station_data.date_time)
+        long_df.dropna(subset=["value"], inplace=True)
+        # add final metadata
+        long_df["depth_unit"] = "m"
+        stations_df = pd.read_csv(stations, index_col="station_id")
+        stations_df = stations_df[["latitude", "longitude"]]
+        long_df.join(stations_df, on="station_id", how="left")
 
         # map parameter names to device names, normalized names, and units
-        station_data["device_name"] = station_data["parameter"].map(utils.kc_devices)
-        station_data["parameter"] = station_data["parameter"].map(utils.parameter_dict)
-        station_data["unit"] = station_data["parameter"].map(utils.kc_units)
+        parameter_metadata = pd.read_csv(station_parameter_metadata, index_col=["station_id", "parameter"])
+        long_df = long_df.join(parameter_metadata, on=["station_id", "parameter"], how='left')
+        long_df["parameter"] = long_df["parameter"].map(utils.parameter_dict)
 
-        return station_data
+        return long_df

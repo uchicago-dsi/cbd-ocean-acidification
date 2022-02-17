@@ -5,31 +5,8 @@ import numpy as np
 import erddapy
 import requests
 from pathlib import Path
+from . import utils
 
-COL_RENAMES = {
-    'sea_water_practical_salinity': 'salinity',
-    'sea_water_ph_reported_on_total_scale': 'pH',
-    'sea_water_ph_reported_on_total_scale_salinity_corrected': 'pH_salinity',
-    'sea_water_ph_reported_on_total_scale_internal': 'pH_internal',
-    'sea_water_ph_reported_on_total_scale_external': 'pH_external',
-    'sea_water_temperature' : 'water_temperature',
-    'sea_water_pressure': 'water_pressure',
-    'mass_concentration_of_oxygen_in_sea_water' : 'oxygen_concentration',
-    'fractional_saturation_of_oxygen_in_sea_water' : 'oxygen_saturation',
-    'sea_water_electrical_conductivity' : 'conductivity',
-    'total_dissolved_solids' : 'total_dissolved_solids',
-    'sea_water_turbidity' : 'turbidity',
-    'total_alkalinity_ta' : 'total_alkalinity',
-    'omega_aragonite': 'omega_aragonite'
-}
-
-positional_column_mapping = {
-    'time (UTC)': 'datetime',
-    'latitude (degrees_north)': 'latitude',
-    'longitude (degrees_east)': 'longitude',
-    'station': 'staion_id',
-    'z (m)': 'depth'
-}
 
 index_columns = ["datetime", "latitude", "longitude", "station_id", "depth"]
 
@@ -125,7 +102,7 @@ class ERDDAP():
         """ Reformat data to match a single standard format """
         # use station_id column used to retrieve data
         dataset.drop(columns=["station"], inplace=True)
-        dataset.rename(columns=positional_column_mapping, inplace=True, errors='ignore')
+        dataset.rename(columns=utils.positional_column_mapping, inplace=True, errors='ignore')
         # measurements updated with qc tests, keep most up to date
         dataset.drop_duplicates(subset=index_columns, keep="last", inplace=True)
         # rearrange stubs to prefix parameter names to fit wide_to_long
@@ -146,5 +123,6 @@ class ERDDAP():
         long_df.reset_index(inplace=True)
         parameter_metadata = pd.read_csv(station_parameter_metadata, index_col=["station_id", "parameter"])
         long_df = long_df.join(parameter_metadata, on=["station_id", "parameter"], how='left')
-        long_df['parameter'] = long_df["parameter"].map(COL_RENAMES)
+        long_df['parameter'] = long_df["parameter"].map(utils.parameter_dict)
+        long_df["depth_unit"] = "m"
         return long_df
