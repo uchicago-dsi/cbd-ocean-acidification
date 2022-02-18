@@ -2,6 +2,18 @@
 
 import numpy as np
 
+# column names to be renamed before pivot to long format
+positional_column_mapping = {
+    'time (UTC)': 'datetime',
+    'latitude (degrees_north)': 'latitude',
+    'longitude (degrees_east)': 'longitude',
+    'station': 'staion_id',
+    'z (m)': 'depth',
+    'Date': 'datetime',
+    'Depth_m': 'depth'
+}
+
+# parameter names to be renamed after pivot to long format
 parameter_dict = {
     "A1_AirTemp": "air_temperature",
     "A1_BarPress": "air_pressure",
@@ -21,31 +33,24 @@ parameter_dict = {
     "Dissolved_Oxygen": "oxygen_concentration",
     "Dissolved_Oxygen_Sat": "oxygen_saturation",
     "Sonde_pH": "pH",
-    "SeaFET_External_pH_recalc_w_salinity": "pH",
+    "SeaFET_External_pH_recalc_w_salinity": "pH_salinity",
     "Salinity": "salinity",
     "Water_Temperature": "water_temperature",
     "SeaFET_Temperature": "water_temperature",
-}
-
-kc_units = {
-    "air_pressure": "inHg",
-    "air_temperature": "°F",
-    "oxygen_concentration": "mg/L",
-    "oxygen_saturation": "%",
-    "salinity": "PSU",
-    "water_temperature": "°C",
-}
-
-kc_devices = {
-    "depth": "Sea-Bird HydroCAT-EP datasonde",
-    "Air_Temperature": "Vaisala WXT510 meteorological station",
-    "Dissolved_Oxygen": "YSI 6600 V2 datasonde",
-    "Dissolved_Oxygen_Sat": "YSI 6600 V2 datasonde",
-    "Sonde_pH": "Sea-Bird HydroCAT-EP datasonde",
-    "SeaFET_External_pH_recalc_w_salinity": "Satlantic SeaFET Sensor",
-    "Salinity": "Sea-Bird HydroCAT-EP datasonde",
-    "Water_Temperature": "Sea-Bird HydroCAT-EP datasonde",
-    "SeaFET_Temperature": "Satlantic SeaFET Sensor",
+    "sea_water_practical_salinity": "salinity",
+    "sea_water_ph_reported_on_total_scale": "pH",
+    "sea_water_ph_reported_on_total_scale_salinity_corrected": "pH_salinity",
+    "sea_water_ph_reported_on_total_scale_internal": "pH_internal",
+    "sea_water_ph_reported_on_total_scale_external": "pH_external",
+    "sea_water_temperature" : "water_temperature",
+    "sea_water_pressure": "water_pressure",
+    "mass_concentration_of_oxygen_in_sea_water" : "oxygen_concentration",
+    "fractional_saturation_of_oxygen_in_sea_water" : "oxygen_saturation",
+    "sea_water_electrical_conductivity" : "conductivity",
+    "total_dissolved_solids" : "total_dissolved_solids",
+    "sea_water_turbidity" : "turbidity",
+    "total_alkalinity_ta" : "total_alkalinity",
+    "omega_aragonite": "omega_aragonite"
 }
 
 ceden_stations = {

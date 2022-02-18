@@ -104,13 +104,15 @@ class KingCounty():
             j="parameter",
             suffix=r"\w+",
             sep="_",
-        ).reset_index()
+        )
+        long_df = long_df.reset_index()
+        long_df.drop(columns="index", inplace=True)
         long_df.dropna(subset=["value"], inplace=True)
         # add final metadata
         long_df["depth_unit"] = "m"
         stations_df = pd.read_csv(stations, index_col="station_id")
         stations_df = stations_df[["latitude", "longitude"]]
-        long_df.join(stations_df, on="station_id", how="left")
+        long_df = long_df.join(stations_df, on="station_id", how="left")
 
         # map parameter names to device names, normalized names, and units
         parameter_metadata = pd.read_csv(station_parameter_metadata, index_col=["station_id", "parameter"])
