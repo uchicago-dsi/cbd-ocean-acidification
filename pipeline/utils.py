@@ -10,7 +10,9 @@ positional_column_mapping = {
     'station': 'staion_id',
     'z (m)': 'depth',
     'Date': 'datetime',
-    'Depth_m': 'depth'
+    'Depth_m': 'depth',
+    "level": "depth",
+    "utcstamp": "datetime"
 }
 
 # parameter names to be renamed after pivot to long format
@@ -50,7 +52,14 @@ parameter_dict = {
     "total_dissolved_solids" : "total_dissolved_solids",
     "sea_water_turbidity" : "turbidity",
     "total_alkalinity_ta" : "total_alkalinity",
-    "omega_aragonite": "omega_aragonite"
+    "omega_aragonite": "omega_aragonite",
+    "do_pct": "oxygen_saturation",
+    "do_mgl": "oxygen_concentration",
+    "temp": "water_temperature",
+    "sal": "salinity",
+    "turb": "turbidity",
+    "spcond": "conductivity",
+    "ph": "pH"
 }
 
 ceden_station_misc = {

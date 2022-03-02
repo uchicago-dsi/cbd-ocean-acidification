@@ -5,11 +5,11 @@ from datetime import datetime, timedelta
 from .ipacoa import IPACOA
 from .kingcounty import KingCounty
 from .erddap import ERDDAP
-
+from .nerrs import NERRS
 class TestDataCollection():
 
     now = datetime.now()
-    month_prior = datetime.now() - timedelta(10)
+    month_prior = datetime.now() - timedelta(30)
 
 
     def test_ipacoa_default(self):
@@ -30,6 +30,11 @@ class TestDataCollection():
     def test_kingcounty_default(self):
         station_id = "SEATTLE_AQUARIUM"
         collector = KingCounty()
+        self.run_collector_tests(collector, station_id, self.month_prior, self.now)
+
+    def test_nerrs(self):
+        station_id = "elksmwq"
+        collector = NERRS()
         self.run_collector_tests(collector, station_id, self.month_prior, self.now)
 
 
