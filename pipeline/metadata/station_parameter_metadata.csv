@@ -1,154 +1,284 @@
-station_id,parameter,unit,instrument
-tiburon-water-tibc1,mass_concentration_of_chlorophyll_in_sea_water,microg/L,YSI 6600v2
-tiburon-water-tibc1,sea_water_electrical_conductivity,mS/cm,YSI 6600v2
-tiburon-water-tibc1,mass_concentration_of_oxygen_in_sea_water,mg/L,YSI 6600v2
-tiburon-water-tibc1,fractional_saturation_of_oxygen_in_sea_water,%,YSI 6600v2
-tiburon-water-tibc1,sea_water_practical_salinity,PSU,YSI 6600v2
-tiburon-water-tibc1,sea_water_temperature,C,YSI 6600v2
-tiburon-water-tibc1,total_dissolved_solids,g/L,YSI 6600v2
-tiburon-water-tibc1,sea_water_turbidity,ntu,YSI 6600v2
-tiburon-water-tibc1,sea_water_ph_reported_on_total_scale,pH,YSI 6600v2
-edu_humboldt_tdp,mass_concentration_of_chlorophyll_in_sea_water,microg/L,YSI 6600v2
-edu_humboldt_tdp,sea_water_electrical_conductivity,mS/cm,YSI 6600v2
-edu_humboldt_tdp,mass_concentration_of_oxygen_in_sea_water,mg/L,YSI 6600v2
-edu_humboldt_tdp,fractional_saturation_of_oxygen_in_sea_water,%,YSI 6600v2
-edu_humboldt_tdp,sea_water_practical_salinity,PSU,YSI 6600v2
-edu_humboldt_tdp,sea_water_pressure,decibars,YSI 6600v2
-edu_humboldt_tdp,sea_water_temperature,C,YSI 6600v2
-edu_humboldt_tdp,sea_water_turbidity,ntu,YSI 6600v2
-edu_humboldt_tdp,sea_water_ph_reported_on_total_scale,pH,YSI 6600v2
-edu_humboldt_tdp,sea_water_ph_reported_on_total_scale_external,pH,YSI 6600v2
-edu_humboldt_tdp,sea_water_ph_reported_on_total_scale_internal,pH,YSI 6600v2
-carquinez,mass_concentration_of_chlorophyll_in_sea_water,microg/L,YSI 6600v2
-carquinez,sea_water_electrical_conductivity,mS/cm,YSI 6600v2
-carquinez,mass_concentration_of_oxygen_in_sea_water,mg/L,YSI 6600v2
-carquinez,fractional_saturation_of_oxygen_in_sea_water,%,YSI 6600v2
-carquinez,sea_water_practical_salinity,PSU,YSI 6600v2
-carquinez,sea_water_temperature,C,YSI 6600v2
-carquinez,total_dissolved_solids,g/L,YSI 6600v2
-carquinez,sea_water_turbidity,ntu,YSI 6600v2
-carquinez,sea_water_ph_reported_on_total_scale,pH,YSI 6600v2
-edu_humboldt_humboldt,mass_concentration_of_chlorophyll_in_sea_water,microg/L,
-edu_humboldt_humboldt,sea_water_electrical_conductivity,mS/cm,
-edu_humboldt_humboldt,mass_concentration_of_oxygen_in_sea_water,mg/L,
-edu_humboldt_humboldt,fractional_saturation_of_oxygen_in_sea_water,%,
-edu_humboldt_humboldt,surface_downwelling_shortwave_flux_in_air,W.m-2,
-edu_humboldt_humboldt,surface_downwelling_photosynthetic_photon_flux_in_air,micromol.m-2.s-1,
-edu_humboldt_humboldt,sea_water_practical_salinity,PSU,
-edu_humboldt_humboldt,sea_water_pressure,decibars,
-edu_humboldt_humboldt,sea_water_temperature,C,
-edu_humboldt_humboldt,sea_water_turbidity,ntu,
-edu_humboldt_humboldt,sea_water_ph_reported_on_total_scale,pH,
-edu_calpoly_marine_morro,mass_concentration_of_chlorophyll_in_sea_water,microg/L,SeaBird
-edu_calpoly_marine_morro,sea_water_electrical_conductivity,mS/cm,SeaBird
-edu_calpoly_marine_morro,mass_concentration_of_oxygen_in_sea_water,micromol/L,SeaBird
-edu_calpoly_marine_morro,fractional_saturation_of_oxygen_in_sea_water,%,SeaBird
-edu_calpoly_marine_morro,sea_water_practical_salinity,PSU,SeaBird
-edu_calpoly_marine_morro,sea_water_pressure,decibars,SeaBird
-edu_calpoly_marine_morro,sea_water_temperature,C,SeaBird
-edu_calpoly_marine_morro,sea_water_turbidity,ntu,SeaBird
-edu_calpoly_marine_morro,sea_water_ph_reported_on_total_scale_external,pH,SeaBird
-edu_calpoly_marine_morro,sea_water_ph_reported_on_total_scale_internal,pH,SeaBird
-mlml_mlml_sea,pco2,microatm,
-mlml_mlml_sea,sea_water_electrical_conductivity,mS/cm,
-mlml_mlml_sea,fluorescence,microg/L,
-mlml_mlml_sea,mole_concentration_of_nitrate_in_sea_water,micromol/L,
-mlml_mlml_sea,mole_concentration_of_dissolved_molecular_oxygen_in_sea_water,micromol/L,
-mlml_mlml_sea,fractional_saturation_of_oxygen_in_sea_water,%,
-mlml_mlml_sea,volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water,1.m-1,
-mlml_mlml_sea,sea_water_practical_salinity,PSU,
-mlml_mlml_sea,sea_water_temperature,C,
-mlml_mlml_sea,transmission_percent,%,
-mlml_mlml_sea,sea_surface_height_above_sea_level_geoid_mllw,m,
-mlml_mlml_sea,sea_water_ph_reported_on_total_scale,pH,
-hog-island-hatchery,sea_water_electrical_conductivity,mS/cm,
-hog-island-hatchery,sea_water_practical_salinity,PSU,
-hog-island-hatchery,sea_water_temperature,C,
-hog-island-hatchery,sea_water_ph_reported_on_total_scale_external,pH,
-hog-island-hatchery,sea_water_ph_reported_on_total_scale_internal,pH,
-humboldt-bay-burkeolator,bicarbonate_ion_hco3_,micromol/kg,
-humboldt-bay-burkeolator,total_alkalinity_ta,micromol/kg,
-humboldt-bay-burkeolator,dissolved_carbon_dioxide_co2,micromol/kg,
-humboldt-bay-burkeolator,pco2,microatm,
-humboldt-bay-burkeolator,dissolved_inorganic_carbon,micromol/kg,
-humboldt-bay-burkeolator,carbonate_ion_co3__,micromol/kg,
-humboldt-bay-burkeolator,omega_aragonite,pH,
-humboldt-bay-burkeolator,sea_water_practical_salinity,PSU,
-humboldt-bay-burkeolator,sea_water_temperature,C,
-humboldt-bay-burkeolator,sea_water_ph_reported_on_total_scale,pH,
-monterey-bay-aquarium-seawate,sea_water_electrical_conductivity,mS/cm,
-monterey-bay-aquarium-seawate,fractional_saturation_of_oxygen_in_sea_water,%,
-monterey-bay-aquarium-seawate,sea_water_temperature,C,
-monterey-bay-aquarium-seawate,sea_water_ph_reported_on_total_scale,pH,
-morro-bay-bs1,mass_concentration_of_chlorophyll_in_sea_water,microg/L,
-morro-bay-bs1,sea_water_electrical_conductivity,mS/cm,
-morro-bay-bs1,mass_concentration_of_oxygen_in_sea_water,micromol/L,
-morro-bay-bs1,fractional_saturation_of_oxygen_in_sea_water,%,
-morro-bay-bs1,sea_water_practical_salinity,PSU,
-morro-bay-bs1,sea_water_pressure,decibars,
-morro-bay-bs1,sea_water_temperature,C,
-morro-bay-bs1,sea_water_turbidity,ntu,
-morro-bay-bs1,sea_water_ph_reported_on_total_scale_external,pH,
-morro-bay-bs1,sea_water_ph_reported_on_total_scale_internal,pH,
-newport-pier-automated-shore-sta,mass_concentration_of_chlorophyll_in_sea_water,microg/L,
-newport-pier-automated-shore-sta,sea_water_electrical_conductivity,mS/cm,
-newport-pier-automated-shore-sta,mass_concentration_of_oxygen_in_sea_water,mL/L,
-newport-pier-automated-shore-sta,sea_water_practical_salinity,PSU,
-newport-pier-automated-shore-sta,sea_water_sigma_t,kg.m-3,
-newport-pier-automated-shore-sta,sea_water_pressure,decibars,
-newport-pier-automated-shore-sta,sea_water_temperature,C,
-newport-pier-automated-shore-sta,sea_water_ph_reported_on_total_scale_external,pH,
-newport-pier-automated-shore-sta,sea_water_ph_reported_on_total_scale_internal,pH,
-newport-pier-automated-shore-sta,sea_water_ph_reported_on_total_scale_salinity_corrected,pH,
-ooi-ce01issm-rid16-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce01issm-rid16-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-ooi-ce01issm-mfd35-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce01issm-mfd35-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-ooi-ce04osbp-lj01c-10-phsend107,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce04osbp-lj01c-10-phsend107,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-ooi-ce02shbp-lj01d-10-phsend103,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce02shbp-lj01d-10-phsend103,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-ooi-ce06issm-rid16-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce06issm-rid16-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-ooi-ce09ossm-rid26-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce09ossm-rid26-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-ooi-ce07shsm-rid26-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce07shsm-rid26-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-ooi-ce07shsm-mfd35-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II
-ooi-ce07shsm-mfd35-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II
-DOCKTON,Air_Pressure,inHg,
-DOCKTON,Air_Temperature,F,Vaisala WXT510 meteorological station
-DOCKTON,Dissolved_Oxygen,mg/L,YSI 6600 V2
-DOCKTON,Dissolved_Oxygen_Sat,%,YSI 6600 V2
-DOCKTON,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde
-DOCKTON,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor
-DOCKTON,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde
-DOCKTON,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde
-DOCKTON,SeaFET_Temperature,C,Satlantic SeaFET Sensor
-POINT_WILLIAMS,Air_Pressure,inHg,
-POINT_WILLIAMS,Air_Temperature,F,Vaisala WXT510 meteorological station
-POINT_WILLIAMS,Dissolved_Oxygen,mg/L,YSI 6600 V2
-POINT_WILLIAMS,Dissolved_Oxygen_Sat,%,YSI 6600 V2
-POINT_WILLIAMS,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde
-POINT_WILLIAMS,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor
-POINT_WILLIAMS,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde
-POINT_WILLIAMS,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde
-POINT_WILLIAMS,SeaFET_Temperature,C,Satlantic SeaFET Sensor
-QUARTER_MASTER_YC,Air_Pressure,inHg,
-QUARTER_MASTER_YC,Air_Temperature,F,Vaisala WXT510 meteorological station
-QUARTER_MASTER_YC,Dissolved_Oxygen,mg/L,YSI 6600 V2
-QUARTER_MASTER_YC,Dissolved_Oxygen_Sat,%,YSI 6600 V2
-QUARTER_MASTER_YC,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde
-QUARTER_MASTER_YC,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor
-QUARTER_MASTER_YC,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde
-QUARTER_MASTER_YC,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde
-QUARTER_MASTER_YC,SeaFET_Temperature,C,Satlantic SeaFET Sensor
-SEATTLE_AQUARIUM,Air_Pressure,inHg,
-SEATTLE_AQUARIUM,Air_Temperature,F,Vaisala WXT510 meteorological station
-SEATTLE_AQUARIUM,Dissolved_Oxygen,mg/L,YSI 6600 V2
-SEATTLE_AQUARIUM,Dissolved_Oxygen_Sat,%,YSI 6600 V2
-SEATTLE_AQUARIUM,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde
-SEATTLE_AQUARIUM,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor
-SEATTLE_AQUARIUM,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde
-SEATTLE_AQUARIUM,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde
-SEATTLE_AQUARIUM,SeaFET_Temperature,C,Satlantic SeaFET Sensor
+station_id,parameter,unit,instrument,method
+tiburon-water-tibc1,mass_concentration_of_chlorophyll_in_sea_water,microg/L,YSI 6600v2,
+tiburon-water-tibc1,sea_water_electrical_conductivity,mS/cm,YSI 6600v2,
+tiburon-water-tibc1,mass_concentration_of_oxygen_in_sea_water,mg/L,YSI 6600v2,
+tiburon-water-tibc1,fractional_saturation_of_oxygen_in_sea_water,%,YSI 6600v2,
+tiburon-water-tibc1,sea_water_practical_salinity,PSU,YSI 6600v2,
+tiburon-water-tibc1,sea_water_temperature,C,YSI 6600v2,
+tiburon-water-tibc1,total_dissolved_solids,g/L,YSI 6600v2,
+tiburon-water-tibc1,sea_water_turbidity,ntu,YSI 6600v2,
+tiburon-water-tibc1,sea_water_ph_reported_on_total_scale,pH,YSI 6600v2,
+edu_humboldt_tdp,mass_concentration_of_chlorophyll_in_sea_water,microg/L,YSI 6600v2,
+edu_humboldt_tdp,sea_water_electrical_conductivity,mS/cm,YSI 6600v2,
+edu_humboldt_tdp,mass_concentration_of_oxygen_in_sea_water,mg/L,YSI 6600v2,
+edu_humboldt_tdp,fractional_saturation_of_oxygen_in_sea_water,%,YSI 6600v2,
+edu_humboldt_tdp,sea_water_practical_salinity,PSU,YSI 6600v2,
+edu_humboldt_tdp,sea_water_pressure,decibars,YSI 6600v2,
+edu_humboldt_tdp,sea_water_temperature,C,YSI 6600v2,
+edu_humboldt_tdp,sea_water_turbidity,ntu,YSI 6600v2,
+edu_humboldt_tdp,sea_water_ph_reported_on_total_scale,pH,YSI 6600v2,
+edu_humboldt_tdp,sea_water_ph_reported_on_total_scale_external,pH,YSI 6600v2,
+edu_humboldt_tdp,sea_water_ph_reported_on_total_scale_internal,pH,YSI 6600v2,
+carquinez,mass_concentration_of_chlorophyll_in_sea_water,microg/L,YSI 6600v2,
+carquinez,sea_water_electrical_conductivity,mS/cm,YSI 6600v2,
+carquinez,mass_concentration_of_oxygen_in_sea_water,mg/L,YSI 6600v2,
+carquinez,fractional_saturation_of_oxygen_in_sea_water,%,YSI 6600v2,
+carquinez,sea_water_practical_salinity,PSU,YSI 6600v2,
+carquinez,sea_water_temperature,C,YSI 6600v2,
+carquinez,total_dissolved_solids,g/L,YSI 6600v2,
+carquinez,sea_water_turbidity,ntu,YSI 6600v2,
+carquinez,sea_water_ph_reported_on_total_scale,pH,YSI 6600v2,
+edu_humboldt_humboldt,mass_concentration_of_chlorophyll_in_sea_water,microg/L,,
+edu_humboldt_humboldt,sea_water_electrical_conductivity,mS/cm,,
+edu_humboldt_humboldt,mass_concentration_of_oxygen_in_sea_water,mg/L,,
+edu_humboldt_humboldt,fractional_saturation_of_oxygen_in_sea_water,%,,
+edu_humboldt_humboldt,surface_downwelling_shortwave_flux_in_air,W.m-2,,
+edu_humboldt_humboldt,surface_downwelling_photosynthetic_photon_flux_in_air,micromol.m-2.s-1,,
+edu_humboldt_humboldt,sea_water_practical_salinity,PSU,,
+edu_humboldt_humboldt,sea_water_pressure,decibars,,
+edu_humboldt_humboldt,sea_water_temperature,C,,
+edu_humboldt_humboldt,sea_water_turbidity,ntu,,
+edu_humboldt_humboldt,sea_water_ph_reported_on_total_scale,pH,,
+edu_calpoly_marine_morro,mass_concentration_of_chlorophyll_in_sea_water,microg/L,SeaBird,
+edu_calpoly_marine_morro,sea_water_electrical_conductivity,mS/cm,SeaBird,
+edu_calpoly_marine_morro,mass_concentration_of_oxygen_in_sea_water,micromol/L,SeaBird,
+edu_calpoly_marine_morro,fractional_saturation_of_oxygen_in_sea_water,%,SeaBird,
+edu_calpoly_marine_morro,sea_water_practical_salinity,PSU,SeaBird,
+edu_calpoly_marine_morro,sea_water_pressure,decibars,SeaBird,
+edu_calpoly_marine_morro,sea_water_temperature,C,SeaBird,
+edu_calpoly_marine_morro,sea_water_turbidity,ntu,SeaBird,
+edu_calpoly_marine_morro,sea_water_ph_reported_on_total_scale_external,pH,SeaBird,
+edu_calpoly_marine_morro,sea_water_ph_reported_on_total_scale_internal,pH,SeaBird,
+mlml_mlml_sea,pco2,microatm,,
+mlml_mlml_sea,sea_water_electrical_conductivity,mS/cm,,
+mlml_mlml_sea,fluorescence,microg/L,,
+mlml_mlml_sea,mole_concentration_of_nitrate_in_sea_water,micromol/L,,
+mlml_mlml_sea,mole_concentration_of_dissolved_molecular_oxygen_in_sea_water,micromol/L,,
+mlml_mlml_sea,fractional_saturation_of_oxygen_in_sea_water,%,,
+mlml_mlml_sea,volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water,1.m-1,,
+mlml_mlml_sea,sea_water_practical_salinity,PSU,,
+mlml_mlml_sea,sea_water_temperature,C,,
+mlml_mlml_sea,transmission_percent,%,,
+mlml_mlml_sea,sea_surface_height_above_sea_level_geoid_mllw,m,,
+mlml_mlml_sea,sea_water_ph_reported_on_total_scale,pH,,
+hog-island-hatchery,sea_water_electrical_conductivity,mS/cm,,
+hog-island-hatchery,sea_water_practical_salinity,PSU,,
+hog-island-hatchery,sea_water_temperature,C,,
+hog-island-hatchery,sea_water_ph_reported_on_total_scale_external,pH,,
+hog-island-hatchery,sea_water_ph_reported_on_total_scale_internal,pH,,
+humboldt-bay-burkeolator,bicarbonate_ion_hco3_,micromol/kg,,
+humboldt-bay-burkeolator,total_alkalinity_ta,micromol/kg,,
+humboldt-bay-burkeolator,dissolved_carbon_dioxide_co2,micromol/kg,,
+humboldt-bay-burkeolator,pco2,microatm,,
+humboldt-bay-burkeolator,dissolved_inorganic_carbon,micromol/kg,,
+humboldt-bay-burkeolator,carbonate_ion_co3__,micromol/kg,,
+humboldt-bay-burkeolator,omega_aragonite,pH,,
+humboldt-bay-burkeolator,sea_water_practical_salinity,PSU,,
+humboldt-bay-burkeolator,sea_water_temperature,C,,
+humboldt-bay-burkeolator,sea_water_ph_reported_on_total_scale,pH,,
+monterey-bay-aquarium-seawate,sea_water_electrical_conductivity,mS/cm,,
+monterey-bay-aquarium-seawate,fractional_saturation_of_oxygen_in_sea_water,%,,
+monterey-bay-aquarium-seawate,sea_water_temperature,C,,
+monterey-bay-aquarium-seawate,sea_water_ph_reported_on_total_scale,pH,,
+morro-bay-bs1,mass_concentration_of_chlorophyll_in_sea_water,microg/L,,
+morro-bay-bs1,sea_water_electrical_conductivity,mS/cm,,
+morro-bay-bs1,mass_concentration_of_oxygen_in_sea_water,micromol/L,,
+morro-bay-bs1,fractional_saturation_of_oxygen_in_sea_water,%,,
+morro-bay-bs1,sea_water_practical_salinity,PSU,,
+morro-bay-bs1,sea_water_pressure,decibars,,
+morro-bay-bs1,sea_water_temperature,C,,
+morro-bay-bs1,sea_water_turbidity,ntu,,
+morro-bay-bs1,sea_water_ph_reported_on_total_scale_external,pH,,
+morro-bay-bs1,sea_water_ph_reported_on_total_scale_internal,pH,,
+newport-pier-automated-shore-sta,mass_concentration_of_chlorophyll_in_sea_water,microg/L,,
+newport-pier-automated-shore-sta,sea_water_electrical_conductivity,mS/cm,,
+newport-pier-automated-shore-sta,mass_concentration_of_oxygen_in_sea_water,mL/L,,
+newport-pier-automated-shore-sta,sea_water_practical_salinity,PSU,,
+newport-pier-automated-shore-sta,sea_water_sigma_t,kg.m-3,,
+newport-pier-automated-shore-sta,sea_water_pressure,decibars,,
+newport-pier-automated-shore-sta,sea_water_temperature,C,,
+newport-pier-automated-shore-sta,sea_water_ph_reported_on_total_scale_external,pH,,
+newport-pier-automated-shore-sta,sea_water_ph_reported_on_total_scale_internal,pH,,
+newport-pier-automated-shore-sta,sea_water_ph_reported_on_total_scale_salinity_corrected,pH,,
+ooi-ce01issm-rid16-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce01issm-rid16-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+ooi-ce01issm-mfd35-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce01issm-mfd35-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+ooi-ce04osbp-lj01c-10-phsend107,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce04osbp-lj01c-10-phsend107,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+ooi-ce02shbp-lj01d-10-phsend103,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce02shbp-lj01d-10-phsend103,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+ooi-ce06issm-rid16-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce06issm-rid16-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+ooi-ce09ossm-rid26-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce09ossm-rid26-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+ooi-ce07shsm-rid26-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce07shsm-rid26-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+ooi-ce07shsm-mfd35-06-phsend000,sea_water_practical_salinity,PSU,Sunburst Sensor Sami II,
+ooi-ce07shsm-mfd35-06-phsend000,sea_water_ph_reported_on_total_scale,pH,Sunburst Sensor Sami II,
+DOCKTON,Air_Pressure,inHg,,
+DOCKTON,Air_Temperature,F,Vaisala WXT510 meteorological station,
+DOCKTON,Dissolved_Oxygen,mg/L,YSI 6600 V2,
+DOCKTON,Dissolved_Oxygen_Sat,%,YSI 6600 V2,
+DOCKTON,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde,
+DOCKTON,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor,
+DOCKTON,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde,
+DOCKTON,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde,
+DOCKTON,SeaFET_Temperature,C,Satlantic SeaFET Sensor,
+POINT_WILLIAMS,Air_Pressure,inHg,,
+POINT_WILLIAMS,Air_Temperature,F,Vaisala WXT510 meteorological station,
+POINT_WILLIAMS,Dissolved_Oxygen,mg/L,YSI 6600 V2,
+POINT_WILLIAMS,Dissolved_Oxygen_Sat,%,YSI 6600 V2,
+POINT_WILLIAMS,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde,
+POINT_WILLIAMS,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor,
+POINT_WILLIAMS,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde,
+POINT_WILLIAMS,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde,
+POINT_WILLIAMS,SeaFET_Temperature,C,Satlantic SeaFET Sensor,
+QUARTER_MASTER_YC,Air_Pressure,inHg,,
+QUARTER_MASTER_YC,Air_Temperature,F,Vaisala WXT510 meteorological station,
+QUARTER_MASTER_YC,Dissolved_Oxygen,mg/L,YSI 6600 V2,
+QUARTER_MASTER_YC,Dissolved_Oxygen_Sat,%,YSI 6600 V2,
+QUARTER_MASTER_YC,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde,
+QUARTER_MASTER_YC,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor,
+QUARTER_MASTER_YC,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde,
+QUARTER_MASTER_YC,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde,
+QUARTER_MASTER_YC,SeaFET_Temperature,C,Satlantic SeaFET Sensor,
+SEATTLE_AQUARIUM,Air_Pressure,inHg,,
+SEATTLE_AQUARIUM,Air_Temperature,F,Vaisala WXT510 meteorological station,
+SEATTLE_AQUARIUM,Dissolved_Oxygen,mg/L,YSI 6600 V2,
+SEATTLE_AQUARIUM,Dissolved_Oxygen_Sat,%,YSI 6600 V2,
+SEATTLE_AQUARIUM,Sonde_pH,pH,Sea-Bird HydroCAT-EP datasonde,
+SEATTLE_AQUARIUM,SeaFET_External_pH_recalc_w_salinity,pH,Satlantic SeaFET Sensor,
+SEATTLE_AQUARIUM,Salinity,PSU,Sea-Bird HydroCAT-EP datasonde,
+SEATTLE_AQUARIUM,Water_Temperature,C,Sea-Bird HydroCAT-EP datasonde,
+SEATTLE_AQUARIUM,SeaFET_Temperature,C,Satlantic SeaFET Sensor,
+test-ceden,mass_concentration_of_chlorophyll_in_sea_water,microg/L,YSI 6600v2,
+test-ceden,sea_water_electrical_conductivity,mS/cm,YSI 6600v2,
+test-ceden,mass_concentration_of_oxygen_in_sea_water,mg/L,YSI 6600v2,
+test-ceden,fractional_saturation_of_oxygen_in_sea_water,%,YSI 6600v2,
+test-ceden,sea_water_practical_salinity,PSU,YSI 6600v2,
+test-ceden,sea_water_pressure,decibars,YSI 6600v2,
+test-ceden,sea_water_temperature,C,YSI 6600v2,
+test-ceden,sea_water_turbidity,ntu,YSI 6600v2,
+test-ceden,sea_water_ph_reported_on_total_scale,pH,YSI 6600v2,
+test-ceden,sea_water_ph_reported_on_total_scale_external,pH,YSI 6600v2,
+test-ceden,sea_water_ph_reported_on_total_scale_internal,pH,YSI 6600v2,
+elkapwq,Temp,C,YSI 6560,
+elkapwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+elkapwq,DO_pct,%,YSI rapid pulse 6562,
+elkapwq,pH,pH,YSI 6600 V2,
+elkapwq,Salinity,PSU,,
+elkapwq,SpCond,mS/cm,YSI 6560,
+elkapwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+elksmwq,Temp,C,YSI 6560,
+elksmwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+elksmwq,DO_pct,%,YSI rapid pulse 6562,
+elksmwq,pH,pH,YSI 6600 V2,
+elksmwq,Salinity,PSU,,
+elksmwq,SpCond,mS/cm,YSI 6560,
+elksmwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+elkvmwq,Temp,C,YSI 6560,
+elkvmwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+elkvmwq,DO_pct,%,YSI rapid pulse 6562,
+elkvmwq,pH,pH,YSI 6600 V2,
+elkvmwq,Salinity,PSU,,
+elkvmwq,SpCond,mS/cm,YSI 6560,
+elkvmwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+job09wq,Temp,C,YSI 6560,
+job09wq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+job09wq,DO_pct,%,YSI rapid pulse 6562,
+job09wq,pH,pH,YSI 6600 V2,
+job09wq,Salinity,PSU,,
+job09wq,SpCond,mS/cm,YSI 6560,
+job09wq,DO_mgl,mg/L,YSI rapid pulse 6562,
+job20wq,Temp,C,YSI 6560,
+job20wq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+job20wq,DO_pct,%,YSI rapid pulse 6562,
+job20wq,pH,pH,YSI 6600 V2,
+job20wq,Salinity,PSU,,
+job20wq,SpCond,mS/cm,YSI 6560,
+job20wq,DO_mgl,mg/L,YSI rapid pulse 6562,
+kachdwq,Temp,C,YSI 6560,
+kachdwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+kachdwq,DO_pct,%,YSI rapid pulse 6562,
+kachdwq,pH,pH,YSI 6600 V2,
+kachdwq,Salinity,PSU,,
+kachdwq,SpCond,mS/cm,YSI 6560,
+kachdwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+kacsdwq,Temp,C,YSI 6560,
+kacsdwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+kacsdwq,DO_pct,%,YSI rapid pulse 6562,
+kacsdwq,pH,pH,YSI 6600 V2,
+kacsdwq,Salinity,PSU,,
+kacsdwq,SpCond,mS/cm,YSI 6560,
+kacsdwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+pdbbpwq,Temp,C,YSI 6560,
+pdbbpwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+pdbbpwq,DO_pct,%,YSI rapid pulse 6562,
+pdbbpwq,pH,pH,YSI 6600 V2,
+pdbbpwq,Salinity,PSU,,
+pdbbpwq,SpCond,mS/cm,YSI 6560,
+pdbbpwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+pdbbywq,Temp,C,YSI 6560,
+pdbbywq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+pdbbywq,DO_pct,%,YSI rapid pulse 6562,
+pdbbywq,pH,pH,YSI 6600 V2,
+pdbbywq,Salinity,PSU,,
+pdbbywq,SpCond,mS/cm,YSI 6560,
+pdbbywq,DO_mgl,mg/L,YSI rapid pulse 6562,
+sfbccwq,Temp,C,YSI 6560,
+sfbccwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+sfbccwq,DO_pct,%,YSI rapid pulse 6562,
+sfbccwq,pH,pH,YSI 6600 V2,
+sfbccwq,Salinity,PSU,,
+sfbccwq,SpCond,mS/cm,YSI 6560,
+sfbccwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+sfbfmwq,Temp,C,YSI 6560,
+sfbfmwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+sfbfmwq,DO_pct,%,YSI rapid pulse 6562,
+sfbfmwq,pH,pH,YSI 6600 V2,
+sfbfmwq,Salinity,PSU,,
+sfbfmwq,SpCond,mS/cm,YSI 6560,
+sfbfmwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+sfbgcwq,Temp,C,YSI 6560,
+sfbgcwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+sfbgcwq,DO_pct,%,YSI rapid pulse 6562,
+sfbgcwq,pH,pH,YSI 6600 V2,
+sfbgcwq,Salinity,PSU,,
+sfbgcwq,SpCond,mS/cm,YSI 6560,
+sfbgcwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+sfbsmwq,Temp,C,YSI 6560,
+sfbsmwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+sfbsmwq,DO_pct,%,YSI rapid pulse 6562,
+sfbsmwq,pH,pH,YSI 6600 V2,
+sfbsmwq,Salinity,PSU,,
+sfbsmwq,SpCond,mS/cm,YSI 6560,
+sfbsmwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+soschwq,Temp,C,YSI 6560,
+soschwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+soschwq,DO_pct,%,YSI rapid pulse 6562,
+soschwq,pH,pH,YSI 6600 V2,
+soschwq,Salinity,PSU,,
+soschwq,SpCond,mS/cm,YSI 6560,
+soschwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+sosvawq,Temp,C,YSI 6560,
+sosvawq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+sosvawq,DO_pct,%,YSI rapid pulse 6562,
+sosvawq,pH,pH,YSI 6600 V2,
+sosvawq,Salinity,PSU,,
+sosvawq,SpCond,mS/cm,YSI 6560,
+sosvawq,DO_mgl,mg/L,YSI rapid pulse 6562,
+soswiwq,Temp,C,YSI 6560,
+soswiwq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+soswiwq,DO_pct,%,YSI rapid pulse 6562,
+soswiwq,pH,pH,YSI 6600 V2,
+soswiwq,Salinity,PSU,,
+soswiwq,SpCond,mS/cm,YSI 6560,
+soswiwq,DO_mgl,mg/L,YSI rapid pulse 6562,
+tjroswq,Temp,C,YSI 6560,
+tjroswq,Turb,ntu,YSI 6600 V2 - sensor 6136,
+tjroswq,DO_pct,%,YSI rapid pulse 6562,
+tjroswq,pH,pH,YSI 6600 V2,
+tjroswq,Salinity,PSU,,
+tjroswq,SpCond,mS/cm,YSI 6560,
+tjroswq,DO_mgl,mg/L,YSI rapid pulse 6562,
