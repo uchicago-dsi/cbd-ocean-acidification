@@ -9,7 +9,7 @@ from .erddap import ERDDAP
 class TestDataCollection():
 
     now = datetime.now()
-    month_prior = datetime.now() - timedelta(30)
+    month_prior = datetime.now() - timedelta(10)
 
 
     def test_ipacoa_default(self):
@@ -23,7 +23,7 @@ class TestDataCollection():
         self.run_collector_tests(collector, station_id, self.month_prior, self.now)
 
     def test_cencoos_default(self):
-        station_id = "tiburon-water-tibc1"
+        station_id = "edu_humboldt_tdp"
         collector = ERDDAP("https://erddap.cencoos.org/erddap/")
         self.run_collector_tests(collector, station_id, self.month_prior, self.now)
     
@@ -38,10 +38,7 @@ class TestDataCollection():
         data = collector.get_data(station_id, start, end)
         expected_columns = {
             "datetime", "latitude", "longitude", "depth", "depth_unit", "station_id",
-            "parameter", "value", "quality", "unit", "instrument"
+            "parameter", "value", "quality", "unit", "instrument", "method"
         }
         ## depth unit and reference point?
-        assert set(data.columns) == expected_columns
-
-        
-
+        assert expected_columns.issubset(set(data.columns))
