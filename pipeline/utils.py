@@ -53,25 +53,6 @@ parameter_dict = {
     "omega_aragonite": "omega_aragonite"
 }
 
-ceden_stations = {
-    "HIOC_Hogisland1": "201ST1775",
-    "NERRS_elkapwq": "NERRS_elkapwq",
-    "NERRS_elksmwq": "306-ELKHO-33",
-    "NERRS_elkvmwq": "306ELKNVM",
-    "NERRS_sfbccwq": "CHINA CAMP",
-    "NERRS_sfbfmwq": "NERRS_sfbfmwq",
-    "NERRS_sfbgcwq": "LLFS17_17",
-    "NERRS_sfbsmwq": "NERRS_sfbsmwq",
-    "NERRS_tjroswq": "NERRS_tjroswq",
-    "PMELCO2_cce1": "PMELCO2_cce1",
-    "PMELCO2_cce2": "PMELCO2_cce2",
-    "CARLSBD_Aquafarm1": "CARLSBD_Aquafarm1",
-    "cencoos_Carquinez": "cencoos_Carquinez",
-    "cencoos_Humboldt": "cencoos_Humboldt",
-    "cencoos_Tiburon": "cencoos_Tiburon",
-    "cencoos_Trinidad": "cencoos_Trinidad",
-}
-
 ceden_station_misc = {
     "EventCode": "WQ",  # for for Water Quality
     "ProjectCode": "CBD-MONITORING-ACID",
@@ -93,19 +74,15 @@ ceden_field_misc = {
     "ProjectCode": "CBD-MONITORING-ACID",
     "EventCode": "WQ",
     "ProtocolCode": "Not Recorded",
-    "AgencyCode": "CBD",
     "SampleComments": "",
     "LocationCode": "Not Recorded",
     "GeometryShape": "Point",
     "CollectionMethodCode": "Water_Grab",
-    "CollectionDeviceName": "Not Recorded",
     "PositionWaterColumn": "Not Applicable",
     "FieldCollectionComments": "",
-    "MethodName": "FieldMeasure",
     "FractionName": "Not Recorded",
     "FieldReplicate": "1",
     "ResQualCode": "=",
-    "QACode": "None",
     "ComplianceCode": "NR",
     "BatchVerificationCode": "NR",
     "CalibrationDate": "01/Jan/1950",
@@ -126,20 +103,6 @@ ceden_matrix_dict = {
     "tco2": "samplewater",
 }
 
-ceden_param_dict = {
-    "salinity": "Salinity",
-    "total_alkalinity": "Alkalinity as CaCO3",
-    "water_temperature": "Temperature",
-    "oxygen_concentration": "Oxygen, Dissolved",
-    "oxygen_saturation": "Oxygen, Saturation",
-    "co2": "Carbon dioxide, free",
-    "water_pressure": "Pressure",
-    "air_pressure": "Barometric Pressure",
-    "air_temperature": "Temperature",  # looks like same as water
-    "tco2": "Carbon dioxide, free",
-    "pH": "pH",
-}
-
 ceden_unit_dict = {
     "µmol/kg": "umol/g",  # multiply with 1000
     "PSU": "psu",
@@ -148,7 +111,7 @@ ceden_unit_dict = {
     "%": "%",
     "ppm": "mg/L",
     # "inHg": "mmHG",  # divide by 0.0393701, need to validate
-    "inHg": "inHg",
+    "inHg": "mmHg",
     # "µatm": "per mil",  # not sure, need to validate
     "µatm": "uatm",
     "dbar": "dbar",
