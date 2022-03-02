@@ -7,7 +7,7 @@ import json
 from datetime import datetime, date, timedelta
 import time
 import re
-from . import utils
+from pipeline import utils
 
 
 HERE = Path(__file__).resolve().parent

@@ -5,7 +5,7 @@ from tqdm import tqdm
 import time
 from datetime import date
 from pathlib import Path
-from . import utils
+from pipeline import utils
 
 HERE = Path(__file__).resolve().parent
 measurements_path = HERE / 'metadata' / 'ipacoa_platform_measurements.csv'
@@ -57,15 +57,15 @@ class IPACOA():
             df["parameter"] = measurement
             df["depth_unit"] = "ft"
             df.rename(
-                columns={" Depth (Ft)": "depth", "Date and Time": "date_time"},
+                columns={" Depth (Ft)": "depth", "Date and Time": "datetime"},
                 inplace=True,
             )
             df["depth"] = df["depth"].str.strip(" ft").astype(int)
             dfs.append(df)
 
         all_measures = pd.concat(dfs, ignore_index=True)
-        all_measures["date_time"] = pd.to_datetime(
-            all_measures["date_time"], errors="coerce"
+        all_measures["datetime"] = pd.to_datetime(
+            all_measures["datetime"], errors="coerce"
         )
         if start_date:
             start_date = pd.to_datetime(start_date, utc=True)
@@ -80,7 +80,7 @@ class IPACOA():
             units[["parameter", "unit"]], on="parameter", how="left"
         )
         all_measures = all_measures[
-            ["station_id", "date_time", "parameter", "value", "unit", "depth", "depth_unit"]
+            ["station_id", "datetime", "parameter", "value", "unit", "depth", "depth_unit"]
         ]
 
         # map parameter names to normalized names

@@ -5,7 +5,7 @@ import numpy as np
 import erddapy
 import requests
 from pathlib import Path
-from . import utils
+from pipeline import utils
 
 
 index_columns = ["datetime", "latitude", "longitude", "station_id", "depth"]

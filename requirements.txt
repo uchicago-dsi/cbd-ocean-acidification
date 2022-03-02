@@ -6,3 +6,4 @@ xlrd == 2.0.1
 xlutils == 2.0.0
 pytemp == 0.0.1
 tqdm == 4.59.0
+erddapy == 1.2.0

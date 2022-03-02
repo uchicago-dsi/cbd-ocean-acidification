@@ -7,51 +7,86 @@ Currently contains scripts to
 - Retrieve and aggregate data from [IPACOA](https://www.ipacoa.org/) and [King County](https://green2.kingcounty.gov/marine-buoy/Data.aspx).
 - Reformat that data to make it ready for [CEDEN](http://ceden.org/index.shtml) submission.
 
-## Prerequisites
 
-The project is designed to run in a Docker container. Therefore, the only prerequisite is Docker: [Get Docker](https://docs.docker.com/get-docker/)
+## Initial Setup
 
-If you want to run the scripts locally in a Python installed environment, then refer to the `requirements.txt` file for needed packages.
+These steps must be taken before using the program. Most will only be required once. 
+### Software Setup
+
+This setup should only have to be run once per machine you run it on.
+
+1. Install Docker. The project is designed to run in a Docker container. Therefore, the only prerequisite is Docker: [Get Docker](https://docs.docker.com/get-docker/)
+
+2. Clone the repository. If you haven't already: `git clone https://github.com/11th-Hour-Data-Science/cbd-ocean-acidification.git`
+
+3. Change to the root project directory: `cd cbd-ocean-acidification`
+
+4. Build the Docker image: `docker build --tag cbd .`
+
+
+### Record Keeping Setup
+
+Some steps in the 303(d) data submission process must be taken manually once before completion. The `metadata/stations.csv` contains metadata about the stations that are available to retrieve data from. You can open this in Excel or any csv editor of your choice. Just be sure to save any changes as a csv. 
+
+#### Washington
+
+Washington uses EIM to handle environmental data. It has three distinct types of data. 
+- Results, which are the values of a given parameter at a given
+ time and place, are formatted in a results table automatically.
+- Locations, which are the descriptions of locations from which results originate, are formatted in a locations table automatically.
+- Studies are data about how the results were collected and who administers the locations. These must be submitted manually once.
+
+To set up submitting data to Washington:
+
+1. Create required accounts
+2. Create studies
+3. Add Study ID to relevant stations' eim_study_id column in `stations.csv`
+
+#### California
+
+CEDEN is California's primary portal for environmental data upload, but it does not accept time series data as of this writing. All time-series data must be submitted to the Integrated Report Document Upload Portal. To submit to California:
+
+1. Create relevant accounts
+
+
+post:
+
+1. Go to IRUP
+2. Non-CEDED
+3. Fill out study information
+
+#### Hawaii
+
+
+#### Stations
+
+For new stations and locations:
+
+1. Contact the data source to receive approval, ensure we are following their terms of service, and to ensure they are not already submitting data. 
+2. If the station's data is available through one of the available collectors: King County, IPACOA, ERDDAP, find its ID in this service and use it as our station_id
+3. If it is not available through one of the available collectors, a new scraper will need to be created. If you are able you can try to write one yourself (following existing patterns) and open a Pull Request. Otherwise open an [issue](https://github.com/11th-Hour-Data-Science/cbd-ocean-acidification/issues/new) describing the new station you would like and where you retrieved its data from. 
+4. Add an entry to `stations.csv` with all relevant data. You may need to contact the source.  
+5. Add entries to `station_parameter_metadata.csv` with all relevant data. You may need to contact the source. 
 
 ## Usage
 
-### Through Docker (recommended)
+1. In the project root directory, run:
+   ```sh
+    docker run --name cbd cbd <STATE> --start <start_date> --end <end_date>
+   ```
+   where <STATE> should be the state name (California, Hawaii, or Washington), <start_date> and <end_date> should be dates YYYY/MM/DD format (exclude <>). 
+2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with an `instructions.txt` file explaining further instructions. 
 
-1. Clone the repo
-   ```sh
-    git clone https://github.com/11th-Hour-Data-Science/cbd-ocean-acidification.git
-   ```
-2. Build the Docker image
-   ```sh
-   docker build --tag cbd .
-   ```
-3. Run the commands in the `shell.sh` script within the Docker container.
-   ```sh
-    docker run --name cbd cbd
-   ```
-4. You can now access the output files using the CLI through Docker Desktop.
-   <br><br>
 
-5. Can stop and remove via
-   ```sh
-   docker stop cbd
-   docker rm cbd
-   ```
+### Without Docker (discouraged)
 
-### Or locally
+1. In the project root directory, run:
+   ```sh
+    python main.py <STATE> --start <start_date> --end <end_date>
+   ```
+   where <STATE> should be the state name (California, Hawaii, or Washington), <start_date> and <end_date> should be dates YYYY/MM/DD format (exclude <>). 
+2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with an `instructions.txt` file explaining further instructions. 
 
-1. Install packages
-   ```sh
-   pip install -r requirements.txt
-   ```
-2. Allow access
-   ```sh
-   chmod +x shell.sh
-   ```
-3. Run the scripts
-   ```sh
-   ./shell.sh
-   ```
 
 ## Directory Structure
 
@@ -63,7 +98,7 @@ If you want to run the scripts locally in a Python installed environment, then r
 - `getdata.py`: Python script to call functions within `kingcounty.py` and `ipacoa.py` and store the concatenated results at `data/measurements.csv`. Change `months=6` to desired value at line 10 to get older/newer data.
 - `utils.py`: Contains relevant dictionaries used to normalize column and value names across different sources, as well as to comply with CEDEN template guidelines.
 
-### pipeline/metadata
+### metadata/
 
 - `ipacoa_measurement_lookup.csv`: Lookup table that shows IDs, names, and measurement units for all measurements provided by stations listed in the asset list.
 - `ipacoa_platform_measurements.csv`: Contains all combinations of stations and measurements accessible through IPACOA. The `process` column indicates whether that information is going to be downloaded by the scraper `ipacoa.py`. If you want to add additional stations or measurements, you should update `process` column of the relevant row to be `True`. Otherwise that information will not be included in the dataset. Currently only ocean acidification related measurements of West Coast stations are set to have `process=True`.
