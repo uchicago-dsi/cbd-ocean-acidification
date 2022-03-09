@@ -105,10 +105,10 @@ class TestDataCollection():
             "Location ID", "Location Name", "Location Setting",
             "Location Description", "Coordinate System", "Latitude Degrees", "Longitude Degrees",
             "Horizontal Coordinates Represent", "Horizontal Datum", "Horizontal Coordinate Accuracy",
-            "Horizontal Datum Collection Method"
+            "Horizontal Coordinate Collection Method"
         }
         assert set(locations.columns) == required_locations_columns
-        assert set(results["Location ID"].unique()) == set(locations.index)
+        assert set(results["Location ID"].unique()) == set(locations["Location ID"])
 
 
     def ceden_tests(self, results: pd.DataFrame, locations: pd.DataFrame):
