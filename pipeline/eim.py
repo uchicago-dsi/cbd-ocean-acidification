@@ -5,7 +5,6 @@ from datetime import datetime
 
 HERE = Path(__file__).resolve().parent
 stations = HERE / "metadata" / "stations.csv"
-station_parameters = HERE / "metadata" / "station_parameter_metadata.csv"
 
 MAX_EIM_ROWS = 150000
 
@@ -19,7 +18,6 @@ location_columns = {
     "horizontal_datum": "Horizontal Datum",
     "horizontal_coordinate_accuracy": "Horizontal Coordinate Accuracy",
     "horizontal_coordinate_collection": "Horizontal Coordinate Collection Method"
-
 }
 
 results_columns = {
@@ -30,7 +28,8 @@ results_columns = {
     "unit": "Result Unit",
     "quality": "Result Data Qualifier",
     "depth": "Field Collection Depth",
-    "depth_units": "Field Collection Depth Units"
+    "depth_unit": "Field Collection Depth Units",
+    "method": "Result Method"
 }
 
 parameter_names = {
@@ -103,22 +102,22 @@ class EIM():
     def save_results_for_study(self, data: pd.DataFrame, study_id: str):
         """ Saves results for a single EIM study"""
         # 150,000 records per batch. 1 study + location per batch
-        result_directory = self.results_directory / study_id
-        result_directory.mkdir()
+        study_result_directory = self.results_directory / study_id
+        study_result_directory.mkdir(exist_ok=True)
         stations_table = pd.read_csv(stations, index_col="station_id")
         stations_used = data["station_id"].unique()
         stations_subset = stations_table[stations_table.index.isin(stations_used)]
         locations_table = self.create_locations_table(stations_subset)
-        locations_table.to_csv(self.results_directory / "{}_locations.csv".format(study_id))
+        locations_table.to_csv(study_result_directory / "{}_locations.csv".format(study_id))
         for station_id in stations_used:
             if not stations_table.loc[station_id, "approved"]:
                 continue
             station_data = data[data["station_id"] == station_id]
             splits = station_data.shape[0] // MAX_EIM_ROWS + 1
             for batch_no, batch in enumerate(np.array_split(station_data, splits)):
-                results_table = self.create_locations_table(batch)
+                results_table = self.create_results_table(batch)
                 result_file = study_id + "_" + station_id + "_b" + str(batch_no) + ".csv"
-                results_table.to_csv(result_directory / result_file)
+                results_table.to_csv(study_result_directory / result_file)
 
             
     def create_results_table(self, data: pd.DataFrame):
@@ -130,23 +129,46 @@ class EIM():
             modified data with proper columns and values
         """
         stations_table = pd.read_csv(stations, index_col="station_id")
-        station_parameter_table = pd.read_csv(station_parameters, index_col=["station_id", "parameter"])
-        data["Study ID"] = stations_table.loc[data["station_id"], "eim_study_id"]
-        data["Study Specific Location ID"] = stations_table.loc[data["station_id"], "eim_location_study"]
+        data["Study ID"] = data["station_id"].map(stations_table["eim_study_id"])
+        data["Study Specific Location ID"] = data["station_id"].map(stations_table["eim_location_study"])
         data["Field Collection Type"] = "Measurement"
-        data["Field Collector"] = stations_table.loc[data["station_id"], "collector"]
-        data["Field Collection Reference Point"] = stations_table.loc[data["station_id"], "reference_point"]
+        data["Field Collector"] = data["station_id"].map(stations_table["collector"])
+        data["Field Collection Reference Point"] = data["station_id"].map(stations_table["reference_point"])
         data["Matrix"] = "Water"
         data["Source"] = "Salt/Marine Water"
         eim_date_format = "%m/%d/%Y"
         eim_time_format = "%H:%M:%S"
         data["Start Date"] = pd.to_datetime(data["datetime"]).dt.strftime(eim_date_format)
         data["Start Time"] = pd.to_datetime(data["datetime"]).dt.strftime(eim_time_format)
-        data["Result Method"] = station_parameter_table.loc[(data["station_id"], data["parameter"]), "method"]
 
         data["parameter"] = data["parameter"].map(parameter_names)
-        data["units"] = data["units"].map(units)
+        data["unit"] = data["unit"].map(units)
         results_table = data.rename(columns=results_columns)
+        results_table = results_table.loc[:, results_table.columns.isin(
+            [
+                "Study ID",
+                "Instrument ID",
+                "Location ID", 
+                "Study Specific Location ID",
+                "Field Collection Type",
+                "Field Collector",
+                "Matrix",
+                "Source",
+                "Start Date",
+                "Start Time",
+                "Result Parameter Name",
+                "Result Value",
+                "Result Unit",
+                "Result Method",
+                "Result Data Qualifier",
+                "Field Collection Reference Point",
+                "Field Collection Depth",
+                "Field Collection Depth Units"
+            ]
+        )]
+
+
+
         return results_table
         
 
@@ -158,8 +180,25 @@ class EIM():
         Returns:
             modified station data with proper columns and names
         """
+        station_data.reset_index(inplace=True)
         location_data = station_data.rename(columns=location_columns)
         location_data["Location Setting"] = "Water"
+        location_data["Coordinate System"] = "LAT/LONG"
         # 24 = Discrete Monitoring Point
         location_data["Horizontal Coordinates Represent"] = 24
+        location_data = location_data.loc[:, location_data.columns.isin(
+            [
+                "Location ID",
+                "Location Name",
+                "Location Setting",
+                "Location Description",
+                "Coordinate System",
+                "Latitude Degrees",
+                "Longitude Degrees",
+                "Horizontal Coordinates Represent",
+                "Horizontal Datum",
+                "Horizontal Coordinate Accuracy",
+                "Horizontal Coordinate Collection Method"
+            ]
+        )]
         return location_data
