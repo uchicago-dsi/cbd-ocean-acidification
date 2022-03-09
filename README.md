@@ -38,22 +38,16 @@ Washington uses EIM to handle environmental data. It has three distinct types of
 
 To set up submitting data to Washington:
 
-1. Create required accounts
-2. Create studies
-3. Add Study ID to relevant stations' eim_study_id column in `stations.csv`
+1. Follow the instructins [here](https://apps.ecology.wa.gov/eim/help/HelpDocuments/OpenDocument/14) through creating the relevant studies
+2. Update `stations.csv` to add the `eim_study_id` to the relevant stations
+3. Ensure all stations you wish to submit have the required information in `stations.csv` and `station_parameter_metadata.csv`
 
 #### California
 
-CEDEN is California's primary portal for environmental data upload, but it does not accept time series data as of this writing. All time-series data must be submitted to the Integrated Report Document Upload Portal. To submit to California:
+CEDEN is California's primary portal for environmental data upload, but it does not accept time series data as of this writing. All time-series data must be submitted to the [Integrated Report Document Upload Portal](https://www.waterboards.ca.gov/water_issues/programs/water_quality_assessment/ir_upload_portal.html). To submit to California:
 
-1. Create relevant accounts
-
-
-post:
-
-1. Go to IRUP
-2. Non-CEDED
-3. Fill out study information
+1. Create an IR Portal account: https://public2.waterboards.ca.gov/IRPORTAL/Account/Register
+2. Ensure all stations you wish to submit have the required information in `stations.csv` and `station_parameter_metadata.csv`
 
 #### Hawaii
 
@@ -75,7 +69,7 @@ For new stations and locations:
     docker run --name cbd cbd <STATE> --start <start_date> --end <end_date>
    ```
    where <STATE> should be the state name (California, Hawaii, or Washington), <start_date> and <end_date> should be dates YYYY/MM/DD format (exclude <>). 
-2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with an `instructions.txt` file explaining further instructions. 
+2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with an `README.txt` file explaining further instructions. 
 
 
 ### Without Docker (discouraged)
@@ -85,7 +79,7 @@ For new stations and locations:
     python main.py <STATE> --start <start_date> --end <end_date>
    ```
    where <STATE> should be the state name (California, Hawaii, or Washington), <start_date> and <end_date> should be dates YYYY/MM/DD format (exclude <>). 
-2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with an `instructions.txt` file explaining further instructions. 
+2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with a `README.txt` file explaining further instructions. 
 
 
 ## Directory Structure

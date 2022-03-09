@@ -60,6 +60,17 @@ units = {
 class EIM():
     state = "Washington"
 
+    instructions = """Washington Submission Steps
+    Before you ran the pipeline, you should have:
+     - Follow the instructins here (https://apps.ecology.wa.gov/eim/help/HelpDocuments/OpenDocument/14) through creating the relevant studies
+     - Update stations.csv to add the eim_study_id to the relevant stations
+     - Ensure all stations you wish to submit have the required information in stations.csv and station_parameter_metadata.csv
+    After running the pipeline:
+     - Results should be saved here: {}
+     - Follow the instructions here (https://fortress.wa.gov/ecy/eimhelp/HelpDocuments/OpenDocument/13) to submit the generated data files in this directory. Note that each study will have its own subdirectory. 
+    """
+
+
     def __init__(self):
         """ initialize with proper output directory """
         request_time = datetime.now().strftime("%Y-%m-%dT%H-%M")
@@ -82,6 +93,10 @@ class EIM():
             stations_used_by_study = stations_subset[stations_subset["eim_study_id"] == study_id]["station_id"].unique()
             self.save_results_for_study(data[data["station_id"].isin(stations_used_by_study)], study_id)
         
+        # create instructions
+        with open(self.results_directory / "README.txt", "w") as f:
+            f.write(self.instructions.format(self.results_directory))
+
         return self.results_directory
         
 

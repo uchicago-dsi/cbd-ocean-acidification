@@ -53,6 +53,14 @@ parameter_dict = {
 }
 class CEDEN():
     state = "California"
+    instructions = """California Submission Instructions
+    Before you run the pipeline, you should have:
+     - Create an IR Portal account: https://public2.waterboards.ca.gov/IRPORTAL/Account/Register
+     - Ensure all stations you wish to submit have the required information in `stations.csv` and `station_parameter_metadata.csv`
+    After running the pipeline:
+     - Results should be saved here: {}
+     - Submit results to the IR Portal
+    """
 
     def __init__(self):
         """ initialize with proper output directory """
@@ -81,6 +89,11 @@ class CEDEN():
             locations.to_csv(location_file)
             results_file = self.results_directory / "cbd_results_b{}.csv".format(batch_no)
             results.to_csv(results_file)
+
+        # create instructions
+        with open(self.results_directory / "README.txt", "w") as f:
+            f.write(self.instructions.format(self.results_directory))
+
         return self.results_directory
 
     def populate_locations(self, df: pd.DataFrame):
