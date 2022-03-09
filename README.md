@@ -38,9 +38,11 @@ Washington uses EIM to handle environmental data. It has three distinct types of
 
 To set up submitting data to Washington:
 
-1. Follow the instructins [here](https://apps.ecology.wa.gov/eim/help/HelpDocuments/OpenDocument/14) through creating the relevant studies
+1. Follow the instructions [here](https://apps.ecology.wa.gov/eim/help/HelpDocuments/OpenDocument/14) through creating the relevant studies
 2. Update `stations.csv` to add the `eim_study_id` to the relevant stations
 3. Ensure all stations you wish to submit have the required information in `stations.csv` and `station_parameter_metadata.csv`
+
+For more information, visit the [EIM page](https://ecology.wa.gov/Research-Data/Data-resources/Environmental-Information-Management-database/EIM-submit-data)
 
 #### California
 

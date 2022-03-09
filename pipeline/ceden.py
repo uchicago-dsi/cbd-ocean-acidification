@@ -11,7 +11,6 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 HERE = Path(__file__).resolve().parent
 stations = HERE / "metadata" / "stations.csv"
-station_parameters = HERE / "metadata" / "station_parameter_metadata.csv"
 
 # .xls does not allow more than 63356 rows
 MAX_EXCEL_SIZE = 65535
