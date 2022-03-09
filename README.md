@@ -64,12 +64,17 @@ For new stations and locations:
 
 ## Usage
 
+If you are submitting NERRS data:
+1. Get your ipv4 address (going to a website like https://whatismyipaddress.com/ should do it)
+2. Request a webservices account from NERRS: http://cdmo.baruch.sc.edu/web-services-request/
+3. Wait for your confirmation email. Since most IP addresses change over time, you may have to do this before each time you acquire NERRS data, or get a static IP. 
+
 1. In the project root directory, run:
    ```sh
     docker run --name cbd cbd <STATE> --start <start_date> --end <end_date>
    ```
    where <STATE> should be the state name (California, Hawaii, or Washington), <start_date> and <end_date> should be dates YYYY/MM/DD format (exclude <>). 
-2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with an `README.txt` file explaining further instructions. 
+2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with a `README.txt` file explaining further instructions. 
 
 
 ### Without Docker (discouraged)
