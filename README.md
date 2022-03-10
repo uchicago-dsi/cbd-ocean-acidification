@@ -4,8 +4,8 @@ Automates retrieval and submission of ocean acidification data for the Center fo
 
 Currently contains scripts to
 
-- Retrieve and aggregate data from [IPACOA](https://www.ipacoa.org/) and [King County](https://green2.kingcounty.gov/marine-buoy/Data.aspx).
-- Reformat that data to make it ready for [CEDEN](http://ceden.org/index.shtml) submission.
+- Retrieve and aggregate data from [NERRS](http://cdmo.baruch.sc.edu/), [King County](https://green2.kingcounty.gov/marine-buoy/Data.aspx), [Ocean Observatories Initiative](https://oceanobservatories.org/) and [CeNCOOS](https://www.cencoos.org/)
+- Reformat that data to make it ready for submission to California, Washington, and Hawaii.
 
 
 ## Initial Setup
@@ -66,16 +66,20 @@ For new stations and locations:
 
 ## Usage
 
+### NERRS
 If you are submitting NERRS data:
 1. Get your ipv4 address (going to a website like https://whatismyipaddress.com/ should do it)
 2. Request a webservices account from NERRS: http://cdmo.baruch.sc.edu/web-services-request/
 3. Wait for your confirmation email. Since most IP addresses change over time, you may have to do this before each time you acquire NERRS data, or get a static IP. 
 
+
 1. In the project root directory, run:
    ```sh
-    docker run --name cbd cbd <STATE> --start <start_date> --end <end_date>
+    bash run_tool.sh <STATE> <start_date> <end_date>
    ```
-   where <STATE> should be the state name (California, Hawaii, or Washington), <start_date> and <end_date> should be dates YYYY/MM/DD format (exclude <>). 
+   where <STATE> should be the state name (California, Hawaii, or Washington), <start_date> and <end_date> should be dates YYYY/MM/DD format (exclude <>).
+   This will prompt your password, as we are using sudo priveleges to change the owner of the output files from root (since docker created them) to the current
+   user. 
 2. Results will be saved in `results/STATE/YYYY-MM-DDTHH-MM` with a `README.txt` file explaining further instructions. 
 
 
@@ -91,15 +95,7 @@ If you are submitting NERRS data:
 
 ## Directory Structure
 
-### pipeline/
-
-- `ipacoa.py`: Python script to get water quality data from [IPACOA](https://www.ipacoa.org/).
-- `kingcounty.py`: Python script to get water quality data from [King County](https://green2.kingcounty.gov/marine-buoy/Data.aspx).
-- `ceden.py`: Python script to collect water quality data from the `data` folder and populate the [CEDEN](http://ceden.org/index.shtml) `.xls` template under the `templates` folder. The populated templates are stored at `data/submittal`.
-- `getdata.py`: Python script to call functions within `kingcounty.py` and `ipacoa.py` and store the concatenated results at `data/measurements.csv`. Change `months=6` to desired value at line 10 to get older/newer data.
-- `utils.py`: Contains relevant dictionaries used to normalize column and value names across different sources, as well as to comply with CEDEN template guidelines.
-
-### metadata/
+### pipeline/metadata/
 
 - `ipacoa_measurement_lookup.csv`: Lookup table that shows IDs, names, and measurement units for all measurements provided by stations listed in the asset list.
 - `ipacoa_platform_measurements.csv`: Contains all combinations of stations and measurements accessible through IPACOA. The `process` column indicates whether that information is going to be downloaded by the scraper `ipacoa.py`. If you want to add additional stations or measurements, you should update `process` column of the relevant row to be `True`. Otherwise that information will not be included in the dataset. Currently only ocean acidification related measurements of West Coast stations are set to have `process=True`.
@@ -108,18 +104,6 @@ If you are submitting NERRS data:
 - `kingcounty_measurement_lookup.csv`: Contains information on measurements, units, and devices used in the stations listed by King County data portal.
   <br><br>
 - `stations.csv`: Table containing information on all stations that can be accessed through both IPACOA and King County data sources.
-
-### templates/
-
-- `ceden_field_template.xls`: Empty CEDEN template to be filled by `ceden.py`.
-
-`.gitignore`: Files to be ignored by git.
-
-`Dockerfile`: Text document that contains the commands to assemble a Docker image.
-
-`requirements.txt`: Contains the Python package requirements with versions. Necessary for Docker to create an image that can run the scripts.
-
-`shell.sh`: Shell script to run the Python files in correct order to assemble templates ready to be submitted.
 
 ## Contact
 
