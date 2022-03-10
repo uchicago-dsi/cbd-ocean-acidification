@@ -61,9 +61,14 @@ class EIM():
 
     instructions = """Washington Submission Steps
     Before you ran the pipeline, you should have:
-     - Follow the instructins here (https://apps.ecology.wa.gov/eim/help/HelpDocuments/OpenDocument/14) through creating the relevant studies
+     - Follow the instructins here (https://apps.ecology.wa.gov/eim/help/HelpDocuments/OpenDocument/14) 
+       through creating the relevant studies
      - Update stations.csv to add the eim_study_id to the relevant stations
-     - Ensure all stations you wish to submit have the required information in stations.csv and station_parameter_metadata.csv
+     - Ensure all stations you wish to submit have the required information 
+       in stations.csv and station_parameter_metadata.csv
+     - IMPORTANT: this will not work if the desired stations have not had
+       their 'approved' value in stations.csv set to TRUE and an eim_study_id
+       and eim_location_study added.
     After running the pipeline:
      - Results should be saved here: {}
      - Follow the instructions here (https://fortress.wa.gov/ecy/eimhelp/HelpDocuments/OpenDocument/13) to submit the generated data files in this directory. Note that each study will have its own subdirectory. 
@@ -88,6 +93,8 @@ class EIM():
         stations_used = data["station_id"].unique()
         stations_subset = stations_table[stations_table.index.isin(stations_used)]
         stations_subset.reset_index(inplace=True) 
+        if np.isnan(stations_subset["eim_study_id"].unique()):
+            raise ValueError("No returned stations have an 'eim_study_id' in stations.csv")
         for study_id in stations_subset["eim_study_id"].unique():
             stations_used_by_study = stations_subset[stations_subset["eim_study_id"] == study_id]["station_id"].unique()
             self.save_results_for_study(data[data["station_id"].isin(stations_used_by_study)], study_id)
@@ -102,7 +109,7 @@ class EIM():
     def save_results_for_study(self, data: pd.DataFrame, study_id: str):
         """ Saves results for a single EIM study"""
         # 150,000 records per batch. 1 study + location per batch
-        study_result_directory = self.results_directory / study_id
+        study_result_directory = self.results_directory / str(study_id)
         study_result_directory.mkdir(exist_ok=True)
         stations_table = pd.read_csv(stations, index_col="station_id")
         stations_used = data["station_id"].unique()
