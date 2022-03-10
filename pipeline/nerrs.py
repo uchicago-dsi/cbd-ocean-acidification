@@ -43,6 +43,9 @@ class NERRS():
                 record[param_tag.name] = param_tag.text
             records.append(record)
         dataset_df = pd.DataFrame(records)
+        if dataset_df.empty:
+            print("NERRS returned no data. Are you sure your IP is registered with http://cdmo.baruch.sc.edu/web-services-request/")
+            return pd.DataFrame()
         dataset_df["station_id"] = dataset_id
         long_df = self.standardize_data(dataset_df)
         return long_df
