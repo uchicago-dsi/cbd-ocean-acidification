@@ -7,3 +7,7 @@ xlutils == 2.0.0
 pytemp == 0.0.1
 tqdm == 4.59.0
 erddapy == 1.2.0
+pytest == 7.0.1
+beautifulsoup4 == 4.10.0
+suds == 1.0.0
+lxml == 4.8.0
