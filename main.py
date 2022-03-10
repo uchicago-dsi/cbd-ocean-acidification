@@ -1,7 +1,5 @@
 import argparse
 from datetime import datetime, timedelta
-from distutils.log import error
-from os import stat
 from requests.exceptions import HTTPError
 import pandas as pd
 from pathlib import Path
