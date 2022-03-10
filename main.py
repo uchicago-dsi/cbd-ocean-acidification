@@ -11,19 +11,21 @@ from pipeline.ipacoa import IPACOA
 from pipeline.kingcounty import KingCounty
 from pipeline.eim import EIM
 from pipeline.ceden import CEDEN
+from pipeline.nerrs import NERRS
 
 HERE = Path(__file__).resolve().parent
 STATIONS = HERE / 'pipeline' / 'metadata' / 'stations.csv'
 
 collectors = {
-    "IPACOA": IPACOA(),
+    "NERRS": NERRS(),
     "OOI": ERDDAP("https://erddap.dataexplorer.oceanobservatories.org/erddap/"),
     "CeNCOOS": ERDDAP("https://erddap.cencoos.org/erddap/"),
     "King County": KingCounty()
 }
 
 formatters = {
-    "Washington": EIM()
+    "Washington": EIM,
+    "California": CEDEN
 }
 
 def collect_data(state, start_time, end_time):
@@ -38,17 +40,20 @@ def collect_data(state, start_time, end_time):
     Returns:
         data (pd.DataFrame): Table containing all data points
     """
-    print(state)
     stations = pd.read_csv(STATIONS, index_col="station_id")
-    state_stations = stations#[stations['state'] == state]
+    state_stations = stations[stations['state'] == state]
     all_station_data = []
     for index, row in state_stations.iterrows():
-        collector = collectors[row["provider"]]
+        if row["provider"] == "test":
+            continue
         try:
+            collector = collectors[row["provider"]]
             station_data = collector.get_data(index, start_time, end_time)
+            all_station_data.append(station_data)
         except HTTPError as e:
             continue
-        all_station_data.append(station_data)
+        except KeyError:
+            print(f"{row['provider']} collector not implemented")
     data = pd.concat(all_station_data)
     return data
 
@@ -61,7 +66,7 @@ def format_data(state, data):
     Returns:
         Nothing. Saves relevant documents to folder with name {state}-{unixtime}
     """
-    formatter = formatters[state]
+    formatter = formatters[state]()
     formatter.format_data_for_agency(data)
     
 
@@ -82,8 +87,12 @@ if __name__ == "__main__":
     # set defaults
     if args.start == None:
         args.start = datetime.now() - timedelta(30)
+    else:
+        args.start = datetime.strptime(args.start, "%Y/%m/%d")
     if args.end == None:
         args.end = datetime.now()
+    else:
+        args.end = datetime.strptime(args.end, "%Y/%m/%d")
     # run pipeline
     data = collect_data(args.state, args.start, args.end)
     format_data(args.state, data)
