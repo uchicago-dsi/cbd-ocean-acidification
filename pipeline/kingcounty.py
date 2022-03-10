@@ -93,9 +93,9 @@ class KingCounty():
         dataset.rename(columns=utils.positional_column_mapping, inplace=True)
         # kingcounty cols are Var_Name_Unit, Qual_Var_Name
         dataset.rename(columns={'Dissolved_Oxygen_%Sat': 'Dissolved_Oxygen_Sat_%'}, inplace=True)
-        dataset.columns = dataset.columns.str.replace("(^(?!Qual).*)_pH", "\\1_pH_1")
-        dataset.columns = dataset.columns.str.replace("(^(?!Qual|[a-z]).*)_(.*)", "value_\\1")
-        dataset.columns = dataset.columns.str.replace("Qual_(.*)", "quality_\\1")
+        dataset.columns = dataset.columns.str.replace("(^(?!Qual).*)_pH", "\\1_pH_1", regex=True)
+        dataset.columns = dataset.columns.str.replace("(^(?!Qual|[a-z]).*)_(.*)", "value_\\1", regex=True)
+        dataset.columns = dataset.columns.str.replace("Qual_(.*)", "quality_\\1", regex=True)
         dataset.reset_index(inplace=True)
         long_df = pd.wide_to_long(
             dataset,

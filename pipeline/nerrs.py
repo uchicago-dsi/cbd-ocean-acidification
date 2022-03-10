@@ -1,6 +1,3 @@
-
-
-from pytest import param
 from suds.client import Client
 from datetime import datetime, timedelta
 from urllib.error import HTTPError
@@ -10,7 +7,7 @@ import erddapy
 import requests
 from pathlib import Path
 from pipeline import utils
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 
 
 index_columns = ["datetime", "station_id", "depth"]
@@ -41,7 +38,7 @@ class NERRS():
         for data_tag in xml_data.find_all("data"):
             record = {}
             for param_tag in data_tag.children:
-                if param_tag.text == "\n" or param_tag.contents == []:
+                if isinstance(param_tag, NavigableString) or param_tag.text == "\n" or param_tag.contents == []:
                     continue
                 record[param_tag.name] = param_tag.text
             records.append(record)
@@ -68,7 +65,7 @@ class NERRS():
         dataset.drop_duplicates(subset=index_columns, keep="last", inplace=True)
         # rearrange stubs to prefix parameter names to fit wide_to_long
         # nerrs cols are var_name, f_var_name, ec_var_name
-        dataset.columns = dataset.columns.str.replace("(^(?!ec_|f_|station|datetime|depth)(.*))", "value_\\1")       
+        dataset.columns = dataset.columns.str.replace("(^(?!ec_|f_|station|datetime|depth)(.*))", "value_\\1", regex=True)       
         long_df = pd.wide_to_long(
             dataset,
             stubnames=["value", "ec", "f"],

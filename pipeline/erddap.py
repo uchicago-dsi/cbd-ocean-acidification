@@ -107,8 +107,8 @@ class ERDDAP():
         dataset.drop_duplicates(subset=index_columns, keep="last", inplace=True)
         # rearrange stubs to prefix parameter names to fit wide_to_long
         # erddap cols are var_name_qc_agg, var_name_qc_tests, var_name (unit)
-        dataset.columns = dataset.columns.str.replace("(.*) \(.*\)", "value_\\1")
-        dataset.columns = dataset.columns.str.replace("(.*)_qc(.*)", "qc\\2_\\1")
+        dataset.columns = dataset.columns.str.replace("(.*) \(.*\)", "value_\\1", regex=True)
+        dataset.columns = dataset.columns.str.replace("(.*)_qc(.*)", "qc\\2_\\1", regex=True)
         long_df = pd.wide_to_long(
             dataset,
             stubnames=["value", "qc_agg", "qc_tests"],
