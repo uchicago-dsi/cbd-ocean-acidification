@@ -78,7 +78,8 @@ class EIM():
     def __init__(self):
         """ initialize with proper output directory """
         request_time = datetime.now().strftime("%Y-%m-%dT%H-%M")
-        self.results_directory = HERE.parent / "output" / self.state / request_time
+        self.relative_path = Path("output") / self.state / request_time
+        self.results_directory = HERE.parent / self.relative_path
         self.results_directory.mkdir(exist_ok=True, parents=True)
 
     def format_data_for_agency(self, data: pd.DataFrame) -> Path:
@@ -101,7 +102,7 @@ class EIM():
         
         # create instructions
         with open(self.results_directory / "README.txt", "w") as f:
-            f.write(self.instructions.format(self.results_directory))
+            f.write(self.instructions.format(self.relative_path))
 
         return self.results_directory
         
