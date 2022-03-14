@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from pipeline import utils
+from pipeline.formatter import Formatter
 import pandas as pd
 from datetime import datetime
 import numpy as np
@@ -50,7 +51,7 @@ parameter_dict = {
     "tco2": "Carbon dioxide, free",
     "pH": "pH",
 }
-class CEDEN():
+class CEDEN(Formatter):
     state = "California"
     instructions = """California Submission Instructions
     Before you run the pipeline, you should have:
@@ -60,13 +61,6 @@ class CEDEN():
      - Results should be saved here: {}
      - Submit results to the IR Portal
     """
-
-    def __init__(self):
-        """ initialize with proper output directory """
-        request_time = datetime.now().strftime("%Y-%m-%dT%H-%M")
-        self.relative_path = Path("output") / self.state / request_time
-        self.results_directory = HERE.parent / self.relative_path
-        self.results_directory.mkdir(exist_ok=True, parents=True)
 
     def format_data_for_agency(self, data: pd.DataFrame) -> Path:
         """ Outermost method for transforming data into agency ready format

@@ -2,6 +2,7 @@ import pandas as pd
 from pathlib import Path
 import numpy as np
 from datetime import datetime
+from pipeline.formatter import Formatter
 
 HERE = Path(__file__).resolve().parent
 stations = HERE / "metadata" / "stations.csv"
@@ -58,7 +59,6 @@ units = {
 
 class EIM():
     state = "Washington"
-
     instructions = """Washington Submission Steps
     Before you ran the pipeline, you should have:
      - Follow the instructins here (https://apps.ecology.wa.gov/eim/help/HelpDocuments/OpenDocument/14) 
@@ -73,14 +73,6 @@ class EIM():
      - Results should be saved here: {}
      - Follow the instructions here (https://fortress.wa.gov/ecy/eimhelp/HelpDocuments/OpenDocument/13) to submit the generated data files in this directory. Note that each study will have its own subdirectory. 
     """
-
-
-    def __init__(self):
-        """ initialize with proper output directory """
-        request_time = datetime.now().strftime("%Y-%m-%dT%H-%M")
-        self.relative_path = Path("output") / self.state / request_time
-        self.results_directory = HERE.parent / self.relative_path
-        self.results_directory.mkdir(exist_ok=True, parents=True)
 
     def format_data_for_agency(self, data: pd.DataFrame) -> Path:
         """ Outermost method for transforming data into agency ready format
