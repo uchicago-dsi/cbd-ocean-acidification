@@ -4,12 +4,9 @@ from datetime import datetime, timedelta
 import pandas as pd
 from pathlib import Path
 
-from .ipacoa import IPACOA
-from .kingcounty import KingCounty
-from .erddap import ERDDAP
-
 from .eim import EIM
 from .ceden import CEDEN
+from .hawaii import Hawaii
 
 
 #TODO: update nerrs, ipacoa. Test ceden, eim, hawaii
@@ -76,9 +73,19 @@ class TestDataCollection():
 
     @pytest.mark.state_test_data("hawaii")
     def test_hawaii_standard(self, state_test):
-        formatter = None
-
-
+        formatter = Hawaii()
+        results_directory = formatter.format_data_for_agency(state_test)
+        all_results = []
+        for obj in results_directory.iterdir():
+            if "results" in obj.name:
+                results = pd.read_csv(obj, index_col=0)
+                all_results.append(results)
+            elif "locations" in obj.name:
+                locations = pd.read_csv(obj, index_col=0)
+            else:
+                assert obj.name == "README.txt"  
+        full_results = pd.concat(all_results)
+        self.hawaii_tests(full_results, locations)
 
     def eim_tests(self, results: pd.DataFrame, locations: pd.DataFrame):
         """ Runs get_data tests and asserts properly formed table """
@@ -136,7 +143,10 @@ class TestDataCollection():
     def hawaii_tests(self, results: pd.DataFrame, locations: pd.DataFrame):
         required_results_columns = {
             "Station", "Date", "Time", "Latitude", "Longitude", "Parameter",
-            "Value", "Unit", "Method", "Instrument", "QualityCodes"
+            "Value", "Unit", "CollectionMethod", "Instrument", "QualityCodes",
+            "Depth", "DepthUnit"
         }
+        results_columns = set(results.columns)
+        assert results_columns.issubset(required_results_columns)
 
 
