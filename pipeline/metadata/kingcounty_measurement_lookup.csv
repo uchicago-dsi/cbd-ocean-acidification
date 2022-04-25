@@ -1,0 +1,20 @@
+﻿Sensor Name,Parameter,Display Name,Range Min Value <.4.>,Range Max Value <.4.>,End Check Failed <.2.>,Device Name
+YSI or HCEP,Depth (m),Depth_m,0,61,NA,Sea-Bird HydroCAT-EP datasonde
+YSI or HCEP,Chlorophyll Fluorescence (ug/L),Chl_fluor_ug/L,0,400,>±15 %,Sea-Bird HydroCAT-EP datasonde
+YSI,Dissolved Oxygen (% saturation),DO_%_Sat,0,500,>±5 %,YSI 6600 V2 datasonde
+YSI or HCEP,pH,Sonde_pH,0,14,>±0.20 units,Sea-Bird HydroCAT-EP datasonde
+YSI or HCEP,Salinity (psu),Sal_psu,0,42,±0.2 psu,Sea-Bird HydroCAT-EP datasonde
+YSI or HCEP,Water Temperature (°C),Water_Temp_C,-5,45,NA,Sea-Bird HydroCAT-EP datasonde
+YSI or HCEP,Turbidity (NTU),Turb_NTU,0,1000,>±20 %,Sea-Bird HydroCAT-EP datasonde
+SeaFET,External pH (recalculated with YSI salinity),SeaFET_EXT_pH_wSal,6,9,NA,Satlantic SeaFET Sensor
+SeaFET,External pH,SeaFET_EXT_pH,6,9,NA,Satlantic SeaFET Sensor
+SeaFET,Internal pH,SeaFET_INT_pH,6,9,NA,Satlantic SeaFET Sensor
+SeaFET,Temperature (°C),SeaFET_Temp_C,0,50,NA,Satlantic SeaFET Sensor
+SUNA,Nitrate-Nitrogen (mg/L),SUNA_Nitrite+Nitrate_mgN/L,NA,NA,NA,Satlantic SUNA (Submersible Ultraviolet Nitrate Analyzer) Sensor
+Meteorological,Wind Direction (degrees),Wind_Dir_deg,0,360,NA,Vaisala WXT510 meteorological station
+Meteorological,Wind Speed (m/sec),Wind_Sp_m/sec,0,60,NA,Vaisala WXT510 meteorological station
+Meteorological,Air Temperature (°F),Air_Temp_F,-60,140,NA,Vaisala WXT510 meteorological station
+Meteorological,Pressure (in Hg),Press_inHg,17.7,32.5,NA,Vaisala WXT510 meteorological station
+Meteorological,Relative Humidity (%),Rel_Hum_%,0,100,NA,Vaisala WXT510 meteorological station
+Meteorological,Radiation (watts/m2),PAR_umo/s/sqm,NA,NA,NA,Vaisala WXT510 meteorological station
+Meteorological,Rain Fall (in),Rain_Fall_in,NA,NA,NA,Vaisala WXT510 meteorological station
