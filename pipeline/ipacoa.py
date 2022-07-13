@@ -1,3 +1,4 @@
+from readline import parse_and_bind
 import pandas as pd
 import requests
 from io import StringIO
@@ -9,7 +10,8 @@ from pipeline import utils
 
 HERE = Path(__file__).resolve().parent
 measurements_path = HERE / 'metadata' / 'ipacoa_platform_measurements.csv'
-unit_path = HERE / 'metadata' / 'ipacoa_measurement_lookup.csv'
+stations = HERE / "metadata" / "stations.csv"
+station_parameter_metadata = HERE / 'metadata' / 'station_parameter_metadata.csv'
 
 class IPACOA():
 
@@ -69,21 +71,28 @@ class IPACOA():
         )
         if start_date:
             start_date = pd.to_datetime(start_date, utc=True)
-            all_measures = all_measures[all_measures["date_time"] >= start_date]
+            all_measures = all_measures[all_measures["datetime"] >= start_date]
         if end_date:
             end_date = pd.to_datetime(end_date, utc=True)
-            all_measures = all_measures[all_measures["date_time"] <= end_date]
+            all_measures = all_measures[all_measures["datetime"] <= end_date]
 
-        # Add measurement units
-        units = pd.read_csv(unit_path)
-        all_measures = all_measures.merge(
-            units[["parameter", "unit"]], on="parameter", how="left"
-        )
         all_measures = all_measures[
-            ["station_id", "datetime", "parameter", "value", "unit", "depth", "depth_unit"]
+            ["station_id", "datetime", "parameter", "value", "depth", "depth_unit"]
         ]
 
-        # map parameter names to normalized names
-        all_measures["parameter"] = all_measures["parameter"].map(utils.parameter_dict)
+        # add station metadata (location)        
+        stations_df = pd.read_csv(stations, index_col="station_id")
+        stations_df = stations_df[["latitude", "longitude"]]
+        long_df = all_measures.join(stations_df, on="station_id", how="left")
 
-        return all_measures
+        # map parameter names to device names, normalized names, and units
+        parameter_metadata = pd.read_csv(station_parameter_metadata, index_col=["station_id", "parameter"])
+        # if pd.merge(left=long_df, right=parameter_metadata, on=["station_id", "parameter"], indicator=True)
+        
+        long_df = long_df.join(parameter_metadata, on=["station_id", "parameter"], how='left')
+        long_df["parameter"] = long_df["parameter"].map(utils.parameter_dict)
+
+        # ipacoa has no quality flags
+        long_df["quality"] = None
+
+        return long_df

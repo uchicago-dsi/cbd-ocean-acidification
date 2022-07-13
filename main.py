@@ -10,6 +10,7 @@ from pipeline.kingcounty import KingCounty
 from pipeline.eim import EIM
 from pipeline.ceden import CEDEN
 from pipeline.nerrs import NERRS
+from pipeline.hawaii import Hawaii
 
 HERE = Path(__file__).resolve().parent
 STATIONS = HERE / 'pipeline' / 'metadata' / 'stations.csv'
@@ -18,12 +19,14 @@ collectors = {
     "NERRS": NERRS(),
     "OOI": ERDDAP("https://erddap.dataexplorer.oceanobservatories.org/erddap/"),
     "CeNCOOS": ERDDAP("https://erddap.cencoos.org/erddap/"),
-    "King County": KingCounty()
+    "King County": KingCounty(),
+    "IPACOA": IPACOA(),
 }
 
 formatters = {
     "Washington": EIM,
-    "California": CEDEN
+    "California": CEDEN,
+    "Hawaii": Hawaii,
 }
 
 def collect_data(state, start_time, end_time):
