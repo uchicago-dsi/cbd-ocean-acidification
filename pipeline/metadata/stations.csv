@@ -1,7 +1,7 @@
 station_id,name,source,provider,QAPP,state,latitude,longitude,eim_location_study,eim_study_id,description,approved,setting,collector,horizontal_datum,horizontal_coordinate_accuracy,horizontal_coordinate_collection,study_specific_id,reference_point,ceden_id,ceden_project_code
 test-ceden,Sample Station for CEDEN tests,UofC,Test,,California,36.9613,-122.0201,,,,TRUE,Estuary,University,NAVD88,,,test-test,,test_ceden,CBD-Test
 test-hawaii,Sample Station for Hawaii tests,UofC,Test,,Hawaii,21.2812,-157.86,,,,TRUE,Estuary,University,NAVD88,,,test-test,,,
-test-eim,Sample Station for EIM tests,UofC,Test,,Washington,47.9629,-124.961,,,,TRUE,Estuary,University,NAVD88,,,test-test,,,
+test-eim,Sample Station for EIM tests,UofC,Test,,Washington,47.9629,-124.961,,test_study,,TRUE,Estuary,University,NAVD88,,,test-test,,,
 tiburon-water-tibc1,* CeNCOOS in situ water monitoring data at Romberg Tiburon Center Pier,Romberg Tiburon Center SFSU/CeNCOOS,CeNCOOS,,California,37.8915,-122.4467,,," The Tiburon shore station is maintained by San Francisco State University. The station has been operational since 2002 and consists of both in-water and meteorological sensors. The in-water sensors are fixed to a pier and provide near-real time observations of water salinity, temperature, dissolved oxygen, chlorophyll fluorescence, turbidity and pH. San Francisco State University - http://sfbeams.sfsu.edu/. These nearshore sensors are part of the Central and Norther California Ocean Observing System (CeNCOOS). They measure various water quality parameters at fixed points along the California coast.",TRUE,Estuary,University,,,,,,cencoos_Tiburon,
 edu_ucsc_scwharf1,* CeNCOOS in situ Water monitoring data at the Santa Cruz municipal wharf,"University of California, Santa Cruz",CeNCOOS,,California,36.9603,-122.0203,,,Pier Mounted instrument measuring oceanographic parameters,TRUE,Marine,University,,,,,,,
 edu_humboldt_tdp,"* CeNCOOS in situ water monitoring data at Trinidad Head, California",Humboldt State University/CeNCOOS,CeNCOOS,,California,41.055,-124.147,,,"The Trinidad shore station is maintained by Humboldt State University. The station has been operational since 2012 and consists of subsurface sensors mounted rigidly to a pier. The sensors provide near-real-time observations of ocean water salinity, temperature, dissolved oxygen, chlorophyll fluorescence, turbidity and pH. Water depth at this location ranges from approximately 5 ft to 15 ft. These nearshore sensors are part of the Central and Norther California Ocean Observing System (CeNCOOS). They measure various water quality parameters at fixed points along the California coast.",TRUE,Marine,University,,,,,,cencoos_Trinidad,
@@ -32,7 +32,6 @@ ooi-rs01sbps-pc01a-4b-phsena102,Regional Cabled Array: Oregon Slope Base Shallow
 APSH_Seward1,AOOS Burkolator at Alutiiq Pride Shellfish Hatchery,Alutiiq Pride Shellfish,IPACOA,,Alaska,60.0992,-149.4428,,,,TRUE,,,,,,,,,
 OCAL_Ketchikan1,AOOS Burkolator at OceansAlaska Ketchikan Shellfish Hatchery,OceansAlaska,IPACOA,,Alaska,55.315,-131.5954,,,,TRUE,,,,,,,,,
 APL_Chaba,Ćháʔba· UW/NANOOS Moored Buoy near La Push,APL-UW,IPACOA,,Washington,47.9627,-124.958,,,,TRUE,,,,,,,,,
-HIOC_Hogisland1,CeNCOOS Burkolator at Hog Island Oyster Farm,Hog Island Oysters,IPACOA,,California,38.162,-122.8939,,,,TRUE,,,,,,,,201ST1775,
 FBO_Fannybay1,"Fanny Bay Oysters, Baynes Sound",FannyBayOysters,IPACOA,,British Columbia,49.4716,-124.7927,,,,TRUE,,,,,,,,,
 HAKAI_KCBuoy,"Seaology CO2 Buoy in Kwakshua Channel, BC",Hakai Institute,IPACOA,,British Columbia,51.6501,-127.9664,,,,TRUE,,,,,,,,,
 HAKAI_Quadra1,Quadra Island Field Station at Hyacinthe Bay,Hakai Institute,IPACOA,,British Columbia,50.116,-125.222,,,,TRUE,,,,,,,,,
@@ -77,7 +76,6 @@ PMELCO2_whots,WHOI Hawaii Ocean Time-series Station Mooring,PMEL-CO2,IPACOA,,Haw
 PSI_Baycenter,"PCSGA - Bay Center Port mooring, Willapa Bay",PSI,IPACOA,,Washington,46.629,-123.9516,,,,TRUE,,,,,,,,,
 PCS_Penncove1,"Penn Cove Shellfish, Coupeville - Whidbey Island",PennCoveShellfish,IPACOA,,Washington,48.2191,-122.7048,,,,TRUE,,,,,,,,,
 CARLSBD_Aquafarm1,Agua Hedionda Lagoon - Carlsbad Aquafarm,Carlsbad Aquafarm,IPACOA,,California,33.1407,-117.3389,,,,TRUE,,,,,,,,,
-KC_SEAQYSI,Seattle Aquarium Mooring - Elliott Bay,King County,IPACOA,,Washington,47.608,-122.3438,,,,TRUE,,,,,,,,,
 STA_Sitka1,Sitka Tribe of Alaska Burke-o-Lator site - Sitka,STA,IPACOA,,Alaska,57.0526,-135.3456,,,,TRUE,,,,,,,,,
 TAF_Dabobbay,"PCSGA - Taylor Shellfish Hatchery intakes, Dabob Bay",TaylorShellfish,IPACOA,,Washington,47.8199,-122.8215,,,,TRUE,,,,,,,,,
 WCSH_Whiskey1,"PCSGA - Whiskey Creek Shellfish Hatchery, Netarts Bay",WhiskeyCrShelfish,IPACOA,,Oregon,45.4214,-123.9362,,,,TRUE,,,,,,,,,
