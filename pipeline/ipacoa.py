@@ -58,6 +58,9 @@ class IPACOA():
             df["value"] = df.pop(df.columns[2])
             df["parameter"] = measurement
             df["depth_unit"] = "ft"
+            # change temps to celcius (ipacoa default is F)
+            if "Temp" in measurement:
+                df["value"] = (df["value"] - 32) * 5 / 9
             df.rename(
                 columns={" Depth (Ft)": "depth", "Date and Time": "datetime"},
                 inplace=True,
@@ -67,7 +70,7 @@ class IPACOA():
 
         all_measures = pd.concat(dfs, ignore_index=True)
         all_measures["datetime"] = pd.to_datetime(
-            all_measures["datetime"], errors="coerce"
+            all_measures["datetime"], errors="coerce", utc=True
         )
         if start_date:
             start_date = pd.to_datetime(start_date, utc=True)

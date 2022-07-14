@@ -10,7 +10,7 @@
 IMAGE_NAME=cbd
 CONTAINER_NAME=cbd
 
-if [[ $1 == "build" ]];
+if [[ $4 == "build" ]];
 then
     docker build -t $IMAGE_NAME .
 fi

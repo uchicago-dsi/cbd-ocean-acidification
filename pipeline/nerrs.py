@@ -1,3 +1,4 @@
+from xml.sax import SAXParseException
 from suds.client import Client
 from datetime import datetime, timedelta
 from urllib.error import HTTPError
@@ -5,6 +6,7 @@ import pandas as pd
 import numpy as np
 import erddapy
 import requests
+import logging
 from pathlib import Path
 from pipeline import utils
 from bs4 import BeautifulSoup, NavigableString
@@ -31,8 +33,11 @@ class NERRS():
         start_date = start_date.strftime(self.time_format)
         end_date = end_date.strftime(self.time_format)
         soapClient = Client(self.api_endpoint, timeout=90, retxml=True)
-
-        raw_data = soapClient.service.exportAllParamsDateRangeXMLNew(dataset_id, start_date, end_date, '*')
+        try:
+            raw_data = soapClient.service.exportAllParamsDateRangeXMLNew(dataset_id, start_date, end_date, '*')
+        except SAXParseException as e:
+            logging.warning(f"{dataset_id} raises error, may not have data for period.")
+            return pd.DataFrame()
         xml_data = BeautifulSoup(raw_data, "lxml")
         records = []
         for data_tag in xml_data.find_all("data"):
@@ -44,7 +49,10 @@ class NERRS():
             records.append(record)
         dataset_df = pd.DataFrame(records)
         if dataset_df.empty:
-            print("NERRS returned no data. Are you sure your IP is registered with http://cdmo.baruch.sc.edu/web-services-request/")
+            logging.warning(
+                "NERRS returned no data. Are you sure your IP is registered"
+                " with http://cdmo.baruch.sc.edu/web-services-request/"
+            )
             return pd.DataFrame()
         dataset_df["station_id"] = dataset_id
         long_df = self.standardize_data(dataset_df)
@@ -65,6 +73,9 @@ class NERRS():
         ]
         dataset = dataset.loc[:, dataset.columns.isin(desired_columns)]
         dataset.rename(columns=utils.positional_column_mapping, inplace=True, errors='ignore')
+        if "depth" not in dataset.columns:
+            logging.warning("Depth not included in data")
+            dataset["depth"] = None
         dataset.drop_duplicates(subset=index_columns, keep="last", inplace=True)
         # rearrange stubs to prefix parameter names to fit wide_to_long
         # nerrs cols are var_name, f_var_name, ec_var_name

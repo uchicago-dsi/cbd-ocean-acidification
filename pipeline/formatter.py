@@ -17,12 +17,16 @@ class Formatter(ABC):
         """ Instructions loaded into README.txt """
         return self._instructions
 
-    def __init__(self):
+    def __init__(self, output_directory: Path=None):
         """ initialize with proper output directory """
-        request_time = datetime.now().strftime("%Y-%m-%dT%H-%M")
-        self.relative_path = Path("output") / self.state / request_time
-        self.results_directory = HERE.parent / self.relative_path
-        self.results_directory.mkdir(exist_ok=True, parents=True)
+        if output_directory is None:
+            request_time = datetime.now().strftime("%Y-%m-%dT%H-%M")
+            self.relative_path = Path("output") / self.state / request_time
+            self.results_directory = HERE.parent / self.relative_path
+            self.results_directory.mkdir(exist_ok=True, parents=True)
+        else:
+            self.results_directory = output_directory
+            self.relative_path = Path("output") / self.state / output_directory.name
 
     @abstractmethod
     def format_data_for_agency(self, data: pd.DataFrame) -> Path:
