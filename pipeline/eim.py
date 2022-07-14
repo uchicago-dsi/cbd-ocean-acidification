@@ -1,6 +1,7 @@
 import pandas as pd
 from pathlib import Path
 import numpy as np
+import logging
 from datetime import datetime
 from pipeline.formatter import Formatter
 
@@ -57,7 +58,7 @@ units = {
     "inHg": "in/Hg"
 }
 
-class EIM():
+class EIM(Formatter):
     state = "Washington"
     instructions = """Washington Submission Steps
     Before you ran the pipeline, you should have:
@@ -85,8 +86,10 @@ class EIM():
         stations_table = pd.read_csv(stations, index_col="station_id")
         stations_used = data["station_id"].unique()
         stations_subset = stations_table[stations_table.index.isin(stations_used)]
-        stations_subset.reset_index(inplace=True) 
-        if np.isnan(stations_subset["eim_study_id"].unique()):
+        stations_subset.reset_index(inplace=True)
+        study_ids = list(stations_subset["eim_study_id"].unique())
+        if len(study_ids) == 1 and isinstance(study_ids[0], np.float) and np.isnan(study_ids[0]):
+            logging.error("Stations must have an 'eim_study_id in stations.csv")
             raise ValueError("No returned stations have an 'eim_study_id' in stations.csv")
         for study_id in stations_subset["eim_study_id"].unique():
             stations_used_by_study = stations_subset[stations_subset["eim_study_id"] == study_id]["station_id"].unique()
