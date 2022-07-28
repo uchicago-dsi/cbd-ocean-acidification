@@ -16,6 +16,7 @@ then
 fi
 docker run --name $CONTAINER_NAME \
     --volume "/${PWD}/output:/src/output" \
+    --volume "/${PWD}/pipeline/metadata:/src/pipeline/metadata" \
     --rm \
     $IMAGE_NAME \
     $1 --start $2 --end $3
