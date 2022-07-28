@@ -38,6 +38,7 @@ parameter_names = {
     "pH_salinity": "pH",
     "pH_internal": "pH",
     "pH_external": "pH",
+    "pH": "pH",
     "water_temperature": "Temperature, water",
     "salinity": "Salinity",
     "water_pressure" : "Water pressure",
@@ -46,7 +47,10 @@ parameter_names = {
     "conductivity": "Conductivity",
     "total_dissolved_solids": "Total Dissolved Solids",
     "turbidity": "Turbidity",
-    "total_alkalinity": "Alkalinity, Total as CaCO3"
+    "total_alkalinity": "Alkalinity, Total as CaCO3",
+    "air_temperature": "Temperature, air",
+    "air_pressure": "Barometric pressure",
+    "co2": "Carbon Dioxide",
 }
 
 units = {
@@ -143,7 +147,10 @@ class EIM(Formatter):
         eim_time_format = "%H:%M:%S"
         data["Start Date"] = pd.to_datetime(data["datetime"]).dt.strftime(eim_date_format)
         data["Start Time"] = pd.to_datetime(data["datetime"]).dt.strftime(eim_time_format)
-
+        # check which parameters are not included
+        unknown_parameters = set(data["parameter"].unique()).difference(set(parameter_names.keys()))
+        if len(unknown_parameters) > 0:
+            logging.info(f"{unknown_parameters} in data but have no EIM parameter name listed.")
         data["parameter"] = data["parameter"].map(parameter_names)
         data["unit"] = data["unit"].map(units)
         results_table = data.rename(columns=results_columns)
