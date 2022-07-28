@@ -107,6 +107,6 @@ If you are submitting NERRS data:
 
 ## Contact
 
-Egemen Pamukcu - [GitHub](github.com/egemenpamukcu) - egemenpamukcu@uchicago.edu
+You can contact us by opening an issue or emailing tspread at uchicago edu
 
-Project Link: [https://github.com/11th-Hour-Data-Science/cbd-ocean-acidification]()
+Project Link: [https://github.com/chicago-cdac/cbd-ocean-acidification]()
