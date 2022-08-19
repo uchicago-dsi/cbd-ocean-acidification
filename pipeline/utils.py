@@ -36,6 +36,7 @@ parameter_dict = {
     "Dissolved_Oxygen_Sat": "oxygen_saturation",
     "Sonde_pH": "pH",
     "SeaFET_External_pH_recalc_w_salinity": "pH_salinity",
+    "SeaFET_External_pH_1_recalc_w": "pH_external",
     "Salinity": "salinity",
     "Water_Temperature": "water_temperature",
     "SeaFET_Temperature": "water_temperature",
@@ -59,7 +60,8 @@ parameter_dict = {
     "sal": "salinity",
     "turb": "turbidity",
     "spcond": "conductivity",
-    "ph": "pH"
+    "ph": "pH",
+    "co2": "Carbon Dioxide",
 }
 
 ceden_station_misc = {
