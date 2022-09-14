@@ -83,6 +83,11 @@ class KingCounty():
         long_df = self.standardize_data(station_data)
         return long_df
 
+    def filter_poor_data(self, dataset: pd.DataFrame):
+        """Remove data with low or suspect quality"""
+        dataset["suspect"] = (dataset["quality"] // 100 >= 3)
+        return dataset[~dataset["suspect"]]
+
     def standardize_data(self, dataset: pd.DataFrame):
         """ Reformat data to match a single standard format """
         dataset = dataset.filter(items=COLS)
@@ -118,5 +123,6 @@ class KingCounty():
         parameter_metadata = pd.read_csv(station_parameter_metadata, index_col=["station_id", "parameter"])
         long_df = long_df.join(parameter_metadata, on=["station_id", "parameter"], how='left')
         long_df["parameter"] = long_df["parameter"].map(utils.parameter_dict)
+        long_df = self.filter_poor_data(long_df)
 
         return long_df

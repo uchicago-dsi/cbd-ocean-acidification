@@ -98,6 +98,11 @@ class ERDDAP():
         long_df = self.standardize_data(dataset_df)
         return long_df
 
+    def filter_poor_data(self, dataset: pd.DataFrame) -> pd.DataFrame:
+        """Remove suspect / poor quality data"""
+        dataset["suspect"] = (dataset["quality"] >= 3)
+        return dataset[~dataset["suspect"]]
+
     def standardize_data(self, dataset: pd.DataFrame):
         """ Reformat data to match a single standard format """
         # use station_id column used to retrieve data
@@ -125,4 +130,5 @@ class ERDDAP():
         long_df = long_df.join(parameter_metadata, on=["station_id", "parameter"], how='left')
         long_df['parameter'] = long_df["parameter"].map(utils.parameter_dict)
         long_df["depth_unit"] = "m"
+        long_df = self.filter_poor_data(long_df)
         return long_df
