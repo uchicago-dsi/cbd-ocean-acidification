@@ -20,8 +20,7 @@ location_columns = {
 
 results_columns = {
    "station_id": "Monitoring Location ID",
-   # deal with activity start date and time in func
-   # ?? : "Equipment ID",
+   "equipment_id" : "Equipment ID",
    "parameter": "Characteristic Name",
    "value": "Result Value",
    "unit": "Result Unit",
@@ -62,6 +61,7 @@ class Oregon(Formatter):
         - qa/qc protocols
       - Fill out all relevant information on stations you are submitting
       - Set "Approved" to TRUE in stations.csv for stations you wish to submit and have recieved relevant approvals for.
+      - Fill out "New Equipment" tables for all equipment. Put the equipment ids into 'station_parameter_metadata.csv'
     """
 
 
@@ -123,7 +123,6 @@ class Oregon(Formatter):
         stations_table = pd.read_csv(stations)
         df["Activity Start Date"] = pd.to_datetime(df["datetime"], utc=True).dt.strftime("%Y/%m/%d") 
         df["Activity Start Time"] = pd.to_datetime(df["datetime"], utc=True).dt.strftime("%H:%M") 
-        # TODO: lookup equipment ids from saved table
 
         molg = df.loc[df.unit == "µmol/kg", "value"] * 1000
         df.loc[df.unit == "µmol/kg", "value"] = molg
@@ -136,7 +135,6 @@ class Oregon(Formatter):
 
         df["unit"] = df["unit"].map(unit_dict)
         df["parameter"] = df["parameter"].map(parameter_dict)
-        # TODO: ignore errors in map. If not by default, do map on filtered df with unit strat above
         df["quality"] = df["quality"].map(qa_dict)
         df.sort_values(["station_id", "parameter", "datetime"])
         df.rename(columns=results_columns, inplace=True, errors="ignore")
