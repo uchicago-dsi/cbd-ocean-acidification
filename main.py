@@ -13,6 +13,7 @@ from pipeline.eim import EIM
 from pipeline.ceden import CEDEN
 from pipeline.nerrs import NERRS
 from pipeline.hawaii import Hawaii
+from pipeline.oregon import Oregon
 
 HERE = Path(__file__).resolve().parent
 STATIONS = HERE / 'pipeline' / 'metadata' / 'stations.csv'
@@ -29,6 +30,7 @@ formatters = {
     "Washington": EIM,
     "California": CEDEN,
     "Hawaii": Hawaii,
+    "Oregon": Oregon,
 }
 
 def collect_data(state, start_time, end_time):

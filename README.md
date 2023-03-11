@@ -5,7 +5,7 @@ Automates retrieval and submission of ocean acidification data for the Center fo
 Currently contains scripts to
 
 - Retrieve and aggregate data from [NERRS](http://cdmo.baruch.sc.edu/), [King County](https://green2.kingcounty.gov/marine-buoy/Data.aspx), [Ocean Observatories Initiative](https://oceanobservatories.org/) and [CeNCOOS](https://www.cencoos.org/)
-- Reformat that data to make it ready for submission to California, Washington, and Hawaii.
+- Reformat that data to make it ready for submission to California, Washington, Hawaii, and Oregon.
 
 
 ## Initial Setup
@@ -27,6 +27,8 @@ This setup should only have to be run once per machine you run it on.
 ### Record Keeping Setup
 
 Some steps in the 303(d) data submission process must be taken manually once before completion. The `metadata/stations.csv` contains metadata about the stations that are available to retrieve data from. You can open this in Excel or any csv editor of your choice. Just be sure to save any changes as a csv. 
+
+Please refer to "Stations Table Schema" below for information on how to fill out columns.
 
 #### Washington
 
@@ -104,6 +106,31 @@ If you are submitting NERRS data:
 - `kingcounty_measurement_lookup.csv`: Contains information on measurements, units, and devices used in the stations listed by King County data portal.
   <br><br>
 - `stations.csv`: Table containing information on all stations that can be accessed through both IPACOA and King County data sources.
+
+### Stations Table Schema
+
+- station_id: unique identifier for the station, usually taken from station.
+- name: descriptive name of a station
+- approved: TRUE if we have permision to submit station data, FALSE if not.
+- source: organization that operates station 
+- provider: source from which we retrieve data from this station
+- QAPP: link to qapp, if available
+- state: state or province station is located in
+- latitude: latitude expressed in decimal form
+- longitude: longitude expressed in decimal form
+- description: qualitative information about station and station location
+- setting: where the station is located. Options are: "Canal Transport", "Estuary", "Lake", "Ocean", "Other-Surface Water", "Reservoir", "River/Stream", "Seep", "Spring", "Storm Sewer". This is from Oregon's DEQ and is converted for other states.
+- collector: organization type of operator. "University", "GovFed", "GovLocal", "NOAA"
+- horizonatl_datum: Datum that was used for horizontal coordinates. Acceptable values are: "WGS84", "NAD27", "NAD83".
+- horizontal_coordinate_accuracy:
+- horizontal_coordinate_collection: (DEQ, ?). For DEQ: "GPS-Unspecified", "Interpolation-Map", or blank.
+- study_specific_id:
+- reference_point:
+- ceden_id: (CEDEN only) 
+- ceded_project_code: (CEDEN only)
+- tribal_land: (DEQ only) Yes or No.
+- eim_location_study: (EIM only)
+- eim_study_id: (EIM only)
 
 ## Contact
 
