@@ -11,8 +11,8 @@ location_columns = {
     "station_id": "Monitoring Location ID",
     "name": "Monitoring Location Name",
     "setting" : "Monitoring Location Type",
-    "latitude": "Latitude",
-    "longitude": "Longitude",
+    "latitude": "Monitoring Location Latitude",
+    "longitude": "Monitoring Location Longitude",
     "horizontal_datum" : "Horizontal Datum",
     "horizontal_coordinate_collection" : "Coordinate Collection Method",
     "tribal_land" : "Tribal Land Indicator",
@@ -34,6 +34,9 @@ parameter_dict = {
     "oxygen_saturation": "Dissolved oxygen saturation",
     "salinity": "Salinity",
     "pH": "pH",
+    "turbidity": "Turbidity",
+    "conductivity": "Conductivity",
+    "water_pressure": "Water Pressure"
 }
 
 unit_dict = {
@@ -43,6 +46,8 @@ unit_dict = {
     "µmol/kg": "umol/kg",
     "inHg": "mmHg", # convert to mm
     "PSU": "PSU",
+    "ntu": "NTU",
+    "mS/cm": "uS/cm", # convert
 }
 
 
@@ -132,6 +137,9 @@ class Oregon(Formatter):
 
         mmhg = df.loc[df.unit == "inHg", "value"] / 0.0393701
         df.loc[df.unit == "inHg", "value"] = mmhg
+
+        uScm = df.loc[df.unit == "mS/cm", "value"] * 1000
+        df.loc[df.unit == "mS/cm", "value"] = uScm
 
         df["unit"] = df["unit"].map(unit_dict)
         df["parameter"] = df["parameter"].map(parameter_dict)
